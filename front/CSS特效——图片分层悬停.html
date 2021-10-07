@@ -1,0 +1,180 @@
+<hr>
+<p>title: CSS特效——图片分层悬停<br>data: 2021-04-25 14:25:00<br>tags:<br>    - CSS3<br>    - 特效<br>categories: CSS特效</p>
+<hr>
+<h1 id="CSS特效——图片分层悬停"><a href="#CSS特效——图片分层悬停" class="headerlink" title="CSS特效——图片分层悬停"></a>CSS特效——图片分层悬停</h1><p>为了实现以后可以直接拿来使用，这里就把他做成模块了。</p>
+<p>[TOC]</p>
+<h2 id="一、制作思路"><a href="#一、制作思路" class="headerlink" title="一、制作思路"></a>一、制作思路</h2><p>​         首先是一个大盒子来包裹所有的内容.outbox，在设置一个包裹img的盒子.imgbox，里面放置所有的img，为了好看在加上一个span，来体现更好的过度。其次，将所有的img叠加到一起，将所有的样式设置好。最后就是动画了，当鼠标经过最外层大盒子时，先将imgbox绕X，Z轴旋转，达到平面到立体的过程，再将每个img沿各个轴移动相应的距离，达到分层的效果，同时，透明度也要随之递减，最后设置一下span即可。</p>
+<h2 id="二、相关步骤"><a href="#二、相关步骤" class="headerlink" title="二、相关步骤"></a>二、相关步骤</h2><p>先设置好HTML页面</p>
+<pre><code class="html"> &lt;div class=&quot;outbox&quot;&gt;
+        &lt;div class=&quot;imgbox&quot;&gt;
+            &lt;img src=&quot;1.png&quot; alt=&quot;#&quot;&gt;
+            &lt;img src=&quot;1.png&quot; alt=&quot;#&quot;&gt;
+            &lt;img src=&quot;1.png&quot; alt=&quot;#&quot;&gt;
+            &lt;img src=&quot;1.png&quot; alt=&quot;#&quot;&gt;
+            &lt;img src=&quot;1.png&quot; alt=&quot;#&quot;&gt;
+            &lt;span class=&quot;bottom&quot;&gt;&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+</code></pre>
+<p>在设置CSS</p>
+<pre><code class="css">*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;/* 这句话时为了所有的盒子在设置内边距和边框时，不撑成大盒子*/
+}
+body{
+    display: flex;/* 进行流式布局*/
+    height: 100vh;/* 高度为可视距高的100%*/
+    justify-content: center;/* 流式布局的子内容全部居中*/
+    align-items: center;    /* 居中对齐弹性盒的各项*/     
+    background-color: rgb(46, 59, 77);
+}
+</code></pre>
+<p>此时，最好使用justify-content: center;   align-items: center;， 如果不想使用的话，也可以用margin:100px auto;</p>
+<pre><code class="css">.outbox{
+    /* margin: 200px auto; */
+    position: relative;
+    perspective: 2000px;   /* 通俗点就是你的眼睛距离3D内容的距离，最好远点*/ 
+
+}
+.outbox .imgbox{
+    position: relative;
+    height: 38px;
+    width: 260px;
+    transition: all 0.5s;/* 所用动画效果在0.5s内完成*/ 
+    transform-style: preserve-3d;/* 子内容保留3D属性*/ 
+}
+.outbox .imgbox img{
+    position: absolute;
+    height: 1000%;
+    width: 100%;
+    transition: all 1.5s;/* 完成全部动画用1.5s*/
+    box-shadow: 0 0 3px rgb(61, 138, 226);
+    transform:  translateZ(0px);/* 平移*/ 
+}
+.outbox .imgbox .bottom{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: all 1.5s;
+    opacity: 0.1;
+}
+</code></pre>
+<p>之后再设置鼠标经过时的动画效果</p>
+<pre><code class="css">.outbox :hover{
+    transform: rotateX(50deg) rotateZ(-50deg) translateY(-100px) translateZ(-30px);
+}
+.outbox :hover img:nth-child(2){
+    transform: translateX(-10px) translateY(10px) translateZ(-10px);
+    opacity: 0.8;
+}
+.outbox :hover img:nth-child(3){
+    transform: translateX(-20px) translateY(20px) translateZ(-20px);
+    opacity: 0.6;
+}
+.outbox :hover img:nth-child(4){
+    transform: translateX(-30px) translateY(30px) translateZ(-30px);
+    opacity: 0.4;
+}
+.outbox :hover img:nth-child(5){
+    transform: translateX(-40px) translateY(40px) translateZ(-40px);
+    opacity: 0.2;
+}
+.outbox :hover .bottom{
+    transform: translateX(-50px) translateY(50px) translateZ(-50px);
+    box-shadow: 0 0 40px rgb(41, 151, 253);    
+    background-color: rgb(41, 151, 253);
+}
+</code></pre>
+<h2 id="三、完整代码"><a href="#三、完整代码" class="headerlink" title="三、完整代码"></a>三、完整代码</h2><pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;index.css&quot;&gt;
+    &lt;title&gt;图片分层悬停&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;div class=&quot;outbox&quot;&gt;
+        &lt;div class=&quot;imgbox&quot;&gt;
+            &lt;img src=&quot;1.png&quot; alt=&quot;#&quot;&gt;
+            &lt;img src=&quot;1.png&quot; alt=&quot;#&quot;&gt;
+            &lt;img src=&quot;1.png&quot; alt=&quot;#&quot;&gt;
+            &lt;img src=&quot;1.png&quot; alt=&quot;#&quot;&gt;
+            &lt;img src=&quot;1.png&quot; alt=&quot;#&quot;&gt;
+            &lt;span class=&quot;bottom&quot;&gt;&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+<pre><code class="css">*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;/* */
+}
+body{
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;         
+    background-color: rgb(46, 59, 77);
+}
+.outbox{
+    /* margin: 200px auto; */
+    position: relative;
+    perspective: 2000px;
+
+}
+.outbox .imgbox{
+    position: relative;
+    height: 38px;
+    width: 260px;
+    transition: all 0.5s;
+    transform-style: preserve-3d;
+}
+.outbox .imgbox img{
+    position: absolute;
+    height: 1000%;
+    width: 100%;
+    transition: all 1.5s;/* 完成全部动画用1.5s*/
+    box-shadow: 0 0 3px rgb(61, 138, 226);
+    transform:  translateZ(0px);
+}
+.outbox .imgbox .bottom{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: all 1.5s;
+    opacity: 0.1;
+}
+.outbox :hover{
+    transform: rotateX(50deg) rotateZ(-50deg) translateY(-100px) translateZ(-30px);
+}
+.outbox :hover img:nth-child(2){
+    transform: translateX(-10px) translateY(10px) translateZ(-10px);
+    opacity: 0.8;
+}
+.outbox :hover img:nth-child(3){
+    transform: translateX(-20px) translateY(20px) translateZ(-20px);
+    opacity: 0.6;
+}
+.outbox :hover img:nth-child(4){
+    transform: translateX(-30px) translateY(30px) translateZ(-30px);
+    opacity: 0.4;
+}
+.outbox :hover img:nth-child(5){
+    transform: translateX(-40px) translateY(40px) translateZ(-40px);
+    opacity: 0.2;
+}
+.outbox :hover .bottom{
+    transform: translateX(-50px) translateY(50px) translateZ(-50px);
+    box-shadow: 0 0 40px rgb(41, 151, 253);    
+    background-color: rgb(41, 151, 253);
+}
+</code></pre>
+<h2 id="四、效果展示"><a href="#四、效果展示" class="headerlink" title="四、效果展示"></a>四、效果展示</h2><p><img src="C:\Users\墨宝\Desktop\num1.gif" alt="num1"></p>

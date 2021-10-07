@@ -1,0 +1,487 @@
+<hr>
+<p>title: CSS特效—旋转相册<br>data: 2021-05-5 10:02:20<br>tags:<br>    - CSS3<br>    - 特效<br>categories: CSS特效</p>
+<hr>
+<h1 id="CSS特效——旋转相册"><a href="#CSS特效——旋转相册" class="headerlink" title="CSS特效——旋转相册"></a>CSS特效——旋转相册</h1><h2 id="一、制作思路"><a href="#一、制作思路" class="headerlink" title="一、制作思路"></a>一、制作思路</h2><p>想通过定位的方式将所有的相片叠加到一起，再通过3D旋转将所有的相册拼成一个正方体，最后使用动画是其动起来。附加特效：：：可以鼠标经过是，相片的映像层有小变大，由虚变实。</p>
+<h2 id="二、步骤详解"><a href="#二、步骤详解" class="headerlink" title="二、步骤详解"></a>二、步骤详解</h2><h3 id="1、初始化和基础框架"><a href="#1、初始化和基础框架" class="headerlink" title="1、初始化和基础框架"></a>1、初始化和基础框架</h3><pre><code class="HTML"> &lt;div class=&quot;outer&quot;&gt;
+        &lt;div class=&quot;min&quot;&gt;
+            &lt;img src=&quot;image/1.jpeg&quot; alt=&quot;javascript:;&quot; class=&quot;imgs&quot;&gt;
+            &lt;img src=&quot;image/2.jpeg&quot; alt=&quot;javascript:;&quot; class=&quot;imgs&quot;&gt;
+            &lt;img src=&quot;image/3.jpeg&quot; alt=&quot;javascript:;&quot; class=&quot;imgs&quot;&gt;
+            &lt;img src=&quot;image/4.jpeg&quot; alt=&quot;javascript:;&quot; class=&quot;imgs&quot;&gt;
+            &lt;img src=&quot;image/5.jpeg&quot; alt=&quot;javascript:;&quot; class=&quot;imgs&quot;&gt;
+            &lt;img src=&quot;image/6.jpeg&quot; alt=&quot;javascript:;&quot; class=&quot;imgs&quot;&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;max&quot;&gt;
+            &lt;img src=&quot;image/1.jpeg&quot; alt=&quot;javascript:;&quot; class=&quot;img&quot;&gt;
+            &lt;img src=&quot;image/2.jpeg&quot; alt=&quot;javascript:;&quot; class=&quot;img&quot;&gt;
+            &lt;img src=&quot;image/3.jpeg&quot; alt=&quot;javascript:;&quot; class=&quot;img&quot;&gt;
+            &lt;img src=&quot;image/4.jpeg&quot; alt=&quot;javascript:;&quot; class=&quot;img&quot;&gt;
+            &lt;img src=&quot;image/5.jpeg&quot; alt=&quot;javascript:;&quot; class=&quot;img&quot;&gt;
+            &lt;img src=&quot;image/6.jpeg&quot; alt=&quot;javascript:;&quot; class=&quot;img&quot;&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+</code></pre>
+<pre><code class="css">*{
+    margin: 0;
+    padding: 0;
+    box-sizing:border-box ;
+}
+body{
+    height: 100vh;
+    width: 100%;
+    background-color: rgb(233, 195, 151);
+}
+.outer{
+    position: relative;
+    margin: 200px auto ;
+    transform-style: preserve-3d;
+    perspective: 4000px;
+    height: 300px;
+    width: 300px;
+    animation: rotateY 4s linear infinite ;
+}
+</code></pre>
+<h3 id="2、设置相册拼成正方体"><a href="#2、设置相册拼成正方体" class="headerlink" title="2、设置相册拼成正方体"></a>2、设置相册拼成正方体</h3><pre><code class="css">.min .imgs{
+    position: absolute;
+    left: 50px;
+    top: 50px;
+    height: 150px;
+    width: 150px;
+    
+}
+.min .imgs:nth-child(1){
+    transform: translateZ(80px);
+}
+.min .imgs:nth-child(2){
+    transform: translateZ(-80px);
+}
+.min .imgs:nth-child(3){
+    transform: translateY(80px) rotateX(90deg);
+}
+.min .imgs:nth-child(4){
+    transform: translateY(-80px) rotateX(-90deg);
+}
+.min .imgs:nth-child(5){
+    transform: translateX(80px) rotateY(90deg);
+}
+.min .imgs:nth-child(6){
+    transform: translateX(-80px) rotateY(-90deg);
+}
+
+.max .img{
+    position: absolute;
+    left: 25px;
+    top: 25px;
+    height: 200px;
+    width: 200px;
+    opacity: .2;
+    
+}
+.max .img:nth-child(1){
+    transform: translateZ(115px) rotateX(10deg);
+}
+.max .img:nth-child(2){
+    transform: translateZ(-115px) rotateX(-10deg);
+}
+.max .img:nth-child(3){
+    transform: translateY(105px) rotateX(85deg);
+}
+.max .img:nth-child(4){
+    transform: translateY(-115px) rotateX(-95deg);
+}
+.max .img:nth-child(5){
+    transform: translateX(115px) rotateY(90deg) rotateY(10deg);
+}
+.max .img:nth-child(6){
+    transform: translateX(-115px) rotateY(-90deg) rotateY(-10deg);
+}
+</code></pre>
+<h3 id="3、使其旋转起来"><a href="#3、使其旋转起来" class="headerlink" title="3、使其旋转起来"></a>3、使其旋转起来</h3><pre><code class="css">@keyframes rotateY {
+    0%{
+        transform: rotateY(0deg);
+        
+    }
+    100%{
+        
+        transform: rotateY(360deg);
+    }
+    
+}
+</code></pre>
+<h3 id="4、附加特效"><a href="#4、附加特效" class="headerlink" title="4、附加特效"></a>4、附加特效</h3><pre><code class="css">.outer:hover .max .img:nth-child(1){
+    animation: rotate1 1s linear forwards;
+}
+.outer:hover .max .img:nth-child(2){
+    animation: rotate2 1s linear forwards;
+}
+.outer:hover .max .img:nth-child(3){
+    animation: rotate3 1s linear forwards;
+}
+.outer:hover .max .img:nth-child(4){
+    animation: rotate4 1s linear forwards;
+}
+.outer:hover .max .img:nth-child(5){
+    animation: rotate5 1s linear forwards;
+}
+.outer:hover .max .img:nth-child(6){
+    animation: rotate6 1s linear forwards;
+}
+
+
+@keyframes rotate1 {
+    0%{
+        transform: translateZ(115px) rotateX(10deg);
+        height: 200px;
+        width: 200px;
+        opacity: .2;
+        
+    }
+    100%{
+        height: 400px;
+        top: -50px;
+        left: -50px;
+        width: 400px;
+        opacity: 0.6;
+        transform: translateZ(205px) rotateX(10deg);
+    }
+    
+}
+@keyframes rotate2 {
+    0%{
+        transform: translateZ(-115px) rotateX(-10deg);
+        height: 200px;
+        width: 200px;
+        opacity: .2;
+        
+    }
+    100%{
+        height: 400px;
+        top: -50px;
+        left: -50px;
+        width: 400px;
+        opacity: 0.6;
+        transform: translateZ(-205px) rotateX(-10deg);
+    }
+    
+}
+@keyframes rotate3 {
+    0%{
+        transform: translateY(115px) rotateX(85deg);
+        height: 200px;
+        width: 200px;
+        opacity: .2;
+        
+    }
+    100%{
+        height: 400px;
+        top: -50px;
+        left: -50px;
+        width: 400px;
+        opacity: 0.6;
+        transform: translateY(205px) rotateX(85deg);
+    }
+    
+}
+@keyframes rotate4 {
+    0%{
+        transform: translateY(-115px) rotateX(-95deg);
+        height: 200px;
+        width: 200px;
+        opacity: .2;
+        
+    }
+    100%{
+        height: 400px;
+        top: -50px;
+        left: -50px;
+        width: 400px;
+        opacity: 0.6;
+        transform: translateY(-205px) rotateX(-95deg);
+    }
+    
+}
+@keyframes rotate5 {
+    0%{
+        transform: translateX(115px)  rotateY(90deg) rotateY(10deg);
+        height: 200px;
+        width: 200px;
+        opacity: .2;
+        
+    }
+    100%{
+        height: 400px;
+        top: -50px;
+        left: -50px;
+        width: 400px;
+        opacity: 0.6;
+        transform: translateX(205px)  rotateY(90deg) rotateY(10deg);
+    }
+    
+}
+@keyframes rotate6 {
+    0%{
+        transform: translateX(-115px) rotateY(-90deg) rotateY(-10deg);
+        height: 200px;
+        width: 200px;
+        opacity: .2;
+        
+    }
+    100%{
+        height: 400px;
+        top: -50px;
+        left: -50px;
+        width: 400px;
+        opacity: 0.6;
+        transform: translateX(-205px) rotateY(-90deg) rotateY(-10deg);
+    }
+    
+}
+</code></pre>
+<h2 id="三、整体代码"><a href="#三、整体代码" class="headerlink" title="三、整体代码"></a>三、整体代码</h2><pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;index.css&quot;&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;div class=&quot;outer&quot;&gt;
+        &lt;div class=&quot;min&quot;&gt;
+            &lt;img src=&quot;image/1.jpeg&quot; alt=&quot;javascript:;&quot; class=&quot;imgs&quot;&gt;
+            &lt;img src=&quot;image/2.jpeg&quot; alt=&quot;javascript:;&quot; class=&quot;imgs&quot;&gt;
+            &lt;img src=&quot;image/3.jpeg&quot; alt=&quot;javascript:;&quot; class=&quot;imgs&quot;&gt;
+            &lt;img src=&quot;image/4.jpeg&quot; alt=&quot;javascript:;&quot; class=&quot;imgs&quot;&gt;
+            &lt;img src=&quot;image/5.jpeg&quot; alt=&quot;javascript:;&quot; class=&quot;imgs&quot;&gt;
+            &lt;img src=&quot;image/6.jpeg&quot; alt=&quot;javascript:;&quot; class=&quot;imgs&quot;&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;max&quot;&gt;
+            &lt;img src=&quot;image/1.jpeg&quot; alt=&quot;javascript:;&quot; class=&quot;img&quot;&gt;
+            &lt;img src=&quot;image/2.jpeg&quot; alt=&quot;javascript:;&quot; class=&quot;img&quot;&gt;
+            &lt;img src=&quot;image/3.jpeg&quot; alt=&quot;javascript:;&quot; class=&quot;img&quot;&gt;
+            &lt;img src=&quot;image/4.jpeg&quot; alt=&quot;javascript:;&quot; class=&quot;img&quot;&gt;
+            &lt;img src=&quot;image/5.jpeg&quot; alt=&quot;javascript:;&quot; class=&quot;img&quot;&gt;
+            &lt;img src=&quot;image/6.jpeg&quot; alt=&quot;javascript:;&quot; class=&quot;img&quot;&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+<pre><code class="css">*{
+    margin: 0;
+    padding: 0;
+    box-sizing:border-box ;
+}
+body{
+    height: 100vh;
+    width: 100%;
+    background-color: rgb(233, 195, 151);
+}
+.outer{
+    position: relative;
+    margin: 200px auto ;
+    transform-style: preserve-3d;
+    perspective: 4000px;
+    height: 300px;
+    width: 300px;
+    animation: rotateY 4s linear infinite ;
+}
+
+.min .imgs{
+    position: absolute;
+    left: 50px;
+    top: 50px;
+    height: 150px;
+    width: 150px;
+    
+}
+.min .imgs:nth-child(1){
+    transform: translateZ(80px);
+}
+.min .imgs:nth-child(2){
+    transform: translateZ(-80px);
+}
+.min .imgs:nth-child(3){
+    transform: translateY(80px) rotateX(90deg);
+}
+.min .imgs:nth-child(4){
+    transform: translateY(-80px) rotateX(-90deg);
+}
+.min .imgs:nth-child(5){
+    transform: translateX(80px) rotateY(90deg);
+}
+.min .imgs:nth-child(6){
+    transform: translateX(-80px) rotateY(-90deg);
+}
+
+.max .img{
+    position: absolute;
+    left: 25px;
+    top: 25px;
+    height: 200px;
+    width: 200px;
+    opacity: .2;
+    
+}
+.max .img:nth-child(1){
+    transform: translateZ(115px) rotateX(10deg);
+}
+.max .img:nth-child(2){
+    transform: translateZ(-115px) rotateX(-10deg);
+}
+.max .img:nth-child(3){
+    transform: translateY(105px) rotateX(85deg);
+}
+.max .img:nth-child(4){
+    transform: translateY(-115px) rotateX(-95deg);
+}
+.max .img:nth-child(5){
+    transform: translateX(115px) rotateY(90deg) rotateY(10deg);
+}
+.max .img:nth-child(6){
+    transform: translateX(-115px) rotateY(-90deg) rotateY(-10deg);
+}
+
+.outer:hover .max .img:nth-child(1){
+    animation: rotate1 1s linear forwards;
+}
+.outer:hover .max .img:nth-child(2){
+    animation: rotate2 1s linear forwards;
+}
+.outer:hover .max .img:nth-child(3){
+    animation: rotate3 1s linear forwards;
+}
+.outer:hover .max .img:nth-child(4){
+    animation: rotate4 1s linear forwards;
+}
+.outer:hover .max .img:nth-child(5){
+    animation: rotate5 1s linear forwards;
+}
+.outer:hover .max .img:nth-child(6){
+    animation: rotate6 1s linear forwards;
+}
+@keyframes rotateY {
+    0%{
+        transform: rotateY(0deg);
+        
+    }
+    100%{
+        
+        transform: rotateY(360deg);
+    }
+    
+}
+@keyframes rotate1 {
+    0%{
+        transform: translateZ(115px) rotateX(10deg);
+        height: 200px;
+        width: 200px;
+        opacity: .2;
+        
+    }
+    100%{
+        height: 400px;
+        top: -50px;
+        left: -50px;
+        width: 400px;
+        opacity: 0.6;
+        transform: translateZ(205px) rotateX(10deg);
+    }
+    
+}
+@keyframes rotate2 {
+    0%{
+        transform: translateZ(-115px) rotateX(-10deg);
+        height: 200px;
+        width: 200px;
+        opacity: .2;
+        
+    }
+    100%{
+        height: 400px;
+        top: -50px;
+        left: -50px;
+        width: 400px;
+        opacity: 0.6;
+        transform: translateZ(-205px) rotateX(-10deg);
+    }
+    
+}
+@keyframes rotate3 {
+    0%{
+        transform: translateY(115px) rotateX(85deg);
+        height: 200px;
+        width: 200px;
+        opacity: .2;
+        
+    }
+    100%{
+        height: 400px;
+        top: -50px;
+        left: -50px;
+        width: 400px;
+        opacity: 0.6;
+        transform: translateY(205px) rotateX(85deg);
+    }
+    
+}
+@keyframes rotate4 {
+    0%{
+        transform: translateY(-115px) rotateX(-95deg);
+        height: 200px;
+        width: 200px;
+        opacity: .2;
+        
+    }
+    100%{
+        height: 400px;
+        top: -50px;
+        left: -50px;
+        width: 400px;
+        opacity: 0.6;
+        transform: translateY(-205px) rotateX(-95deg);
+    }
+    
+}
+@keyframes rotate5 {
+    0%{
+        transform: translateX(115px)  rotateY(90deg) rotateY(10deg);
+        height: 200px;
+        width: 200px;
+        opacity: .2;
+        
+    }
+    100%{
+        height: 400px;
+        top: -50px;
+        left: -50px;
+        width: 400px;
+        opacity: 0.6;
+        transform: translateX(205px)  rotateY(90deg) rotateY(10deg);
+    }
+    
+}
+@keyframes rotate6 {
+    0%{
+        transform: translateX(-115px) rotateY(-90deg) rotateY(-10deg);
+        height: 200px;
+        width: 200px;
+        opacity: .2;
+        
+    }
+    100%{
+        height: 400px;
+        top: -50px;
+        left: -50px;
+        width: 400px;
+        opacity: 0.6;
+        transform: translateX(-205px) rotateY(-90deg) rotateY(-10deg);
+    }
+    
+}
+</code></pre>
+<h2 id="四、效果图"><a href="#四、效果图" class="headerlink" title="四、效果图"></a>四、效果图</h2><p>没有设置这些映射层的位置，太麻烦，你可以自己设值成你喜欢的<img src="C:\Users\墨宝\Desktop\num2.gif" alt="num2"></p>

@@ -1,0 +1,243 @@
+<hr>
+<p>title: CSS特效——HOVER的相关应用（上）<br>data: 2021-05-12 12:02:28<br>tags:<br>    - CSS3<br>    - 特效<br>categories: CSS特效</p>
+<hr>
+<h1 id="CSS特效——HOVER的相关应用（上）"><a href="#CSS特效——HOVER的相关应用（上）" class="headerlink" title="CSS特效——HOVER的相关应用（上）"></a>CSS特效——HOVER的相关应用（上）</h1><h2 id="一、邮件发送"><a href="#一、邮件发送" class="headerlink" title="一、邮件发送"></a>一、邮件发送</h2><h4 id="这是靠动画完成，当经过时触发动画，动画将左边的发送图标在一个流程中先向右移动到最右。再回到最初。"><a href="#这是靠动画完成，当经过时触发动画，动画将左边的发送图标在一个流程中先向右移动到最右。再回到最初。" class="headerlink" title="这是靠动画完成，当经过时触发动画，动画将左边的发送图标在一个流程中先向右移动到最右。再回到最初。"></a>这是靠动画完成，当经过时触发动画，动画将左边的发送图标在一个流程中先向右移动到最右。再回到最初。</h4><pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;index.css&quot;&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;button&gt;
+        &lt;div class=&quot;after&quot;&gt;&lt;/div&gt;
+        SEND
+    &lt;/button&gt;
+
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+<pre><code class="css">*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: rgba(255, 255, 255, 0.733);
+    position: relative;
+}
+button{
+    position: absolute;
+    padding-right: 10px;
+    top: 100px;
+    left: 40%;
+    display: inline-block;
+    width: 120px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: rgb(79, 122, 241);
+    font-size: 20px;
+    line-height: 50px;
+    color: bisque;
+    text-align: right;
+}
+button .after{
+    position: absolute;
+    background-image: url(a4c45f638275f9ef2baecdb3d26a75bd.jpg);
+    height: 30px;
+    width: 30px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    top: 10px;
+    left: 10px;
+}
+button:hover .after{
+    animation: fly 2s ease 1 ;
+}
+@keyframes fly {
+    0%{
+        transform:translateX(0%);
+    }
+    50%{
+        transform:translateX(400%);
+    }
+    100%{
+        transform:translateX(0%);
+    }
+}
+</code></pre>
+<h2 id="二、霓虹灯效果"><a href="#二、霓虹灯效果" class="headerlink" title="二、霓虹灯效果"></a>二、霓虹灯效果</h2><h4 id="主要靠box-shadow-完成，"><a href="#主要靠box-shadow-完成，" class="headerlink" title="主要靠box-shadow 完成，"></a>主要靠box-shadow 完成，</h4><pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;index.css&quot;&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;div class=&quot;outer-box&quot;&gt;
+        &lt;div class=&quot;one text-box&quot;&gt;点击我&lt;/div&gt;
+        &lt;div class=&quot;two text-box&quot;&gt;点击我&lt;/div&gt;
+        &lt;div class=&quot;three text-box&quot;&gt;点击我&lt;/div&gt;
+    &lt;/div&gt;
+
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+<pre><code class="css">*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    position: relative;
+    background-color: rgb(25, 30, 56);
+}
+.outer-box{
+    position: absolute;
+    top: 100px;
+    left: 40%;
+    display: inline-block;
+    width: 360px;
+    height: 60px;
+    
+}
+.text-box{
+    float: left;
+    margin:0 10px;
+    width: 100px;
+    height: 60px;
+    font-size: 25px;
+    line-height: 60px;
+    text-align: center;
+    border-radius: 10px;
+    
+}
+.one{
+    border: 1px solid chartreuse;
+    color: chartreuse;
+}
+.one:hover{
+    color: cornsilk;
+    background-color: chartreuse;
+    -webkit-box-shadow:10px 10px 99px 6px chartreuse;
+}
+.two{
+    border: 1px solid rgb(222, 224, 73);
+    color: rgb(222, 224, 73);
+}
+.two:hover{
+    color: cornsilk;
+    background-color: rgb(222, 224, 73);
+    -webkit-box-shadow:10px 10px 99px 6px rgb(222, 224, 73);
+}
+.three{
+    border: 1px solid rgb(233, 69, 69);
+    color: rgb(233, 69, 69);
+}
+.three:hover{
+    color: cornsilk;
+    background-color: rgb(233, 69, 69);
+    -webkit-box-shadow:10px 10px 99px 6px rgb(233, 69, 69);
+}
+</code></pre>
+<h2 id="三、边框出现"><a href="#三、边框出现" class="headerlink" title="三、边框出现"></a>三、边框出现</h2><h4 id="主要靠动画效果完成，最开始是先设置伪元素边框透明。最后当经过时边框颜色设置成相应的颜色。"><a href="#主要靠动画效果完成，最开始是先设置伪元素边框透明。最后当经过时边框颜色设置成相应的颜色。" class="headerlink" title="主要靠动画效果完成，最开始是先设置伪元素边框透明。最后当经过时边框颜色设置成相应的颜色。"></a>主要靠动画效果完成，最开始是先设置伪元素边框透明。最后当经过时边框颜色设置成相应的颜色。</h4><pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;index.css&quot;&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;div class=&quot;outer-box&quot;&gt;
+        HOVER ME
+    &lt;/div&gt;
+
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+<pre><code class="css">*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    position: relative;
+    background-color: rgb(206, 210, 228);
+}
+.outer-box{
+    position: absolute;
+    top: 100px;
+    left: 40%;
+    display: inline-block;
+    width: 200px;
+    height: 60px;
+    font-size: 25px;
+    line-height: 60px;
+    text-align: center;
+    color: rgb(79, 79, 238);
+}
+.outer-box::before, .outer-box::after {
+    box-sizing: inherit;
+    position: absolute ;
+    content :&#39;&#39;;
+    border: 2px solid transparent ; 
+    width: 0;
+    height: 0;
+    }
+.outer-box::after{
+    bottom:0;
+    right: 0;
+} 
+.outer-box::before{
+   left: 0;
+   top: 0;
+} 
+.outer-box:hover::before, .outer-box:hover::after {
+    width: 100% ;
+    height: 100% ;
+}
+.outer-box:hover::before {
+    border-top-color:#4361ee ;
+    border-right-color: #4361ee ;
+    transition: width 0.8s ease-out, height 0.8s ease-out 0.8s ;
+}
+.outer-box:hover::after {
+    border-bottom-color: #4361ee;
+    border-left-color:  #4361ee;
+    transition: width 0.8s ease-out 1.6s, height 0.8s ease-out 2.4s ;
+}
+@keyframes width {
+    0%{
+        transform:translateX(-100%);
+    }
+    
+    100%{
+        transform:translateX(100%);
+    }
+}
+@keyframes height {
+    0%{
+        transform:translateY(-100%);
+    }
+    
+    100%{
+        transform:translateY(100%);
+    }
+}
+</code></pre>
+<h4 id="未完待续……"><a href="#未完待续……" class="headerlink" title="未完待续……"></a>未完待续……</h4>

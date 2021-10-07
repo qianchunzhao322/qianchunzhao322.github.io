@@ -1,0 +1,280 @@
+<hr>
+<p>title: CSS特效—蛇形边框<br>data: 2021-04-28 14:24:58<br>tags:<br>    - CSS3<br>    - 特效<br>categories: CSS特效</p>
+<hr>
+<h1 id="CSS特效——蛇形边框"><a href="#CSS特效——蛇形边框" class="headerlink" title="CSS特效——蛇形边框"></a>CSS特效——蛇形边框</h1><h2 id="一、设计思路"><a href="#一、设计思路" class="headerlink" title="一、设计思路"></a>一、设计思路</h2><p>先设置好基本的轮廓，之后通过背景图片设置成两半颜色，再设置，鼠标经过之后的变色，最后设置一下动画，注意时间的推迟。</p>
+<h2 id="二、详细步骤"><a href="#二、详细步骤" class="headerlink" title="二、详细步骤"></a>二、详细步骤</h2><p>初始化和基本框架</p>
+<pre><code class="html">&lt;div class=&quot;outbox&quot;&gt;
+        &lt;div class=&quot;inbox&quot;&gt;
+            HANDSOME
+            &lt;span class=&quot;borders&quot;&gt;&lt;/span&gt;
+            &lt;span class=&quot;borders&quot;&gt;&lt;/span&gt;
+            &lt;span class=&quot;borders&quot;&gt;&lt;/span&gt;
+            &lt;span class=&quot;borders&quot;&gt;&lt;/span&gt;
+        &lt;/div&gt;
+
+    &lt;/div&gt;
+</code></pre>
+<pre><code class="css">*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(4, 4, 19);
+}
+</code></pre>
+<p>定义一开始的样式</p>
+<pre><code class="css">.outbox{
+    height: 150px;
+    width: 400px;
+}
+.outbox .inbox{
+    position: relative;
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    letter-spacing: 10px;
+    font-size: 55px;
+    color: rgb(18, 190, 243);
+    background-image: linear-gradient(90deg ,rgb(40, 62, 161) 50%,rgb(31, 49, 133) 50% );
+    line-height: 150px;
+    /* text-transform: uppercase;   字母转换成大写 */
+    text-align: center;
+    text-decoration: none;
+    overflow: hidden;
+    box-shadow: inset 0 0 10px rgb(14, 20, 105), 0 0 5px rgb(9, 208, 235);
+    transition: all  0.5s;
+}
+</code></pre>
+<p>定义鼠标经过之后的样式</p>
+<pre><code class="css">.outbox .inbox:hover{
+    text-shadow: 0 0 5px rgb(18, 190, 243),
+    0 0 8px rgb(18, 190, 243),
+    0 0 10px rgb(18, 190, 243); 
+    background-image: linear-gradient(90deg, rgb(25, 38, 99) 50%,rgb(13, 22, 58) 50% );
+    box-shadow: inset 
+    0 0 10px rgb(14, 20, 105),
+    0 0 5px rgb(9, 208, 235),
+    0 0 10px rgb(9, 208, 235);
+}
+</code></pre>
+<p>定义动画</p>
+<pre><code class="css">.outbox .inbox .borders{
+    position: absolute;
+}
+.outbox .inbox .borders:nth-child(1){
+    top: 0;
+    left: 0;
+    height: 5px;
+    width: 100%;
+    background-image: linear-gradient(to right, transparent , rgb(0, 153, 255) );
+    animation: move1 2s linear infinite;
+}
+@keyframes move1{
+    0%{
+        transform:translateX(-100%) ;
+    }
+    100%{
+        transform:translateX(100%) ;
+    }
+}
+.outbox .inbox .borders:nth-child(2){
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 5px;
+    background-image: linear-gradient(to bottom, transparent , rgb(0, 153, 255) );
+    animation: move2 2s linear infinite;
+    animation-delay: 1s;
+}
+@keyframes move2{
+    0%{
+        transform:translateY(-100%) ;
+    }
+    100%{
+        transform:translateY(100%) ;
+    }
+}
+.outbox .inbox .borders:nth-child(3){
+    bottom: 0;
+    right: 0;
+    height: 5px;
+    width: 100%;
+    background-image: linear-gradient(to left, transparent , rgb(0, 153, 255) );
+    animation: move3 2s linear infinite;
+}
+@keyframes move3{
+    0%{
+        transform:translateX(100%) ;
+    }
+    100%{
+        transform:translateX(-100%) ;
+    }
+}
+.outbox .inbox .borders:nth-child(4){
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 5px;
+    background-image: linear-gradient(to top, transparent , rgb(0, 153, 255) );
+    animation: move4 2s linear infinite;
+    animation-delay: 1s;
+}
+@keyframes move4{
+    0%{
+        transform:translateY(100%) ;
+    }
+    100%{
+        transform:translateY(-100%) ;
+    }
+}
+</code></pre>
+<h2 id="三、整体代码"><a href="#三、整体代码" class="headerlink" title="三、整体代码"></a>三、整体代码</h2><p>HTML</p>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;蛇形边框&lt;/title&gt;
+    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;index.css&quot;&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;div class=&quot;outbox&quot;&gt;
+        &lt;div class=&quot;inbox&quot;&gt;
+            HANDSOME
+            &lt;span class=&quot;borders&quot;&gt;&lt;/span&gt;
+            &lt;span class=&quot;borders&quot;&gt;&lt;/span&gt;
+            &lt;span class=&quot;borders&quot;&gt;&lt;/span&gt;
+            &lt;span class=&quot;borders&quot;&gt;&lt;/span&gt;
+        &lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+<p>CSS</p>
+<pre><code class="css">*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(4, 4, 19);
+}
+.outbox{
+    height: 150px;
+    width: 400px;
+}
+.outbox .inbox{
+    position: relative;
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    letter-spacing: 10px;
+    font-size: 55px;
+    color: rgb(18, 190, 243);
+    background-image: linear-gradient(90deg ,rgb(40, 62, 161) 50%,rgb(31, 49, 133) 50% );
+    line-height: 150px;
+    /* text-transform: uppercase;   字母转换成大写 */
+    text-align: center;
+    text-decoration: none;
+    overflow: hidden;
+    box-shadow: inset 0 0 10px rgb(14, 20, 105), 0 0 5px rgb(9, 208, 235);
+    transition: all  0.5s;
+}
+.outbox .inbox:hover{
+    text-shadow: 0 0 5px rgb(18, 190, 243),
+    0 0 8px rgb(18, 190, 243),
+    0 0 10px rgb(18, 190, 243); 
+    background-image: linear-gradient(90deg, rgb(25, 38, 99) 50%,rgb(13, 22, 58) 50% );
+    box-shadow: inset 
+    0 0 10px rgb(14, 20, 105),
+    0 0 5px rgb(9, 208, 235),
+    0 0 10px rgb(9, 208, 235);
+}
+.outbox .inbox .borders{
+    position: absolute;
+}
+.outbox .inbox .borders:nth-child(1){
+    top: 0;
+    left: 0;
+    height: 5px;
+    width: 100%;
+    background-image: linear-gradient(to right, transparent , rgb(0, 153, 255) );
+    animation: move1 2s linear infinite;
+}
+@keyframes move1{
+    0%{
+        transform:translateX(-100%) ;
+    }
+    100%{
+        transform:translateX(100%) ;
+    }
+}
+.outbox .inbox .borders:nth-child(2){
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 5px;
+    background-image: linear-gradient(to bottom, transparent , rgb(0, 153, 255) );
+    animation: move2 2s linear infinite;
+    animation-delay: 1s;
+}
+@keyframes move2{
+    0%{
+        transform:translateY(-100%) ;
+    }
+    100%{
+        transform:translateY(100%) ;
+    }
+}
+.outbox .inbox .borders:nth-child(3){
+    bottom: 0;
+    right: 0;
+    height: 5px;
+    width: 100%;
+    background-image: linear-gradient(to left, transparent , rgb(0, 153, 255) );
+    animation: move3 2s linear infinite;
+}
+@keyframes move3{
+    0%{
+        transform:translateX(100%) ;
+    }
+    100%{
+        transform:translateX(-100%) ;
+    }
+}
+.outbox .inbox .borders:nth-child(4){
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 5px;
+    background-image: linear-gradient(to top, transparent , rgb(0, 153, 255) );
+    animation: move4 2s linear infinite;
+    animation-delay: 1s;
+}
+@keyframes move4{
+    0%{
+        transform:translateY(100%) ;
+    }
+    100%{
+        transform:translateY(-100%) ;
+    }
+}
+</code></pre>
+<h2 id="四、知识点"><a href="#四、知识点" class="headerlink" title="四、知识点"></a>四、知识点</h2><p>letter-spacing: 10px;   表示的是字母之间的距离为10px</p>
+<p>text-transform：uppercase全部字母为大写。<br>user-select：none文本不可选中。</p>
+<p>linear-gradient：渐变色。transparent为透明色。</p>
+<h2 id="五、效果展示"><a href="#五、效果展示" class="headerlink" title="五、效果展示"></a>五、效果展示</h2><p><img src="C:\Users\墨宝\Desktop\num1.gif" alt="num1"></p>

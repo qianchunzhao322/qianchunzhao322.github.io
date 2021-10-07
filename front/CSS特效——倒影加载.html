@@ -1,0 +1,238 @@
+<hr>
+<p>title: CSS特效—倒影加载<br>data: 2021-04-26 12:02:28<br>tags:<br>    - CSS3<br>    - 特效<br>categories: CSS特效</p>
+<hr>
+<h1 id="CSS特效——倒影加载"><a href="#CSS特效——倒影加载" class="headerlink" title="CSS特效——倒影加载"></a>CSS特效——倒影加载</h1><p>[TOC]</p>
+<h2 id="一、具体思路"><a href="#一、具体思路" class="headerlink" title="一、具体思路"></a>一、具体思路</h2><p>和往常一样，我们先做一个大盒子来包裹项目。之后初始化，接下来定义一个span，一个包含div的div，</p>
+<p>用div和他的伪元素制作出圆环的效果，加上定位，之后让内部的小div高等于两倍的宽，在设置边角，达到尾流的效果，其中，还要同过过度的效果，小div的为元素设置成一个圆球，顺便通过盒子阴影来展示光晕，最后通过 -webkit-box-reflect让大盒子产生倒影，再设置大div的旋转动画。</p>
+<h2 id="二、步骤代码"><a href="#二、步骤代码" class="headerlink" title="二、步骤代码"></a>二、步骤代码</h2><h3 id="1、初始化和HTML"><a href="#1、初始化和HTML" class="headerlink" title="1、初始化和HTML"></a>1、初始化和HTML</h3><pre><code class="html"> &lt;div class=&quot;outbox&quot;&gt;
+        &lt;span class=&quot;text&quot;&gt;Loading……&lt;/span&gt;
+        &lt;div class=&quot;inbox&quot;&gt;
+            &lt;div class=&quot;circle&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+</code></pre>
+<pre><code class="css">*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(7, 15, 26);
+
+}
+</code></pre>
+<p>这里采用流式布局</p>
+<h3 id="2、设置大盒子"><a href="#2、设置大盒子" class="headerlink" title="2、设置大盒子"></a>2、设置大盒子</h3><pre><code class="css">.outbox{
+    position: relative;
+    /* margin: 300px auto; */
+    height: 300px;
+    width: 350px;
+    -webkit-box-reflect:below -1px linear-gradient(transparent  ,rgb(7, 15, 26));/*知识1*/
+}
+</code></pre>
+<h3 id="3、设置大div和伪元素"><a href="#3、设置大div和伪元素" class="headerlink" title="3、设置大div和伪元素"></a>3、设置大div和伪元素</h3><pre><code class="css">.inbox{
+    position: relative;
+    margin: 0 auto;
+    /*height: 300px;*/
+    height: 100%;
+    width: 300px;
+    background-color: rgb(13, 10, 37);
+    border-radius: 50%;
+    animation: zhuanquan 2s linear infinite;
+}
+</code></pre>
+<pre><code class="css">.inbox::after{/*伪元素默认覆盖掉父级元素*/
+    content: &#39;&#39;;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background-color: rgb(7, 15, 26);
+    border-radius: 50%;
+}
+</code></pre>
+<p>为了产生不必要的麻烦，由于倒影产生的，大DIV的高必须和父元素一致。由于伪元素的层级会比父元素高，在这次中方便了我们操作。</p>
+<h3 id="4、设置小div和伪元素"><a href="#4、设置小div和伪元素" class="headerlink" title="4、设置小div和伪元素"></a>4、设置小div和伪元素</h3><pre><code class="css">.circle{
+    position: absolute;
+    top: 1px;
+    left: 55px;
+    width: 75px;
+    height: 150px;
+    background-image: linear-gradient(180deg,rgb(22, 121, 252) ,transparent 40%);/*知识二*/
+    border-radius: 75px 0 0 75px;
+    
+}.circle::after{
+    content: &#39;&#39;;/*这是伪元素特有的属性，没啥作用*/
+    position: absolute;
+    right: -5px;
+    top: -2.5px;
+    width: 15px;
+    height: 15px;
+    background-color: rgb(40, 124, 202);
+    box-shadow: 0 0 5px rgb(40, 151, 202),
+    0 0 10px rgb(40, 124, 202),
+    0 0 20px rgb(40, 124, 202),
+    0 0 30px rgb(40, 124, 202),
+    0 0 40px rgb(40, 124, 202),
+    0 0 50px rgb(40, 124, 202);/*知识三*/
+    border-radius: 50%;
+    z-index: 1;
+    
+}
+</code></pre>
+<h3 id="5、设置动画"><a href="#5、设置动画" class="headerlink" title="5、设置动画"></a>5、设置动画</h3><pre><code class="css">@keyframes zhuanquan{
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+</code></pre>
+<h3 id="6、设置文字"><a href="#6、设置文字" class="headerlink" title="6、设置文字"></a>6、设置文字</h3><pre><code class="css">.outbox&gt;span{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    color: rgb(20, 129, 202);
+    text-shadow: 0 0 10px rgb(20, 129, 202),
+    0 0 30px rgb(20, 129, 202),
+    0 0 60px rgb(20, 129, 202),
+    0 0 100px rgb(20, 129, 202);
+    font-size: 35px;
+    z-index: 1;
+
+}
+</code></pre>
+<p>​    left: 50%;<br>​    top: 50%;<br>​    transform: translate(-50%,-50%);</p>
+<p>这些操作是为了动态的保持文字再正中心</p>
+<h2 id="三、全部代码"><a href="#三、全部代码" class="headerlink" title="三、全部代码"></a>三、全部代码</h2><h3 id="1、HTML"><a href="#1、HTML" class="headerlink" title="1、HTML"></a>1、HTML</h3><pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;倒影加载&lt;/title&gt;
+    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;index.css&quot;&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;div class=&quot;outbox&quot;&gt;
+        &lt;span class=&quot;text&quot;&gt;Loading……&lt;/span&gt;
+        &lt;div class=&quot;inbox&quot;&gt;
+            &lt;div class=&quot;circle&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+<h3 id="2、CSS"><a href="#2、CSS" class="headerlink" title="2、CSS"></a>2、CSS</h3><pre><code class="css">*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(7, 15, 26);
+
+}
+.outbox{
+    position: relative;
+    /* margin: 300px auto; */
+    height: 300px;
+    width: 350px;
+    -webkit-box-reflect:below -1px linear-gradient(transparent  ,rgb(7, 15, 26));/*全过度*/
+}
+.inbox{
+    position: relative;
+    margin: 0 auto;
+    height: 300px;
+    width: 300px;
+    background-color: rgb(13, 10, 37);
+    border-radius: 50%;
+    animation: zhuanquan 2s linear infinite;
+}
+@keyframes zhuanquan{
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+.inbox::after{/*伪元素默认覆盖掉父级元素*/
+    content: &#39;&#39;;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background-color: rgb(7, 15, 26);
+    border-radius: 50%;
+}
+.circle{
+    position: absolute;
+    top: 1px;
+    left: 55px;
+    width: 75px;
+    height: 150px;
+    background-image: linear-gradient(180deg,rgb(22, 121, 252) ,transparent 40%);
+    border-radius: 75px 0 0 75px;
+    
+}.circle::after{
+    content: &#39;&#39;;
+    position: absolute;
+    right: -5px;
+    top: -2.5px;
+    width: 15px;
+    height: 15px;
+    background-color: rgb(40, 124, 202);
+    box-shadow: 0 0 5px rgb(40, 151, 202),
+    0 0 10px rgb(40, 124, 202),
+    0 0 20px rgb(40, 124, 202),
+    0 0 30px rgb(40, 124, 202),
+    0 0 40px rgb(40, 124, 202),
+    0 0 50px rgb(40, 124, 202);
+    border-radius: 50%;
+    z-index: 1;
+    
+}
+.outbox&gt;span{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    color: rgb(20, 129, 202);
+    text-shadow: 0 0 10px rgb(20, 129, 202),
+    0 0 30px rgb(20, 129, 202),
+    0 0 60px rgb(20, 129, 202),
+    0 0 100px rgb(20, 129, 202);
+    font-size: 35px;
+    z-index: 1;
+
+}
+</code></pre>
+<h2 id="四、知识点"><a href="#四、知识点" class="headerlink" title="四、知识点"></a>四、知识点</h2><h3 id="1、-webkit-box-reflect"><a href="#1、-webkit-box-reflect" class="headerlink" title="1、-webkit-box-reflect"></a>1、-webkit-box-reflect</h3><p>-webkit-box-reflect:below -1px linear-gradient(transparent  ,rgb(7, 15, 26));</p>
+<p>第一个是方位值：倒影再元素的什么地方出现；**<direction>** = above | below | left | right</p>
+<p>第二个是间隔大小值：倒影离元素有多远；**<offset>** = length或percentage</p>
+<p>为length时：用长度来表示，px……</p>
+<p>为percentage时：用百分比来表示。</p>
+<p>第三个是有无遮罩层：**<mask-box-image>** = none | url| linear-gradient() | radial-gradient() | repeating-linear-gradient() | repeating-radial-gradient()</p>
+<p>详解看<a href="http://www.w3chtml.com/css3/properties/border/box-reflect.html">CSS3 box-reflect 属性 - w3c html</a></p>
+<h3 id="2、-linear-gradient（）"><a href="#2、-linear-gradient（）" class="headerlink" title="2、 linear-gradient（）"></a>2、 linear-gradient（）</h3><p>第一个是渐变起点：left、right、top、bottom</p>
+<p>第二个是渐变颜色</p>
+<p>第三个是渐变多少：用百分比 transparent 40%；</p>
+<p>还可以写角度，就是旋转多少度才开始渐变</p>
+<h3 id="3、box-shadow"><a href="#3、box-shadow" class="headerlink" title="3、box-shadow"></a>3、box-shadow</h3><p>这样写就是为了显示出光晕的效果，记住这个方法就行。</p>
+<h2 id="五、展示图"><a href="#五、展示图" class="headerlink" title="五、展示图"></a>五、展示图</h2><p><img src="C:\Users\墨宝\Desktop\num1.gif" alt="num1"></p>

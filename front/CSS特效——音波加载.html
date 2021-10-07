@@ -1,0 +1,73 @@
+<hr>
+<p>title: CSS特效——音波加载<br>data: 2021-04-26 20:25:34<br>tags:<br>    - CSS3<br>    - 特效<br>categories: CSS特效</p>
+<hr>
+<h1 id="音波加载"><a href="#音波加载" class="headerlink" title="音波加载"></a>音波加载</h1><p>[TOC]</p>
+<p>接上一篇的内容</p>
+<h2 id="一、搭建思路"><a href="#一、搭建思路" class="headerlink" title="一、搭建思路"></a>一、搭建思路</h2><p>首先，造一个大的盒子outbox，接着往里面填充10个小盒子span。设置他们的布局，先让大盒子绕X轴旋转一定的角度，达到斜俯视的效果，更像3D.接着，将小盒子按顺序缩小，做成套环的样子，最后，设置动画效果，让每个小的盒子 都按向上后下的动画动起来，在按顺序延迟一定的秒数。这样就成了联动效果。</p>
+<h2 id="二、步骤代码"><a href="#二、步骤代码" class="headerlink" title="二、步骤代码"></a>二、步骤代码</h2><p>先设置HTML的</p>
+<pre><code class="html"> &lt;div class=&quot;outbox&quot;&gt;
+        &lt;span style=&quot;--num:1&quot;&gt;&lt;/span&gt;
+        &lt;span style=&quot;--num:2&quot;&gt;&lt;/span&gt;
+        &lt;span style=&quot;--num:3&quot;&gt;&lt;/span&gt;
+        &lt;span style=&quot;--num:4&quot;&gt;&lt;/span&gt;
+        &lt;span style=&quot;--num:5&quot;&gt;&lt;/span&gt;
+        &lt;span style=&quot;--num:6&quot;&gt;&lt;/span&gt;
+        &lt;span style=&quot;--num:7&quot;&gt;&lt;/span&gt;
+        &lt;span style=&quot;--num:8&quot;&gt;&lt;/span&gt;
+        &lt;span style=&quot;--num:9&quot;&gt;&lt;/span&gt;
+        &lt;span style=&quot;--num:10&quot;&gt;&lt;/span&gt;
+    &lt;/div&gt;
+</code></pre>
+<h6 id="style-”–num-1”-对于这个不懂的话下面有讲解。"><a href="#style-”–num-1”-对于这个不懂的话下面有讲解。" class="headerlink" title="style=”–num:1”      对于这个不懂的话下面有讲解。"></a>style=”–num:1”      对于这个不懂的话下面有讲解。</h6><p>再初始化大盒子和背景</p>
+<pre><code class="css">*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(4, 6, 17);
+}
+.outbox{
+    position: relative;
+    width: 100px;
+    height: 100px;
+    transform-style: preserve-3d;
+    transform: perspective(600px) rotateX(50deg) translateZ(50px);
+}
+</code></pre>
+<p>最后设置span的样式</p>
+<pre><code class="css">.outbox span{
+    position: absolute;
+    top: calc(-8px * var(--num));
+    left: calc(-8px * var(--num));
+    bottom: calc(-8px * var(--num));
+    right: calc(-8px * var(--num));
+    border: 8px solid rgba(0, 162, 255,0.8);
+    box-shadow: 0 6px 0 rgb(0, 162, 255),
+    inset 0 6px 0 rgba(0, 162, 255,.9);
+    /* background-color: rgba(0, 162, 255,0); */
+    border-radius: 50%;
+    animation: move 1.5s ease-in-out infinite alternate;
+    animation-delay: calc(var(--num) * 0.1s);
+}
+</code></pre>
+<p>其中，小盒子的宽高我没有设置，让他继承父级的宽高，方便使用CSS函数。</p>
+<p>move  是我定义的一个函数。在后面会有。</p>
+<p>top: calc(-8px * var(–num));<br>left: calc(-8px * var(–num));<br>bottom: calc(-8px * var(–num));<br>right: calc(-8px * var(–num));</p>
+<p>这是动态的计算小盒子再大盒子里面的方位，强制让他变小</p>
+<h6 id="定义一个先下后上的动画"><a href="#定义一个先下后上的动画" class="headerlink" title="定义一个先下后上的动画"></a>定义一个先下后上的动画</h6><pre><code class="css">@keyframes move{
+    0%,100%{
+        transform: translateZ(0px);
+    }
+    50%{
+       transform: translateZ(-100px);
+    }
+}
+</code></pre>
+<h2 id="三、CSS函数var"><a href="#三、CSS函数var" class="headerlink" title="三、CSS函数var()"></a>三、CSS函数var()</h2><p>这个函数必须要求定义一个“–XXX：XX”的属性，写在行内样式中。之后用var(–XXX)来使用，相当于JS中遍历这个数组一样。</p>
+<p>[<a href="https://www.runoob.com/cssref/func-var.html">CSS var() 函数 | 菜鸟教程 (runoob.com)</a></p>
+<h2 id="四、效果展示"><a href="#四、效果展示" class="headerlink" title="四、效果展示"></a>四、效果展示</h2><p><img src="C:\Users\墨宝\Desktop\num1.gif" alt="num1"></p>
