@@ -309,6 +309,139 @@
             
 
   
+    <article id="post-中缀表达式转后缀表达式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/10/07/%E4%B8%AD%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BD%AC%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F/" target="_blank">中缀表达式转后缀表达式</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/10/07/%E4%B8%AD%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BD%AC%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="archive-article-date">
+        <time datetime="2021-10-07T05:03:06.003Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-07</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="中缀表达式转后缀表达式-逆波兰表达式"><a href="#中缀表达式转后缀表达式-逆波兰表达式" class="headerlink" title="中缀表达式转后缀表达式(逆波兰表达式)"></a>中缀表达式转后缀表达式(<strong>逆波兰表达式</strong>)</h1><h2 id="表现形式"><a href="#表现形式" class="headerlink" title="表现形式"></a>表现形式</h2><p>将中缀表达式转化成后缀表达式的样子是这样的：<code>1+((2+3)*4)-5  ==&gt;  1 2 3 + 4 * + 5 - </code></p>
+<h2 id="转化思路分析"><a href="#转化思路分析" class="headerlink" title="转化思路分析"></a>转化思路分析</h2><p>思路如下：</p>
+<p>1）先创建两个栈，一个放运算符<code> S1</code>，另一个放运算中间数 <code>s2</code></p>
+<blockquote>
+<p>这里提前说一下：由于后续的操作中S2栈中的数只有PUSH，没有POP，并且最后还要倒序输出一下，就由list来代替栈</p>
+</blockquote>
+<p>2）从左到右遍历原中缀表达式</p>
+<p>3）当遇到操作数的时候就直接将他<code>push</code>到<code>S2</code>中</p>
+<p>4）当遇到运算符时分一下几种情况：</p>
+<p>​    ①当<code>S1</code>中没有运算符，或者栈顶是<code>（</code>时，直接入栈<code>s1</code></p>
+<p>​    ②将运算符与<code>S1</code>栈顶的运算符进行比较，若该运算符的优先级小于等于栈顶运算符时，将<code>S1</code>的运算符<code>pop</code>出加入到S2中</p>
+<p>​    ③如果该运算符的优先级大于栈顶运算符时，直接入栈<code>S1</code></p>
+<p>5）当遇到<code>（</code>、<code>）</code>时分一下几种情况：</p>
+<p>​    ①当为<code>（</code>时，直接入栈<code>S1</code></p>
+<p>​    ②当为<code>）</code>时，将<code>S1</code>的栈顶运算符<code>POP</code>出入栈<code>S2</code>，直到遇到<code>（ </code>停止，同时将<code>S1</code>的<code>（</code>清除掉</p>
+<p>6）重复上述操作直到遍历完成</p>
+<p>7）将<code>S1</code>的运算符依次<code>POP</code>出入栈<code>S2</code></p>
+<p>8）倒序输出<code>S2</code>中的数据即为后缀表达式</p>
+<h2 id="细节代码与关键之处"><a href="#细节代码与关键之处" class="headerlink" title="细节代码与关键之处"></a>细节代码与关键之处</h2><h3 id="先将中缀表达式转化成list的形式，方便遍历"><a href="#先将中缀表达式转化成list的形式，方便遍历" class="headerlink" title="先将中缀表达式转化成list的形式，方便遍历"></a>先将中缀表达式转化成list的形式，方便遍历</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;String&gt; <span class="title">toInfixExpressionList</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//定义一个List,存放中缀表达式 对应的内容</span></span><br><span class="line">		List&lt;String&gt; ls = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">		<span class="keyword">int</span> i = <span class="number">0</span>; <span class="comment">//这时是一个指针，用于遍历 中缀表达式字符串</span></span><br><span class="line">		String str; <span class="comment">// 对多位数的拼接</span></span><br><span class="line">		<span class="keyword">char</span> c; <span class="comment">// 每遍历到一个字符，就放入到c</span></span><br><span class="line">		<span class="keyword">do</span> &#123;</span><br><span class="line">			<span class="comment">//如果c是一个非数字，加入到ls</span></span><br><span class="line">			<span class="keyword">if</span>((c=s.charAt(i)) &lt; <span class="number">48</span> ||  (c=s.charAt(i)) &gt; <span class="number">57</span>) &#123;<span class="comment">//通过asci表判断是否为数字</span></span><br><span class="line">				ls.add(<span class="string">&quot;&quot;</span> + c);</span><br><span class="line">				i++; <span class="comment">//i需要后移</span></span><br><span class="line">			&#125; <span class="keyword">else</span> &#123; <span class="comment">//如果是一个数，需要考虑多位数</span></span><br><span class="line">				str = <span class="string">&quot;&quot;</span>; <span class="comment">//先将str 置成&quot;&quot; &#x27;0&#x27;[48]-&gt;&#x27;9&#x27;[57]</span></span><br><span class="line">				<span class="keyword">while</span>(i &lt; s.length() &amp;&amp; (c=s.charAt(i)) &gt;= <span class="number">48</span> &amp;&amp; (c=s.charAt(i)) &lt;= <span class="number">57</span>) &#123;</span><br><span class="line">					str += c;<span class="comment">//拼接</span></span><br><span class="line">					i++;</span><br><span class="line">				&#125;</span><br><span class="line">				ls.add(str);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;<span class="keyword">while</span>(i &lt; s.length());</span><br><span class="line">		<span class="keyword">return</span> ls;<span class="comment">//返回</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="中缀转后缀"><a href="#中缀转后缀" class="headerlink" title="中缀转后缀"></a>中缀转后缀</h3><h4 id="判断是数字还是（"><a href="#判断是数字还是（" class="headerlink" title="判断是数字还是（"></a>判断是数字还是<code>（</code></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(item.matches(<span class="string">&quot;\\d+&quot;</span>)) &#123;</span><br><span class="line">				s2.add(item);</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> (item.equals(<span class="string">&quot;(&quot;</span>)) &#123;</span><br><span class="line">				s1.push(item);</span><br><span class="line">			&#125; </span><br></pre></td></tr></table></figure>
+
+<h4 id="判断是）"><a href="#判断是）" class="headerlink" title="判断是）"></a>判断是<code>）</code></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (item.equals(<span class="string">&quot;)&quot;</span>)) &#123;</span><br><span class="line">				<span class="comment">//如果是右括号“)”，则依次弹出s1栈顶的运算符，并压入s2，直到遇到左括号为止，此时将这一对括号丢弃</span></span><br><span class="line">				<span class="keyword">while</span>(!s1.peek().equals(<span class="string">&quot;(&quot;</span>)) &#123;</span><br><span class="line">					s2.add(s1.pop());<span class="comment">//S1弹出S2加入</span></span><br><span class="line">				&#125;</span><br><span class="line">				s1.pop();<span class="comment">//!!! 将 ( 弹出 s1栈， 消除小括号</span></span><br><span class="line">			&#125; </span><br></pre></td></tr></table></figure>
+
+<h4 id="当为运算符时"><a href="#当为运算符时" class="headerlink" title="当为运算符时"></a>当为运算符时</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="comment">//当item的优先级小于等于s1栈顶运算符, 将s1栈顶的运算符弹出并加入到s2中，再次转到(4.1)与s1中新的栈顶运算符相比较</span></span><br><span class="line">				<span class="comment">//问题：我们缺少一个比较优先级高低的方法</span></span><br><span class="line">				<span class="keyword">while</span>(s1.size() != <span class="number">0</span> &amp;&amp; Operation.getValue(s1.peek()) &gt;= Operation.getValue(item) ) &#123;</span><br><span class="line">					s2.add(s1.pop());</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="comment">//还需要将item压入栈</span></span><br><span class="line">				s1.push(item);</span><br><span class="line">			&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="判断优先级的操作，（和上次的方法一样）"><a href="#判断优先级的操作，（和上次的方法一样）" class="headerlink" title="判断优先级的操作，（和上次的方法一样）"></a>判断优先级的操作，（和上次的方法一样）</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//编写一个类 Operation 可以返回一个运算符 对应的优先级</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Operation</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> ADD = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> SUB = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> MUL = <span class="number">2</span>;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> DIV = <span class="number">2</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//写一个方法，返回对应的优先级数字</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getValue</span><span class="params">(String operation)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">switch</span> (operation) &#123;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">&quot;+&quot;</span>:</span><br><span class="line">			result = ADD;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">&quot;-&quot;</span>:</span><br><span class="line">			result = SUB;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">&quot;*&quot;</span>:</span><br><span class="line">			result = MUL;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">&quot;/&quot;</span>:</span><br><span class="line">			result = DIV;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">default</span>:<span class="comment">//有无均可</span></span><br><span class="line">			System.out.println(<span class="string">&quot;不存在该运算符&quot;</span> + operation);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> result;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>一定要注意  *  和  X</p>
+</blockquote>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;String&gt; <span class="title">parseSuffixExpreesionList</span><span class="params">(List&lt;String&gt; ls)</span> </span>&#123;</span><br><span class="line">		Stack&lt;String&gt; s1 = <span class="keyword">new</span> Stack&lt;String&gt;(); <span class="comment">// 符号栈</span></span><br><span class="line">		List&lt;String&gt; s2 = <span class="keyword">new</span> ArrayList&lt;String&gt;(); <span class="comment">// 储存中间结果的Lists2</span></span><br><span class="line">		<span class="comment">//遍历ls</span></span><br><span class="line">		<span class="keyword">for</span>(String item: ls) &#123;</span><br><span class="line">			<span class="keyword">if</span>(item.matches(<span class="string">&quot;\\d+&quot;</span>)) &#123;</span><br><span class="line">				s2.add(item);</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> (item.equals(<span class="string">&quot;(&quot;</span>)) &#123;</span><br><span class="line">				s1.push(item);</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> (item.equals(<span class="string">&quot;)&quot;</span>)) &#123;</span><br><span class="line">				<span class="keyword">while</span>(!s1.peek().equals(<span class="string">&quot;(&quot;</span>)) &#123;</span><br><span class="line">					s2.add(s1.pop());</span><br><span class="line">				&#125;</span><br><span class="line">				s1.pop();<span class="comment">//!!! 将 ( 弹出 s1栈， 消除小括号</span></span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="keyword">while</span>(s1.size() != <span class="number">0</span> &amp;&amp; Operation.getValue(s1.peek()) &gt;= Operation.getValue(item) ) &#123;</span><br><span class="line">					s2.add(s1.pop());</span><br><span class="line">				&#125;</span><br><span class="line">				s1.push(item);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//对应7、8步</span></span><br><span class="line">		<span class="keyword">while</span>(s1.size() != <span class="number">0</span>) &#123;</span><br><span class="line">			s2.add(s1.pop());</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> s2; </span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">笔记 - Java - 原创</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/数据结构//" class="article-tag-list-link color5">数据结构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/10/07/%E4%B8%AD%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BD%AC%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-中间件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1605,120 +1738,9 @@
 
 
   
-    <article id="post-刷题总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/10/07/%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/" target="_blank">刷题总结</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/10/07/%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/" class="archive-article-date">
-        <time datetime="2021-10-07T05:03:05.988Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-07</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--html5的设置字符集--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;utr-8&quot;</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--网页缓存过期时间：如果指定某个日期之后过期，则时间要用格林尼治时间格式“Wed, 22 Jul 2009 16:24:33 GMT”--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;expires&quot;</span> <span class="attr">content</span>=<span class="string">&quot;0&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--每 5 秒刷新一次页面--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&#x27;refresh&#x27;</span> <span class="attr">content</span>=<span class="string">&#x27;5&#x27;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--5秒之后重定向:--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;refresh&quot;</span> <span class="attr">content</span>=<span class="string">&quot;5;url=http://www.w3school.com.cn&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--声明文档的兼容模式:指示IE以目前可用的最高模式显示内容--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&#x27;X-UA-Compatible&#x27;</span> <span class="attr">content</span>=<span class="string">&#x27;IE=Edge,chrome=1&#x27;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--网页不缓存--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&#x27;cache-control&#x27;</span> <span class="attr">content</span>=<span class="string">&#x27;no-cache&#x27;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;cache&quot;</span> <span class="attr">content</span>=<span class="string">&quot;no-cache&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;pragma&quot;</span> <span class="attr">content</span>=<span class="string">&quot;no-cache&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--网页作者--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&#x27;author&#x27;</span> <span class="attr">content</span>=<span class="string">&#x27;风行客&#x27;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--网页描述--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&#x27;description&#x27;</span> <span class="attr">content</span>=<span class="string">&#x27;第一个测试AngularJS程序！&#x27;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--定义最新版本--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&#x27;revised&#x27;</span> <span class="attr">content</span>=<span class="string">&#x27;Pig,2017/5/2&#x27;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--定义针对搜索引擎的关键词--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&#x27;keywords&#x27;</span> <span class="attr">content</span>=<span class="string">&#x27;HTML,CSS,XML&#x27;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">   </span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>1.meta 元素被用于规定页面的描述、关键词、文档的作者、最后修改时间以及其他元数据。</p>
-<p>2.水平方向布局用align==center，垂直方向用 valign == middle</p>
-<p>3.td中的内容也可以是其他非显示性元素</p>
-<p>4.<a href="" target="_blank" rel="noopener noreferrer"></a>target – 用来指出哪个窗口或框架应该被此链接打开  _blank 指使用新页面</p>
-<p>5.alt 属性用来为图像定义一串预备的可替换的文本。</p>
-<p>6.th是表头，，，网页中水平方向不可并排多个独立的表格，，理论上可以对表格进行无限次的拆分</p>
-<p>7.浏览器查看网页时出现505因为系统错误</p>
-<p>8&lt;   ==&amp;lt        &gt;  ==&amp;gt</p>
-<p>9.创建下拉菜单的HTML标签是select</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/10/07/%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -1869,15 +1891,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">前端通后端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">笔记 - 前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">前端通后端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1890,6 +1912,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">特效 - 前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">VSCode - 断点调试配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1909,14 +1935,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Node.js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">VSCode - 断点调试配置</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
@@ -1925,7 +1943,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">中间件</a>
+                <a href="javascript:void(0)" class="js-tag color3">Node.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1938,6 +1956,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">SCREEPS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">中间件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1958,6 +1980,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">软件设计师</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">移动端 - 前端</a>
               </li>
             
             <div class="clearfix"></div>

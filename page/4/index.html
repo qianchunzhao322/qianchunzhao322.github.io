@@ -309,6 +309,122 @@
             
 
   
+    <article id="post-队列" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/10/07/%E9%98%9F%E5%88%97/" target="_blank">队列</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/10/07/%E9%98%9F%E5%88%97/" class="archive-article-date">
+        <time datetime="2021-10-07T05:03:05.974Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-07</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h1><h3 id="队列是一个有序列表，可以用数组或是链表来实现，遵循先入先出的原则"><a href="#队列是一个有序列表，可以用数组或是链表来实现，遵循先入先出的原则" class="headerlink" title="队列是一个有序列表，可以用数组或是链表来实现，遵循先入先出的原则"></a>队列是一个有序列表，可以用数组或是链表来实现，遵循先入先出的原则</h3><p><img src="!%5B%5D(https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210919155204823.png" alt="image-20210919155204823"></p>
+<h2 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h2><p>队列本身是有序列表，若使用数组的结构来存储队列的数据，则队列数组的声明，其中<code>maxSize</code> 是该队列的最大容量。<br>        因为队列的输出、 输入是分别从前后端来处理，因此需要两个变量 <code>front</code>及<code>rear</code>分别记录队列前后 端的下标，<code>front</code>会随着数据输出而改变，而<code>rear</code> 则是随着数据输入而改变，</p>
+<p>当我们将 数据存入队列时称为<code>addQueue</code>，<code>addQueue</code>的处理需要有两个步骤:</p>
+<p>思路分析<br>1)将尾指针往后移: <code>rear+1</code>, 当<code>front== rear</code> [ 空]<br>2)若尾指针<code>rear</code> 小于队列的最大下标<code>maxSize-1</code>, 则将数据存入<code>rear</code> 所指的数组元素中，否则无法存入数据。<code>rear == maxSize- 1</code>[队列满]</p>
+<p>代码实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> queue;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.management.RuntimeErrorException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayQueueDemo</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		ArrayQueue arrayQueue = <span class="keyword">new</span> ArrayQueue(<span class="number">4</span>);</span><br><span class="line">		<span class="keyword">char</span> key = <span class="string">&#x27;&#x27;</span>;<span class="comment">//就收用户输入</span></span><br><span class="line">		Scanner scanner = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		<span class="keyword">boolean</span> loop = <span class="keyword">true</span>;</span><br><span class="line">		<span class="keyword">while</span>(1oop) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;s(show):显示队列&quot;</span>);</span><br><span class="line">			System.out.println(<span class="string">&quot;a(add):添加数据到队列&quot;</span>);</span><br><span class="line">			System.out.println(<span class="string">&quot;g(get):从队列取出数据&quot;</span>);</span><br><span class="line">			System.out.println(<span class="string">&quot;h(head):查看队列头的数据&quot;</span>);</span><br><span class="line">			System.out.println(<span class="string">&quot;e(exit):退出程序&quot;</span>);</span><br><span class="line">			key = scanner.next().charAt(<span class="number">0</span>);</span><br><span class="line">			swich(key)&#123;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">&#x27;s&#x27;</span>:</span><br><span class="line">					queue.showQueue();</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">&#x27;a&#x27;</span>:</span><br><span class="line">					System.out.println(<span class="string">&quot;输出一个数&quot;</span>);</span><br><span class="line">					<span class="keyword">int</span> value = scanner.nextInt();</span><br><span class="line">					queue.addQueue(value);</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">&#x27;g&#x27;</span>:</span><br><span class="line">					<span class="keyword">try</span> &#123;</span><br><span class="line">						<span class="keyword">int</span> res = queue.getQueue();</span><br><span class="line">						System.out.printf(<span class="string">&quot;去除的数据是%d\n&quot;</span>,res);</span><br><span class="line">					&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">						<span class="comment">// <span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">						System.out.println(e.getMessage());</span><br><span class="line">					&#125;</span><br><span class="line">					queue.showQueue();</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">&#x27;h&#x27;</span>:</span><br><span class="line">					<span class="keyword">try</span> &#123;</span><br><span class="line">						<span class="keyword">int</span> res = queue ●headQueue( );</span><br><span class="line">						System. out. printf(<span class="string">&quot;队列头的数据是%d\n&quot;</span>, res);</span><br><span class="line">					&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">						<span class="comment">// <span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">						System. out . println(e. getMessage());</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">&#x27;e&#x27;</span>:</span><br><span class="line">					scanner.close();</span><br><span class="line">					loop = <span class="keyword">false</span>;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//使用数组模拟队列---编写一个ArrayQueue类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ArrayQueue</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> max;<span class="comment">// 表示数组的最大容量</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> front;<span class="comment">// 表示队列的头部</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> rear;<span class="comment">// 表示队列的尾部</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span>[] arr;<span class="comment">// 用于存放数据</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">//创建队列的构造器</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">ArrayQueue</span><span class="params">(<span class="keyword">int</span> arrMax)</span> </span>&#123;</span><br><span class="line">		max = arrMax;</span><br><span class="line">		arr = <span class="keyword">new</span> <span class="keyword">int</span>[max];</span><br><span class="line">		front = -<span class="number">1</span>;<span class="comment">//指向队列的头，，指向队列头的前一个位置</span></span><br><span class="line">		rear = -<span class="number">1</span>;<span class="comment">// 指向队列的尾，，指向队列尾</span></span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//判断队列是否满</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isFull</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> rear == max-<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//判断队列是否空</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> rear == front;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//添加数据</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addQueue</span><span class="params">(<span class="keyword">int</span> n )</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(isFull()) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;队列已满，无法添加数据&quot;</span>);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		rear++;</span><br><span class="line">		arr[rear] = n;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//获取队列数据，出队列</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getQueue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(isEmpty()) &#123;</span><br><span class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">&quot;队列为空&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		front++;</span><br><span class="line">		<span class="keyword">return</span> arr[front];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//显示队列所有数据</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showQueue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(isEmpty()) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;队列为空&quot;</span>);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;arr.length; i++) &#123;</span><br><span class="line">			System.out.printf(<span class="string">&quot;arr[%d]=%d\n&quot;</span>, i, arr[i]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="存在BUG——无法进行复用"><a href="#存在BUG——无法进行复用" class="headerlink" title="存在BUG——无法进行复用"></a>存在BUG——无法进行复用</h2><h2 id="解决方式——成环"><a href="#解决方式——成环" class="headerlink" title="解决方式——成环"></a>解决方式——成环</h2><p>思路如下:</p>
+<p><code>front</code> 变量的含义做- -个调整: <code>front </code>就指向队列的第一个元素, 也就是说<code>arr[front]</code>就是队列的第一-个元素<code>front</code>的初始值<code>= 0</code></p>
+<p>rear 变量的含义做-一个调整:<code> rear</code> 指向队列的最后一-个元素的后一个位置.因为希望空出-一个空间做为约定<code>rear</code>的初始值<code>= 0</code></p>
+<p>当队列满时，条件是<code>(rear + 1) % maxSize= front</code> [满]</p>
+<p>对队列为空的条件，<code>rear= tront</code>空</p>
+<p>队列中有效数据的个数<code>（rear+maxSize-front）%maxSize</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> queue;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CircleArrayQueueDemo</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		CircleQueue arrayQueue = <span class="keyword">new</span> CircleQueue (<span class="number">4</span>);</span><br><span class="line">		<span class="keyword">char</span> key = <span class="string">&#x27; &#x27;</span>;<span class="comment">//就收用户输入</span></span><br><span class="line">		Scanner scanner = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		<span class="keyword">boolean</span> loop = <span class="keyword">true</span>;</span><br><span class="line">		<span class="keyword">while</span>(loop) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;s(show):显示队列&quot;</span>);</span><br><span class="line">			System.out.println(<span class="string">&quot;a(add):添加数据到队列&quot;</span>);</span><br><span class="line">			System.out.println(<span class="string">&quot;g(get):从队列取出数据&quot;</span>);</span><br><span class="line">			System.out.println(<span class="string">&quot;h(head):查看队列头的数据&quot;</span>);</span><br><span class="line">			System.out.println(<span class="string">&quot;e(exit):退出程序&quot;</span>);</span><br><span class="line">			key = scanner.next().charAt(<span class="number">0</span>);</span><br><span class="line">			<span class="keyword">switch</span>(key)&#123;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">&#x27;s&#x27;</span>:</span><br><span class="line">					arrayQueue.showQueue();</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">&#x27;a&#x27;</span>:</span><br><span class="line">					System.out.println(<span class="string">&quot;输出一个数&quot;</span>);</span><br><span class="line">					<span class="keyword">int</span> value = scanner.nextInt();</span><br><span class="line">					arrayQueue.addQueue(value);</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">&#x27;g&#x27;</span>:</span><br><span class="line">					<span class="keyword">try</span> &#123;</span><br><span class="line">						<span class="keyword">int</span> res = arrayQueue.getQueue();</span><br><span class="line">						System.out.printf(<span class="string">&quot;去除的数据是%d\n&quot;</span>,res);</span><br><span class="line">					&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">						<span class="comment">// <span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">						System.out.println(e.getMessage());</span><br><span class="line">					&#125;</span><br><span class="line">					arrayQueue.showQueue();</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">&#x27;h&#x27;</span>:</span><br><span class="line">					<span class="keyword">try</span> &#123;</span><br><span class="line">						<span class="comment">//int res = arrayQueue.headQueue( );</span></span><br><span class="line">						<span class="comment">//System. out. printf(&quot;队列头的数据是%d\n&quot;, res);</span></span><br><span class="line">					&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">						<span class="comment">// <span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">						System. out . println(e. getMessage());</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> <span class="string">&#x27;e&#x27;</span>:</span><br><span class="line">					scanner.close();</span><br><span class="line">					loop = <span class="keyword">false</span>;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//使用数组模拟队列---编写一个CircleQueue类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CircleQueue</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> max;<span class="comment">// 表示数组的最大容量</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> front;<span class="comment">// 表示队列的头部 ,,0</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> rear;<span class="comment">// 表示队列的尾部,,0</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span>[] arr;<span class="comment">// 用于存放数据</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">//创建队列的构造器</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">CircleQueue</span><span class="params">(<span class="keyword">int</span> arrMax)</span> </span>&#123;</span><br><span class="line">		max = arrMax;</span><br><span class="line">		arr = <span class="keyword">new</span> <span class="keyword">int</span>[max];</span><br><span class="line">		front = <span class="number">0</span>;<span class="comment">//指向队列的头，，指向队列的第一个元素</span></span><br><span class="line">		rear = <span class="number">0</span>;<span class="comment">// 指向队列的尾，，指向队列尾最后一个元素的后一个位置</span></span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//判断队列是否满</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isFull</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> (rear + <span class="number">1</span>) % max == front;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//判断队列是否空</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> rear == front;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//添加数据</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addQueue</span><span class="params">(<span class="keyword">int</span> n )</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(isFull()) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;队列已满，无法添加数据&quot;</span>);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		arr[rear] = n;</span><br><span class="line">		<span class="comment">//将rear向后移</span></span><br><span class="line">		rear= (rear + <span class="number">1</span>) % max;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//获取队列数据，出队列</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getQueue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(isEmpty()) &#123;</span><br><span class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">&quot;队列为空&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//这里需要分析出front是指向队列的第--个元素</span></span><br><span class="line">		<span class="comment">//1.先把front对应的值保留到一个临时变量</span></span><br><span class="line">		<span class="comment">//2.将front后移，考虑取模</span></span><br><span class="line">		<span class="comment">//3.将临时保存的变量返回</span></span><br><span class="line">		<span class="keyword">int</span> value = arr[front];	</span><br><span class="line">		front= (front + <span class="number">1</span>) % max;</span><br><span class="line">		<span class="keyword">return</span> value;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//显示队列所有数据</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showQueue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(isEmpty()) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;队列为空&quot;</span>);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//到底要遍历多少个元素</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = front;i&lt;front+(rear+max-front)%max ; i++) &#123;</span><br><span class="line">			System.out.printf(<span class="string">&quot;arr[%d]=%d\n&quot;</span>, i%max, arr[i%max]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>总的来说，画图可以方便理解</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">笔记 - Java - 原创</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/数据结构//" class="article-tag-list-link color5">数据结构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/10/07/%E9%98%9F%E5%88%97/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-递归的基本知识" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1549,7 +1665,7 @@
 <h3 id="2-1基于HTTPS方式上传本地仓库到GitHub"><a href="#2-1基于HTTPS方式上传本地仓库到GitHub" class="headerlink" title="2.1基于HTTPS方式上传本地仓库到GitHub"></a>2.1基于HTTPS方式上传本地仓库到GitHub</h3><p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210724115729026.png" alt="image-20210724115729026"></p>
 <p>当第二次或以后上传文件时直接输入git push 就行</p>
 <h3 id="2-2基于SSH方式上传本地仓库到GitHub-实现免登录加密传输"><a href="#2-2基于SSH方式上传本地仓库到GitHub-实现免登录加密传输" class="headerlink" title="2.2基于SSH方式上传本地仓库到GitHub    实现免登录加密传输"></a>2.2基于SSH方式上传本地仓库到GitHub    实现免登录加密传输</h3><p>生成SSH key</p>
-<p><em>①打开Git Bash</em><br><em>②粘贴如下的命令,并将your_ <a href="mailto:&#x65;&#109;&#x61;&#105;&#108;&#x40;&#101;&#x78;&#97;&#109;&#x70;&#x6c;&#101;&#46;&#99;&#x6f;&#x6d;">&#x65;&#109;&#x61;&#105;&#108;&#x40;&#101;&#x78;&#97;&#109;&#x70;&#x6c;&#101;&#46;&#99;&#x6f;&#x6d;</a>替换为注册Github账号时填写的邮箱:<br>●ssh-keygen -t rsa -b 4096 -C “your <a href="mailto:&#101;&#109;&#97;&#x69;&#x6c;&#x40;&#x65;&#x78;&#97;&#x6d;&#x70;&#x6c;&#101;&#46;&#99;&#x6f;&#x6d;">&#101;&#109;&#97;&#x69;&#x6c;&#x40;&#x65;&#x78;&#97;&#x6d;&#x70;&#x6c;&#101;&#46;&#99;&#x6f;&#x6d;</a>“</em><br><em>③连续敲击3次回车，即可在C:\Users\用户名文件夹.ssh,目录中生成id_ rsa 和 id rsa.pub 两个文件</em></p>
+<p><em>①打开Git Bash</em><br><em>②粘贴如下的命令,并将your_ <a href="mailto:&#101;&#109;&#x61;&#105;&#x6c;&#x40;&#101;&#x78;&#x61;&#109;&#x70;&#108;&#101;&#46;&#99;&#x6f;&#x6d;">&#101;&#109;&#x61;&#105;&#x6c;&#x40;&#101;&#x78;&#x61;&#109;&#x70;&#108;&#101;&#46;&#99;&#x6f;&#x6d;</a>替换为注册Github账号时填写的邮箱:<br>●ssh-keygen -t rsa -b 4096 -C “your <a href="mailto:&#x65;&#x6d;&#x61;&#105;&#108;&#x40;&#x65;&#120;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#x63;&#x6f;&#x6d;">&#x65;&#x6d;&#x61;&#105;&#108;&#x40;&#x65;&#120;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#x63;&#x6f;&#x6d;</a>“</em><br><em>③连续敲击3次回车，即可在C:\Users\用户名文件夹.ssh,目录中生成id_ rsa 和 id rsa.pub 两个文件</em></p>
 <p>配置SSH key</p>
 <p><em>①使用记事本打开id_ rsa.pub 文件，复制里面的文本内容<br>②在浏览器中登录Github, 点击头像-&gt; Settings -&gt; SSH and GPG Keys -&gt; New SSH key<br>③将id _rsa.pub 文件中的内容,粘贴到Key对应的文本框中</em><br><em>④在Title文本框中任意填写-个名称，来标识这个Key从何而来</em></p>
 <p>上传时就参考HTTPS的方式就行</p>
@@ -1651,142 +1767,9 @@
 
 
   
-    <article id="post-GET POST方法总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/10/07/GET%20POST%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/" target="_blank">GET POST方法</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/10/07/GET%20POST%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/" class="archive-article-date">
-        <time datetime="2021-10-07T05:03:05.961Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-07</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="GET-和-POST的区别"><a href="#GET-和-POST的区别" class="headerlink" title="GET 和 POST的区别"></a>GET 和 POST的区别</h1><p>刚刚学了AJAX，以下只能是我自己的简单认识。</p>
-<table>
-<thead>
-<tr>
-<th>get</th>
-<th>post</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>一般用去请求获取数据</td>
-<td>一般作为发送数据到后台时使用</td>
-</tr>
-<tr>
-<td>其参数在浏览器的地址栏的url中可见，所以隐私性安全性较差，且参数长度也是有限制的</td>
-<td>传递参数放在Request body中，不会在url中显示，比GET稍稍要安全点，且参数长度无限制</td>
-</tr>
-<tr>
-<td>可被缓存</td>
-<td>不会被缓存</td>
-</tr>
-<tr>
-<td>保留在浏览器历史记录中</td>
-<td>不会保留在浏览器历史记录中</td>
-</tr>
-<tr>
-<td>只能进行url编码（application/x-www-form-urlencoded）</td>
-<td>支持多种编码方式（application/x-www-form-urlencoded （常用）或 multipart/form-data。</td>
-</tr>
-</tbody></table>
-<p>将AJAX请求封装到一个函数中的方法如下</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">        </span><br><span class="line">    <span class="comment">//option 是个对象，里面包含数据有url type success data</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">ajax</span>(<span class="params">option</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">            <span class="comment">//如果是get并且是有数据</span></span><br><span class="line">            <span class="keyword">if</span> (option.type == <span class="string">&#x27;get&#x27;</span> &amp;&amp; option.data) &#123;</span><br><span class="line">                option.url += <span class="string">&#x27;?&#x27;</span>;</span><br><span class="line">                option.url += option.data;</span><br><span class="line">                option.data = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">            xhr.open(option.type, option.url);</span><br><span class="line">            <span class="comment">//post请求并且有数据</span></span><br><span class="line">            <span class="keyword">if</span> (option.type == <span class="string">&#x27;get&#x27;</span> &amp;&amp; option.data) &#123;</span><br><span class="line">                xhr.setRequestHeader(<span class="string">&#x27;Content-type&#x27;</span>, <span class="string">&#x27;application/x-www-form-urlencoded&#x27;</span>);</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">            xhr.onreadystatechange = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (xhr.readyState == <span class="number">4</span> &amp;&amp; xhr.status == <span class="number">200</span>) &#123;</span><br><span class="line">                    option.success(xhr.responseText);</span><br><span class="line">                    <span class="comment">//获取传输数据</span></span><br><span class="line">                    <span class="keyword">var</span> type = xhr.getAllResponseHeaders(<span class="string">&#x27;Content-Type&#x27;</span>);</span><br><span class="line">                    <span class="comment">//如果传输数据为JSON</span></span><br><span class="line">                    <span class="keyword">if</span>(type.indexOf(<span class="string">&#x27;json&#x27;</span>)!=-<span class="number">1</span>)&#123;</span><br><span class="line">                        option.success(<span class="built_in">JSON</span>.parse(xhr.responseText));</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="comment">//如果传输数据为XML</span></span><br><span class="line">                    <span class="keyword">else</span> <span class="keyword">if</span>(type.indexOf(<span class="string">&#x27;xml&#x27;</span>)!=-<span class="number">1</span>)&#123;</span><br><span class="line">                        option.success(<span class="built_in">JSON</span>.parse(xhr.responseXML));</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="comment">//啥也不是</span></span><br><span class="line">                    <span class="keyword">else</span> &#123;</span><br><span class="line">                        option.success(xhr.responseText);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            xhr.send(option.data);</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<p>封装完毕后，只需要引入一个JS文件，就可以调用这个函数了。</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Ajax</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">前端通后端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Ajax//" class="article-tag-list-link color5">Ajax</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/10/07/GET%20POST%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+      <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -1937,15 +1920,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">前端通后端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">笔记 - 前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">前端通后端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1958,6 +1941,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">特效 - 前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">VSCode - 断点调试配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1977,14 +1964,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Node.js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">VSCode - 断点调试配置</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
@@ -1993,7 +1972,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">中间件</a>
+                <a href="javascript:void(0)" class="js-tag color3">Node.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2006,6 +1985,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">SCREEPS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">中间件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2026,6 +2009,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">软件设计师</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">移动端 - 前端</a>
               </li>
             
             <div class="clearfix"></div>
