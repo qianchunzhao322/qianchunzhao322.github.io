@@ -366,7 +366,7 @@
 <p><strong>模块化</strong>——(js的模块化、CsS 的模块化、资源的模块化)<br><strong>组件化</strong>——(复用现有的UI结构、样式、行为)<br><strong>规范化</strong>——(目录结构的划分、编码规范化、接口规范化、文档规范化、Git 分支管理)<br><strong>自动化</strong>——(自动化构建、自动部署、自动化测试)</p>
 <p>前端工程化的解决方案是webpack</p>
 <h1 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h1><p>主要功能:它提供了友好的前端模块化开发支持，以及代码压缩混淆、处理浏览器端JavaScript的兼容性、性能优化等强大的功能。</p>
-<h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><p>安装<br>npm install <a href="mailto:&#119;&#101;&#x62;&#x70;&#97;&#x63;&#107;&#64;&#53;&#x2e;&#x34;&#x32;&#46;&#x31;">&#119;&#101;&#x62;&#x70;&#97;&#x63;&#107;&#64;&#53;&#x2e;&#x34;&#x32;&#46;&#x31;</a> <a href="mailto:&#x77;&#x65;&#98;&#x70;&#97;&#x63;&#x6b;&#45;&#99;&#108;&#105;&#64;&#x34;&#46;&#55;&#46;&#x32;">&#x77;&#x65;&#98;&#x70;&#97;&#x63;&#x6b;&#45;&#99;&#108;&#105;&#64;&#x34;&#46;&#55;&#46;&#x32;</a> -D</p>
+<h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><p>安装<br>npm install <a href="mailto:&#x77;&#101;&#x62;&#x70;&#x61;&#x63;&#x6b;&#64;&#x35;&#x2e;&#x34;&#x32;&#46;&#x31;">&#x77;&#101;&#x62;&#x70;&#x61;&#x63;&#x6b;&#64;&#x35;&#x2e;&#x34;&#x32;&#46;&#x31;</a> <a href="mailto:&#119;&#x65;&#98;&#112;&#97;&#99;&#x6b;&#x2d;&#99;&#x6c;&#105;&#x40;&#52;&#x2e;&#x37;&#46;&#x32;">&#119;&#x65;&#98;&#112;&#97;&#99;&#x6b;&#x2d;&#99;&#x6c;&#105;&#x40;&#52;&#x2e;&#x37;&#46;&#x32;</a> -D</p>
 <p>此时，  -D将信息记录到package.json中的  “<strong>devDependencies”: {  只在开发阶段用的包  }<strong>节点中，而 -S记录到</strong>“dependencies”: {  开发和上线都需要的包  }</strong></p>
 <p>配置<br>①在项目根目录中，创建名为webpack.config.js的webpack配置文件，并初始化如下的基本配置:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">   <span class="attr">mode</span>:<span class="string">&#x27;development&#x27;</span> <span class="comment">//mode 用来指定构建模式。可选值有development 和production（上线模式）</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -380,7 +380,7 @@
 <p>webpack.config.js是webpack的配置文件。webpack 在真正开始打包构建之前（npm run dev），会先读取这个配置文件,从而基于给定的配置，对项目进行打包。</p>
 <p>注意事项<br>在webpack 4.x和5.x的版本中，有如下的默认约定:<br>①默认的打包入口文件为src -&gt; index.is<br>②默认的输出文件路径为dist -&gt; main.js</p>
 <h3 id="webpack-配置起来十分麻烦，但是开发体验好，于是vue-cli（好像是叫手脚架）起作用了"><a href="#webpack-配置起来十分麻烦，但是开发体验好，于是vue-cli（好像是叫手脚架）起作用了" class="headerlink" title="webpack 配置起来十分麻烦，但是开发体验好，于是vue-cli（好像是叫手脚架）起作用了"></a><strong>webpack 配置起来十分麻烦，但是开发体验好，于是vue-cli（好像是叫手脚架）起作用了</strong></h3><h2 id="webpack中的loader-加载器"><a href="#webpack中的loader-加载器" class="headerlink" title="webpack中的loader(加载器)"></a>webpack中的loader(加载器)</h2><p>在实际开发过程中，webpack 默认只能打包处理以js后缀名结尾的模块。其他非.js 后缀名结尾的模块,webpack默认处理不了，需要调用loader加载器才可以正常打包，否则会报错! <img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210816200056346.png" alt="image-20210816200056346"></p>
-<p>①运行npm i <a href="mailto:&#115;&#116;&#121;&#x6c;&#x65;&#45;&#108;&#111;&#x61;&#100;&#101;&#114;&#x40;&#x33;&#x2e;&#x30;&#x2e;&#x30;">&#115;&#116;&#121;&#x6c;&#x65;&#45;&#108;&#111;&#x61;&#100;&#101;&#114;&#x40;&#x33;&#x2e;&#x30;&#x2e;&#x30;</a> <a href="mailto:&#x63;&#115;&#115;&#x2d;&#x6c;&#x6f;&#x61;&#x64;&#101;&#x72;&#64;&#53;&#x2e;&#50;&#46;&#54;">&#x63;&#115;&#115;&#x2d;&#x6c;&#x6f;&#x61;&#x64;&#101;&#x72;&#64;&#53;&#x2e;&#50;&#46;&#54;</a> -D命令,安装处理Css文件的loader<br>②在webpack.config.js的module -&gt; rules数组中，添加loader规则如下:</p>
+<p>①运行npm i <a href="mailto:&#x73;&#116;&#x79;&#108;&#x65;&#x2d;&#108;&#x6f;&#97;&#x64;&#101;&#x72;&#64;&#x33;&#46;&#x30;&#x2e;&#48;">&#x73;&#116;&#x79;&#108;&#x65;&#x2d;&#108;&#x6f;&#97;&#x64;&#101;&#x72;&#64;&#x33;&#46;&#x30;&#x2e;&#48;</a> <a href="mailto:&#99;&#x73;&#115;&#x2d;&#x6c;&#111;&#97;&#100;&#101;&#x72;&#x40;&#53;&#46;&#50;&#46;&#x36;">&#99;&#x73;&#115;&#x2d;&#x6c;&#111;&#97;&#100;&#101;&#x72;&#x40;&#53;&#46;&#50;&#46;&#x36;</a> -D命令,安装处理Css文件的loader<br>②在webpack.config.js的module -&gt; rules数组中，添加loader规则如下:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">module: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      &#123; test: /\.css$/, use: [&#x27;style-loader&#x27;, &#x27;css-loader&#x27;] &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 
 <p>原理如下：<br>1.webpack默认只能打包处理.js结尾的文件，处理不了其它后缀的文件<br>2.由于代码中包含了index.css 这个文件，因此webpack默认处理不了<br>3.当webpack发现某个文件处理不了的时候，会查找webpack.config.js这个配置文件,看module.rules数组中，是否配置了对应的loader加载器。<br>4.webpack把index.css这个文件,先转交给最后-个loader进行处理(先转交给css-loader) .<br>5.当css-loader处理完毕之后，会把处理的结果，转交给下-个loader (转交给style-loader)<br>6.当style-loader处理完毕之后，发现没有下一个loader了,于是就把处理的结果，转交给了webpack<br>7.webpack把style-loader处理的结果，合并到/dist/bundle.js中,最终生成打包好的文件。</p>
@@ -794,6 +794,14 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Node.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">中间件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
@@ -802,7 +810,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Node.js</a>
+                <a href="javascript:void(0)" class="js-tag color3">SCREEPS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -814,19 +822,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">SCREEPS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">中间件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JS - 前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">函数进阶</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -834,7 +830,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">函数进阶</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">数据可视化 - HTML5 - 前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">移动端 - 前端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -842,7 +846,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">移动端 - 前端</a>
+                <a href="javascript:void(0)" class="js-tag color2">数据结构 - Java</a>
               </li>
             
             <div class="clearfix"></div>

@@ -309,6 +309,133 @@
             
 
   
+    <article id="post-双向链表" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/10/07/%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8/" target="_blank">双向链表</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/10/07/%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8/" class="archive-article-date">
+        <time datetime="2021-10-07T05:03:05.989Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-07</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="双向链表"><a href="#双向链表" class="headerlink" title="双向链表"></a><strong>双向链表</strong></h1><h3 id="管理单向链表的缺点："><a href="#管理单向链表的缺点：" class="headerlink" title="管理单向链表的缺点："></a>管理单向链表的缺点：</h3><p>单向链表，查找方向只能是一个方向，二双向链表可以此案前或者先后查找</p>
+<p>单向链表不能自我删除，需要开辅助节点，二双向链表则可以自我删除，所以前边单链表删除时总要找到temp，temp时待删除节点的前一个节点</p>
+<h2 id="双向链表的增删改查"><a href="#双向链表的增删改查" class="headerlink" title="双向链表的增删改查"></a><strong>双向链表的增删改查</strong></h2><h3 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h3><p>思路——方法同单向链表，就是循环打印</p>
+<p><u><em><strong>代码如下</strong></em></u></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">list</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">//判断链表是否为空</span></span><br><span class="line">		<span class="keyword">if</span>(head.next == <span class="keyword">null</span>) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;链表为空&quot;</span>);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		HeroNode1 temp = head.next ;<span class="comment">//因为头节点，不能动，因此我们需要一个辅助变量来遍历</span></span><br><span class="line">		<span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</span><br><span class="line">			<span class="comment">//判断是否到链表最后</span></span><br><span class="line">			<span class="keyword">if</span>(temp == <span class="keyword">null</span>) &#123;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			System.out.println(temp);<span class="comment">//输出节点的信息</span></span><br><span class="line">			temp = temp.next;<span class="comment">//后移</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加"><a href="#添加" class="headerlink" title="添加"></a>添加</h3><p>思路——首先要找到待添加的位置，然后让temp.next = HeroNode1;<br>        HeroNode1.pre = temp;来完成添加</p>
+<p><u><em><strong>代码如下</strong></em></u>、</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//添加节点到单向链表;</span></span><br><span class="line"><span class="comment">//思路，当不考虑编号顺序时</span></span><br><span class="line"><span class="comment">//1.找到当前链表的最后节点</span></span><br><span class="line"><span class="comment">//2.将最后这个节点的next指向新的节点</span></span><br><span class="line"><span class="comment">//3。将新的节点的pre指向最后这个几点</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addNode</span><span class="params">(HeroNode1 HeroNode1)</span> </span>&#123;</span><br><span class="line">	HeroNode1 temp = head;<span class="comment">//由于head节点不能动，找个变量辅助查找</span></span><br><span class="line">	<span class="keyword">while</span>(<span class="keyword">true</span>) &#123;<span class="comment">//遍历链表，找到最后一个节点</span></span><br><span class="line">		<span class="keyword">if</span>(temp.next == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		temp = temp.next;<span class="comment">//没有找到就将temp后移</span></span><br><span class="line">	&#125;</span><br><span class="line">	temp.next = HeroNode1;</span><br><span class="line">	HeroNode1.pre = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h3><p>思路——同单向链表一样的方法，就是先找到这个节点，在进行一系列的修改</p>
+<p><u><em><strong>代码如下</strong></em></u></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//修改节点的信息，根据no编号来修改,即no编号不能改</span></span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(HeroNode1 newHeroNode1)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//判断是否空</span></span><br><span class="line">		<span class="keyword">if</span>(head.next == <span class="keyword">null</span>) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;链表为空~&quot;</span>); </span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//找到需要修改的节点，根据no编号</span></span><br><span class="line">		<span class="comment">//定义一个辅助变量</span></span><br><span class="line">		HeroNode1 temp = head.next;</span><br><span class="line">		<span class="keyword">boolean</span> flag = <span class="keyword">false</span>; <span class="comment">//表示是否找到该节点</span></span><br><span class="line">		<span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span> (temp == <span class="keyword">null</span>) &#123;</span><br><span class="line">				<span class="keyword">break</span>; <span class="comment">//已经遍历完链表</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(temp.no == newHeroNode1. no) &#123;</span><br><span class="line">				flag = <span class="keyword">true</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			temp = temp.next;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//根据flag判断是否找到要修改的节点</span></span><br><span class="line">		<span class="keyword">if</span>(flag) &#123;</span><br><span class="line">			temp.name = newHeroNode1.name ;</span><br><span class="line">			temp.nickname = newHeroNode1.nickname;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123; <span class="comment">//没有找到</span></span><br><span class="line">			System.out. printf(<span class="string">&quot;没有找到编号%d的节点，不能修改\n&quot;</span>, newHeroNode1.no);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><p>思路——这里要好好想想，因为双向链表的特性有一个自我删除，temp.next.pre = temp.pre;temp.pre.next = temp.next;</p>
+<blockquote>
+<p>这里特别要强调一句话，，由于我们不知道这个待删除的节点是不是最后一个节点，因为最后一个节点的next时一个空指针，.next.pre会导致空指针异常，所以我们需要判断一下时候这个节点是否为最后一个节点</p>
+</blockquote>
+<p>操作方法如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(temp.next != <span class="keyword">null</span>)&#123;</span><br><span class="line">	temp.next.pre = temp.pre;<span class="comment">//如果是最后一个节点的话不执行这句话，否则空指针异常</span></span><br><span class="line">&#125;</span><br><span class="line">	temp.pre.next = temp.next;</span><br></pre></td></tr></table></figure>
+
+<p><u><em><strong>代码如下</strong></em></u></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//删除节点——双向链表</span></span><br><span class="line">	<span class="comment">//思路</span></span><br><span class="line">	<span class="comment">//1. head 不能动,因此我们需要一个temp辅助节点找到待删除节点</span></span><br><span class="line">	<span class="comment">//2. 找到后进行自我删除</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">del</span><span class="params">(<span class="keyword">int</span> no)</span> </span>&#123;</span><br><span class="line">		HeroNode1 temp = head.next;</span><br><span class="line">		<span class="keyword">boolean</span> flag = <span class="keyword">false</span>; <span class="comment">// 标志是否找到待删除节点的</span></span><br><span class="line">		<span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(temp == <span class="keyword">null</span>) &#123; <span class="comment">//已经到链表 的最后</span></span><br><span class="line">				System.out.println(<span class="string">&quot;链表为空&quot;</span>);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(temp.no == no) &#123;</span><br><span class="line">				<span class="comment">//找到的待删除节点的前一个节点temp</span></span><br><span class="line">				flag = <span class="keyword">true</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			temp = temp.next; <span class="comment">//temp后移， 遍历</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//判断flag</span></span><br><span class="line">		<span class="keyword">if</span>(flag) &#123;</span><br><span class="line">			<span class="keyword">if</span>(temp.next != <span class="keyword">null</span>)&#123;</span><br><span class="line">				temp.next.pre = temp.pre;<span class="comment">//如果是最后一个节点的话不执行这句话，否则空指针异常</span></span><br><span class="line">			&#125;</span><br><span class="line">			temp.pre.next = temp.next;</span><br><span class="line">		&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;这个节点不存在&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210923110910505.png" alt="image-20210923110910505"></p>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a><strong>完整代码</strong></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> linkedlist;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DoubleLinkedList</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//创建节点</span></span><br><span class="line">				HeroNode1 hero1 = <span class="keyword">new</span> HeroNode1(<span class="number">1</span>, <span class="string">&quot;11&quot;</span>,<span class="string">&quot;111&quot;</span>);</span><br><span class="line">				HeroNode1 hero2 = <span class="keyword">new</span> HeroNode1(<span class="number">2</span>, <span class="string">&quot;22&quot;</span>,<span class="string">&quot;222&quot;</span>);</span><br><span class="line">				HeroNode1 hero3 = <span class="keyword">new</span> HeroNode1(<span class="number">3</span>, <span class="string">&quot;33&quot;</span>,<span class="string">&quot;333&quot;</span>);</span><br><span class="line">				HeroNode1 hero4 = <span class="keyword">new</span> HeroNode1(<span class="number">4</span>, <span class="string">&quot;44&quot;</span>,<span class="string">&quot;444&quot;</span>);</span><br><span class="line">				DoubleLinkedListTest singleLinkedListTest = <span class="keyword">new</span> DoubleLinkedListTest();</span><br><span class="line">				singleLinkedListTest.addNode(hero1);</span><br><span class="line">				singleLinkedListTest.addNode(hero2);</span><br><span class="line">				singleLinkedListTest.addNode(hero3);</span><br><span class="line">				singleLinkedListTest.addNode(hero4);</span><br><span class="line">				singleLinkedListTest.list();</span><br><span class="line">				<span class="comment">//创建节点2</span></span><br><span class="line"><span class="comment">//				HeroNode11 hero11 = new HeroNode11(1, &quot;11&quot;,&quot;111&quot;);</span></span><br><span class="line"><span class="comment">//				HeroNode11 hero21 = new HeroNode11(2, &quot;22&quot;,&quot;222&quot;);</span></span><br><span class="line"><span class="comment">//				HeroNode11 hero31 = new HeroNode11(3, &quot;33&quot;,&quot;333&quot;);</span></span><br><span class="line"><span class="comment">//				HeroNode11 hero41 = new HeroNode11(4, &quot;44&quot;,&quot;444&quot;);</span></span><br><span class="line"><span class="comment">//				DoubleLinkedListTest singleLinkedListTest2 = new DoubleLinkedListTest();</span></span><br><span class="line"><span class="comment">//				DoubleLinkedListTest.add(hero21);</span></span><br><span class="line"><span class="comment">//				DoubleLinkedListTest.add(hero11);</span></span><br><span class="line"><span class="comment">//				DoubleLinkedListTest.add(hero41);</span></span><br><span class="line"><span class="comment">//				DoubleLinkedListTest.add(hero31);</span></span><br><span class="line"><span class="comment">//				DoubleLinkedListTest.add(hero31);</span></span><br><span class="line"><span class="comment">//				DoubleLinkedListTest.list();</span></span><br><span class="line">				<span class="comment">//修改节点</span></span><br><span class="line">				HeroNode1 hero311 = <span class="keyword">new</span> HeroNode1(<span class="number">3</span>, <span class="string">&quot;331&quot;</span>,<span class="string">&quot;3331&quot;</span>);</span><br><span class="line">				singleLinkedListTest.update(hero311);</span><br><span class="line">				System.out.println(<span class="string">&quot;修改后&quot;</span>);</span><br><span class="line">				singleLinkedListTest.list();</span><br><span class="line">				<span class="comment">//删除节点</span></span><br><span class="line">				</span><br><span class="line">				singleLinkedListTest.del(<span class="number">4</span>);</span><br><span class="line">				System.out.println(<span class="string">&quot;删除后&quot;</span>);</span><br><span class="line">				singleLinkedListTest.list();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DoubleLinkedListTest</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> HeroNode1 head = <span class="keyword">new</span> HeroNode1(<span class="number">0</span>,<span class="string">&quot;&quot;</span>,<span class="string">&quot;&quot;</span>);<span class="comment">//初始化的头节点不妨数据</span></span><br><span class="line">	<span class="comment">//显示链表[遍历]</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">list</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">//判断链表是否为空</span></span><br><span class="line">		<span class="keyword">if</span>(head.next == <span class="keyword">null</span>) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;链表为空&quot;</span>);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		HeroNode1 temp = head.next ;<span class="comment">//因为头节点，不能动，因此我们需要一个辅助变量来遍历</span></span><br><span class="line">		<span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</span><br><span class="line">			<span class="comment">//判断是否到链表最后</span></span><br><span class="line">			<span class="keyword">if</span>(temp == <span class="keyword">null</span>) &#123;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			System.out.println(temp);<span class="comment">//输出节点的信息</span></span><br><span class="line">			temp = temp.next;<span class="comment">//后移</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//添加节点到单向链表;</span></span><br><span class="line">	<span class="comment">//思路，当不考虑编号顺序时</span></span><br><span class="line">	<span class="comment">//1.找到当前链表的最后节点</span></span><br><span class="line">	<span class="comment">//2.将最后这个节点的next指向新的节点</span></span><br><span class="line">	<span class="comment">//3。将新的节点的pre指向最后这个几点</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addNode</span><span class="params">(HeroNode1 HeroNode1)</span> </span>&#123;</span><br><span class="line">		HeroNode1 temp = head;<span class="comment">//由于head节点不能动，找个变量辅助查找</span></span><br><span class="line">		<span class="keyword">while</span>(<span class="keyword">true</span>) &#123;<span class="comment">//遍历链表，找到最后一个节点</span></span><br><span class="line">			<span class="keyword">if</span>(temp.next == <span class="keyword">null</span>) &#123;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			temp = temp.next;<span class="comment">//没有找到就将temp后移</span></span><br><span class="line">		&#125;</span><br><span class="line">		temp.next = HeroNode1;</span><br><span class="line">		HeroNode1.pre = temp;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//修改节点的信息，根据no编号来修改,即no编号不能改</span></span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(HeroNode1 newHeroNode1)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//判断是否空</span></span><br><span class="line">		<span class="keyword">if</span>(head.next == <span class="keyword">null</span>) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;链表为空~&quot;</span>); </span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//找到需要修改的节点，根据no编号</span></span><br><span class="line">		<span class="comment">//定义一个辅助变量</span></span><br><span class="line">		HeroNode1 temp = head.next;</span><br><span class="line">		<span class="keyword">boolean</span> flag = <span class="keyword">false</span>; <span class="comment">//表示是否找到该节点</span></span><br><span class="line">		<span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span> (temp == <span class="keyword">null</span>) &#123;</span><br><span class="line">				<span class="keyword">break</span>; <span class="comment">//已经遍历完链表</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(temp.no == newHeroNode1. no) &#123;</span><br><span class="line">				flag = <span class="keyword">true</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			temp = temp.next;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//根据flag判断是否找到要修改的节点</span></span><br><span class="line">		<span class="keyword">if</span>(flag) &#123;</span><br><span class="line">			temp.name = newHeroNode1.name ;</span><br><span class="line">			temp.nickname = newHeroNode1.nickname;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123; <span class="comment">//没有找到</span></span><br><span class="line">			System.out. printf(<span class="string">&quot;没有找到编号%d的节点，不能修改\n&quot;</span>, newHeroNode1.no);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//删除节点——双向链表</span></span><br><span class="line">	<span class="comment">//思路</span></span><br><span class="line">	<span class="comment">//1. head 不能动,因此我们需要一个temp辅助节点找到待删除节点</span></span><br><span class="line">	<span class="comment">//2. 找到后进行自我删除</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">del</span><span class="params">(<span class="keyword">int</span> no)</span> </span>&#123;</span><br><span class="line">		HeroNode1 temp = head.next;</span><br><span class="line">		<span class="keyword">boolean</span> flag = <span class="keyword">false</span>; <span class="comment">// 标志是否找到待删除节点的</span></span><br><span class="line">		<span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(temp == <span class="keyword">null</span>) &#123; <span class="comment">//已经到链表 的最后</span></span><br><span class="line">				System.out.println(<span class="string">&quot;链表为空&quot;</span>);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(temp.no == no) &#123;</span><br><span class="line">				<span class="comment">//找到的待删除节点的前一个节点temp</span></span><br><span class="line">				flag = <span class="keyword">true</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			temp = temp.next; <span class="comment">//temp后移， 遍历</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//判断flag</span></span><br><span class="line">		<span class="keyword">if</span>(flag) &#123;</span><br><span class="line">			<span class="keyword">if</span>(temp.next != <span class="keyword">null</span>)&#123;</span><br><span class="line">				temp.next.pre = temp.pre;<span class="comment">//如果是最后一个节点的话不执行这句话，否则空指针异常</span></span><br><span class="line">			&#125;</span><br><span class="line">			temp.pre.next = temp.next;</span><br><span class="line">		&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;这个节点不存在&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//定义 HeroNode1节点</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HeroNode1</span></span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">int</span> no;</span><br><span class="line">	<span class="keyword">public</span> String name;</span><br><span class="line">	<span class="keyword">public</span> String nickname;</span><br><span class="line">	<span class="keyword">public</span> HeroNode1 next;<span class="comment">//下一个节点</span></span><br><span class="line">	<span class="keyword">public</span> HeroNode1 pre;<span class="comment">//上一个节点</span></span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">HeroNode1</span><span class="params">(<span class="keyword">int</span> no, String name, String nickname)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.no = no;</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">		<span class="keyword">this</span>.nickname = nickname;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">&quot;HeroNode1 [no=&quot;</span> + no + <span class="string">&quot;, name=&quot;</span> + name + <span class="string">&quot;, nickname=&quot;</span> + nickname + <span class="string">&quot;]&quot;</span> ;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">笔记 - Java - 原创</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/数据结构//" class="article-tag-list-link color5">数据结构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/10/07/%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-刷题总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1533,7 +1660,7 @@
 <p><strong>模块化</strong>——(js的模块化、CsS 的模块化、资源的模块化)<br><strong>组件化</strong>——(复用现有的UI结构、样式、行为)<br><strong>规范化</strong>——(目录结构的划分、编码规范化、接口规范化、文档规范化、Git 分支管理)<br><strong>自动化</strong>——(自动化构建、自动部署、自动化测试)</p>
 <p>前端工程化的解决方案是webpack</p>
 <h1 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h1><p>主要功能:它提供了友好的前端模块化开发支持，以及代码压缩混淆、处理浏览器端JavaScript的兼容性、性能优化等强大的功能。</p>
-<h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><p>安装<br>npm install <a href="mailto:&#119;&#101;&#x62;&#x70;&#97;&#x63;&#107;&#64;&#53;&#x2e;&#x34;&#x32;&#46;&#x31;">&#119;&#101;&#x62;&#x70;&#97;&#x63;&#107;&#64;&#53;&#x2e;&#x34;&#x32;&#46;&#x31;</a> <a href="mailto:&#x77;&#x65;&#98;&#x70;&#97;&#x63;&#x6b;&#45;&#99;&#108;&#105;&#64;&#x34;&#46;&#55;&#46;&#x32;">&#x77;&#x65;&#98;&#x70;&#97;&#x63;&#x6b;&#45;&#99;&#108;&#105;&#64;&#x34;&#46;&#55;&#46;&#x32;</a> -D</p>
+<h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><p>安装<br>npm install <a href="mailto:&#x77;&#101;&#x62;&#x70;&#x61;&#x63;&#x6b;&#64;&#x35;&#x2e;&#x34;&#x32;&#46;&#x31;">&#x77;&#101;&#x62;&#x70;&#x61;&#x63;&#x6b;&#64;&#x35;&#x2e;&#x34;&#x32;&#46;&#x31;</a> <a href="mailto:&#119;&#x65;&#98;&#112;&#97;&#99;&#x6b;&#x2d;&#99;&#x6c;&#105;&#x40;&#52;&#x2e;&#x37;&#46;&#x32;">&#119;&#x65;&#98;&#112;&#97;&#99;&#x6b;&#x2d;&#99;&#x6c;&#105;&#x40;&#52;&#x2e;&#x37;&#46;&#x32;</a> -D</p>
 <p>此时，  -D将信息记录到package.json中的  “<strong>devDependencies”: {  只在开发阶段用的包  }<strong>节点中，而 -S记录到</strong>“dependencies”: {  开发和上线都需要的包  }</strong></p>
 <p>配置<br>①在项目根目录中，创建名为webpack.config.js的webpack配置文件，并初始化如下的基本配置:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">   <span class="attr">mode</span>:<span class="string">&#x27;development&#x27;</span> <span class="comment">//mode 用来指定构建模式。可选值有development 和production（上线模式）</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -1547,7 +1674,7 @@
 <p>webpack.config.js是webpack的配置文件。webpack 在真正开始打包构建之前（npm run dev），会先读取这个配置文件,从而基于给定的配置，对项目进行打包。</p>
 <p>注意事项<br>在webpack 4.x和5.x的版本中，有如下的默认约定:<br>①默认的打包入口文件为src -&gt; index.is<br>②默认的输出文件路径为dist -&gt; main.js</p>
 <h3 id="webpack-配置起来十分麻烦，但是开发体验好，于是vue-cli（好像是叫手脚架）起作用了"><a href="#webpack-配置起来十分麻烦，但是开发体验好，于是vue-cli（好像是叫手脚架）起作用了" class="headerlink" title="webpack 配置起来十分麻烦，但是开发体验好，于是vue-cli（好像是叫手脚架）起作用了"></a><strong>webpack 配置起来十分麻烦，但是开发体验好，于是vue-cli（好像是叫手脚架）起作用了</strong></h3><h2 id="webpack中的loader-加载器"><a href="#webpack中的loader-加载器" class="headerlink" title="webpack中的loader(加载器)"></a>webpack中的loader(加载器)</h2><p>在实际开发过程中，webpack 默认只能打包处理以js后缀名结尾的模块。其他非.js 后缀名结尾的模块,webpack默认处理不了，需要调用loader加载器才可以正常打包，否则会报错! <img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210816200056346.png" alt="image-20210816200056346"></p>
-<p>①运行npm i <a href="mailto:&#115;&#116;&#121;&#x6c;&#x65;&#45;&#108;&#111;&#x61;&#100;&#101;&#114;&#x40;&#x33;&#x2e;&#x30;&#x2e;&#x30;">&#115;&#116;&#121;&#x6c;&#x65;&#45;&#108;&#111;&#x61;&#100;&#101;&#114;&#x40;&#x33;&#x2e;&#x30;&#x2e;&#x30;</a> <a href="mailto:&#x63;&#115;&#115;&#x2d;&#x6c;&#x6f;&#x61;&#x64;&#101;&#x72;&#64;&#53;&#x2e;&#50;&#46;&#54;">&#x63;&#115;&#115;&#x2d;&#x6c;&#x6f;&#x61;&#x64;&#101;&#x72;&#64;&#53;&#x2e;&#50;&#46;&#54;</a> -D命令,安装处理Css文件的loader<br>②在webpack.config.js的module -&gt; rules数组中，添加loader规则如下:</p>
+<p>①运行npm i <a href="mailto:&#x73;&#116;&#x79;&#108;&#x65;&#x2d;&#108;&#x6f;&#97;&#x64;&#101;&#x72;&#64;&#x33;&#46;&#x30;&#x2e;&#48;">&#x73;&#116;&#x79;&#108;&#x65;&#x2d;&#108;&#x6f;&#97;&#x64;&#101;&#x72;&#64;&#x33;&#46;&#x30;&#x2e;&#48;</a> <a href="mailto:&#99;&#x73;&#115;&#x2d;&#x6c;&#111;&#97;&#100;&#101;&#x72;&#x40;&#53;&#46;&#50;&#46;&#x36;">&#99;&#x73;&#115;&#x2d;&#x6c;&#111;&#97;&#100;&#101;&#x72;&#x40;&#53;&#46;&#50;&#46;&#x36;</a> -D命令,安装处理Css文件的loader<br>②在webpack.config.js的module -&gt; rules数组中，添加loader规则如下:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">module: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      &#123; test: /\.css$/, use: [&#x27;style-loader&#x27;, &#x27;css-loader&#x27;] &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 
 <p>原理如下：<br>1.webpack默认只能打包处理.js结尾的文件，处理不了其它后缀的文件<br>2.由于代码中包含了index.css 这个文件，因此webpack默认处理不了<br>3.当webpack发现某个文件处理不了的时候，会查找webpack.config.js这个配置文件,看module.rules数组中，是否配置了对应的loader加载器。<br>4.webpack把index.css这个文件,先转交给最后-个loader进行处理(先转交给css-loader) .<br>5.当css-loader处理完毕之后，会把处理的结果，转交给下-个loader (转交给style-loader)<br>6.当style-loader处理完毕之后，发现没有下一个loader了,于是就把处理的结果，转交给了webpack<br>7.webpack把style-loader处理的结果，合并到/dist/bundle.js中,最终生成打包好的文件。</p>
@@ -2389,123 +2516,6 @@
 
 
   
-    <article id="post-关于SCREEPS的笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/10/07/%E5%85%B3%E4%BA%8ESCREEPS%E7%9A%84%E7%AC%94%E8%AE%B0/" target="_blank">关于SCREEPS的笔记</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/10/07/%E5%85%B3%E4%BA%8ESCREEPS%E7%9A%84%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-        <time datetime="2021-10-07T05:03:05.976Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-07</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="关于SCREEPS的笔记"><a href="#关于SCREEPS的笔记" class="headerlink" title="关于SCREEPS的笔记"></a>关于SCREEPS的笔记</h1><p>你的可控制单位被称为 <strong>Creep</strong>，每个<strong>Creep</strong>上最多可以有 50 个部件，</p>
-<p>Creep 的生命时间只有 1500 个游戏 tick。</p>
-<ul>
-<li><code>WORK</code> – 收集能量，建造和修复结构，升级控制器的能力。</li>
-<li><code>MOVE</code> – 移动的能力。</li>
-<li><code>CARRY</code> – 运输能源的能力。</li>
-<li><code>ATTACK</code> – 短距离攻击的能力。</li>
-<li><code>RANGED_ATTACK</code> – 长距离攻击的能力。</li>
-<li><code>HEAL</code> – 治疗其他单位的能力。</li>
-<li><code>CLAIM</code> - 控制领土的能力。</li>
-<li><code>TOUGH</code> – “空”部件，唯一作用就是承受伤害。</li>
-</ul>
-<p>每个部件（除了 <code>MOVE</code>）都都会产生疲劳值：在道路上为 1 点，平原上为 2 点，沼泽里为 10 点。</p>
-<p>每个 Creep 可以承受的伤害总量由部件总数决定，每个部件可以增加 100 点耐久。被攻击时，排在前面的部件会被优先攻击。</p>
-<p>GCL：全局控制等级 （Global Control Level; 缩写：GCL）的等级在 <a target="_blank" rel="noopener" href="https://screeps.com/a/#!/overview">overview 页面</a> 显示。</p>
-<p>RCL：房间控制等级 （Room Control Level; 缩写：RCL）他的中立房间控制器可以通过带有 <code>CLAIM</code> 部件的 creep <a target="_blank" rel="noopener" href="https://screeps-cn.github.io/api/#Creep.claimController">占有</a>以取得房间控制权。</p>
-<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210320202318948.png" alt="image-20210320202318948"></p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">SCREEPS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/SCREEPS//" class="article-tag-list-link color3">SCREEPS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/10/07/%E5%85%B3%E4%BA%8ESCREEPS%E7%9A%84%E7%AC%94%E8%AE%B0/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
@@ -2703,6 +2713,14 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Node.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">中间件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
@@ -2711,7 +2729,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Node.js</a>
+                <a href="javascript:void(0)" class="js-tag color3">SCREEPS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2723,19 +2741,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">SCREEPS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">中间件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JS - 前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">函数进阶</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2743,7 +2749,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">函数进阶</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">数据可视化 - HTML5 - 前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">移动端 - 前端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2751,7 +2765,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">移动端 - 前端</a>
+                <a href="javascript:void(0)" class="js-tag color2">数据结构 - Java</a>
               </li>
             
             <div class="clearfix"></div>
