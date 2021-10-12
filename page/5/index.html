@@ -309,6 +309,147 @@
             
 
   
+    <article id="post-HTTP协议加强" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/10/07/HTTP%E5%8D%8F%E8%AE%AE%E5%8A%A0%E5%BC%BA/" target="_blank">HTTP协议</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/10/07/HTTP%E5%8D%8F%E8%AE%AE%E5%8A%A0%E5%BC%BA/" class="archive-article-date">
+        <time datetime="2021-10-07T05:03:05.964Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-07</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="HTTP协议加强"><a href="#HTTP协议加强" class="headerlink" title="HTTP协议加强"></a>HTTP协议加强</h1><h2 id="一、通信"><a href="#一、通信" class="headerlink" title="一、通信"></a>一、通信</h2><p>通信，就是信息的交换，包括通信的主体、内容、方式</p>
+<p>客户端和浏览器、传输的相关的数据、响应</p>
+<h3 id="1、通信协议"><a href="#1、通信协议" class="headerlink" title="1、通信协议"></a>1、通信协议</h3><p>通信双方采用的约定好的格式，这个格式叫通信协议，HTTP的交互 模型采用了请求/响应交互模型。</p>
+<h2 id="二、HTTP的请求消息也叫请求报文"><a href="#二、HTTP的请求消息也叫请求报文" class="headerlink" title="二、HTTP的请求消息也叫请求报文"></a>二、HTTP的请求消息也叫请求报文</h2><p>请求行、请求头部、空行、请求体</p>
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210723151525095.png" alt="image-20210723151525095"></p>
+<h3 id="1、请求行"><a href="#1、请求行" class="headerlink" title="1、请求行"></a>1、请求行</h3><p>请求方式、URL、协议版本</p>
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210723154143493.png" alt="image-20210723154143493"></p>
+<h3 id="2、请求头部"><a href="#2、请求头部" class="headerlink" title="2、请求头部"></a>2、请求头部</h3><p>头部是头部字段、：、值</p>
+<p>以下是常见的头部字段</p>
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210723154734491.png" alt="image-20210723154734491"></p>
+<h3 id="3、空行"><a href="#3、空行" class="headerlink" title="3、空行"></a>3、空行</h3><p>作用是通知服务器请求头部到此结束，分割请求体和请求头部</p>
+<h3 id="4、请求体"><a href="#4、请求体" class="headerlink" title="4、请求体"></a>4、请求体</h3><p>就是字符串，只有POST请求有请求体 ，GET无</p>
+<h2 id="二、HTTP的响应消息也叫响应报文"><a href="#二、HTTP的响应消息也叫响应报文" class="headerlink" title="二、HTTP的响应消息也叫响应报文"></a>二、HTTP的响应消息也叫响应报文</h2><p>状态行、响应头部、空行、响应体</p>
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210723160650429.png" alt="image-20210723160650429"></p>
+<h3 id="1、状态行"><a href="#1、状态行" class="headerlink" title="1、状态行"></a>1、状态行</h3><p>协议版本、状态码、状态码描述</p>
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210723160812026.png" alt="image-20210723160812026"></p>
+<h3 id="2、响应头部"><a href="#2、响应头部" class="headerlink" title="2、响应头部"></a>2、响应头部</h3><p>表述服务器的相关信息，键值对的形式，中间用：分割，同请求头部</p>
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210723161017342.png" alt="image-20210723161017342"></p>
+<h3 id="3、响应体"><a href="#3、响应体" class="headerlink" title="3、响应体"></a>3、响应体</h3><p>就是服务器返回给客户端的数据</p>
+<h2 id="三、HTTP的请求方法"><a href="#三、HTTP的请求方法" class="headerlink" title="三、HTTP的请求方法"></a>三、HTTP的请求方法</h2><p>GET（获取）、POST（提交）</p>
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210723172745168.png" alt="image-20210723172745168"></p>
+<h2 id="四、HTTP响应状态码"><a href="#四、HTTP响应状态码" class="headerlink" title="四、HTTP响应状态码"></a>四、HTTP响应状态码</h2><p>用来表识响应的状态</p>
+<p>共分5种1-5</p>
+<p>1**    信息类</p>
+<p>2**    成功，操作被成功接收并处理</p>
+<p>3**    重定向，需要进一步操作</p>
+<p>4**    客户端错误</p>
+<p>5**    服务器端错误</p>
+<h3 id="1、2-信息类错误"><a href="#1、2-信息类错误" class="headerlink" title="1、2**    信息类错误"></a>1、2**    信息类错误</h3><p>200    OK，请求成功，用于GET POST请求</p>
+<p>201    已创建，成功创建了某个资源，用于POST PUT</p>
+<h3 id="2、3-重定向错误"><a href="#2、3-重定向错误" class="headerlink" title="2、3**    重定向错误"></a>2、3**    重定向错误</h3><p>301    永久移动，到新的URL，返回的数据中包括新URL</p>
+<p>302    临时移动</p>
+<p>304    未修改，客户端从缓存中寻找资源</p>
+<h3 id="3、4-客户端错误"><a href="#3、4-客户端错误" class="headerlink" title="3、4**    客户端错误"></a>3、4**    客户端错误</h3><p>400    语义错误或者请求参数错误</p>
+<p>401    当前请求需要用户验证</p>
+<p>403    服务器已经理解请求，但是拒绝执行</p>
+<p>404    服务器找不到资源</p>
+<p>408    请求超时</p>
+<h3 id="4、5-服务器错误"><a href="#4、5-服务器错误" class="headerlink" title="4、5**    服务器错误"></a>4、5**    服务器错误</h3><p>500    服务器内部错误</p>
+<p>501    服务器不支持该请求方法</p>
+<p>503    由于超载或者系统维护，暂时无法处理请求</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">HTTP</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记 - 前端</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/10/07/HTTP%E5%8D%8F%E8%AE%AE%E5%8A%A0%E5%BC%BA/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-git与GitHub" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -381,7 +522,7 @@
 <h3 id="2-1基于HTTPS方式上传本地仓库到GitHub"><a href="#2-1基于HTTPS方式上传本地仓库到GitHub" class="headerlink" title="2.1基于HTTPS方式上传本地仓库到GitHub"></a>2.1基于HTTPS方式上传本地仓库到GitHub</h3><p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210724115729026.png" alt="image-20210724115729026"></p>
 <p>当第二次或以后上传文件时直接输入git push 就行</p>
 <h3 id="2-2基于SSH方式上传本地仓库到GitHub-实现免登录加密传输"><a href="#2-2基于SSH方式上传本地仓库到GitHub-实现免登录加密传输" class="headerlink" title="2.2基于SSH方式上传本地仓库到GitHub    实现免登录加密传输"></a>2.2基于SSH方式上传本地仓库到GitHub    实现免登录加密传输</h3><p>生成SSH key</p>
-<p><em>①打开Git Bash</em><br><em>②粘贴如下的命令,并将your_ <a href="mailto:&#101;&#x6d;&#x61;&#x69;&#x6c;&#64;&#x65;&#120;&#x61;&#109;&#112;&#108;&#101;&#x2e;&#x63;&#x6f;&#x6d;">&#101;&#x6d;&#x61;&#x69;&#x6c;&#64;&#x65;&#120;&#x61;&#109;&#112;&#108;&#101;&#x2e;&#x63;&#x6f;&#x6d;</a>替换为注册Github账号时填写的邮箱:<br>●ssh-keygen -t rsa -b 4096 -C “your <a href="mailto:&#x65;&#x6d;&#x61;&#105;&#x6c;&#64;&#x65;&#x78;&#97;&#109;&#x70;&#108;&#x65;&#46;&#x63;&#x6f;&#109;">&#x65;&#x6d;&#x61;&#105;&#x6c;&#64;&#x65;&#x78;&#97;&#109;&#x70;&#108;&#x65;&#46;&#x63;&#x6f;&#109;</a>“</em><br><em>③连续敲击3次回车，即可在C:\Users\用户名文件夹.ssh,目录中生成id_ rsa 和 id rsa.pub 两个文件</em></p>
+<p><em>①打开Git Bash</em><br><em>②粘贴如下的命令,并将your_ <a href="mailto:&#101;&#x6d;&#x61;&#105;&#108;&#64;&#101;&#120;&#97;&#109;&#112;&#x6c;&#101;&#x2e;&#99;&#111;&#x6d;">&#101;&#x6d;&#x61;&#105;&#108;&#64;&#101;&#120;&#97;&#109;&#112;&#x6c;&#101;&#x2e;&#99;&#111;&#x6d;</a>替换为注册Github账号时填写的邮箱:<br>●ssh-keygen -t rsa -b 4096 -C “your <a href="mailto:&#101;&#109;&#x61;&#x69;&#x6c;&#64;&#101;&#120;&#97;&#x6d;&#112;&#108;&#101;&#46;&#99;&#x6f;&#109;">&#101;&#109;&#x61;&#x69;&#x6c;&#64;&#101;&#120;&#97;&#x6d;&#112;&#108;&#101;&#46;&#99;&#x6f;&#109;</a>“</em><br><em>③连续敲击3次回车，即可在C:\Users\用户名文件夹.ssh,目录中生成id_ rsa 和 id rsa.pub 两个文件</em></p>
 <p>配置SSH key</p>
 <p><em>①使用记事本打开id_ rsa.pub 文件，复制里面的文本内容<br>②在浏览器中登录Github, 点击头像-&gt; Settings -&gt; SSH and GPG Keys -&gt; New SSH key<br>③将id _rsa.pub 文件中的内容,粘贴到Key对应的文本框中</em><br><em>④在Title文本框中任意填写-个名称，来标识这个Key从何而来</em></p>
 <p>上传时就参考HTTPS的方式就行</p>
@@ -749,14 +890,6 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CSS3</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">特效 - HTML5 - 启发</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
@@ -765,15 +898,23 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">CSS3</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">特效 - HTML5 - 启发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">笔记 - 数据结构 - 原创</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">笔记 - 前端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -786,6 +927,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">笔记 - 前端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -817,6 +966,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">中间件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
@@ -826,10 +979,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">SCREEPS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">中间件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -845,11 +994,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+                <a href="javascript:void(0)" class="js-tag color5">函数进阶</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">函数进阶</a>
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">

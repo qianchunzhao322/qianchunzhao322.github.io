@@ -416,7 +416,7 @@
 <h3 id="2-1基于HTTPS方式上传本地仓库到GitHub"><a href="#2-1基于HTTPS方式上传本地仓库到GitHub" class="headerlink" title="2.1基于HTTPS方式上传本地仓库到GitHub"></a>2.1基于HTTPS方式上传本地仓库到GitHub</h3><p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210724115729026.png" alt="image-20210724115729026"></p>
 <p>当第二次或以后上传文件时直接输入git push 就行</p>
 <h3 id="2-2基于SSH方式上传本地仓库到GitHub-实现免登录加密传输"><a href="#2-2基于SSH方式上传本地仓库到GitHub-实现免登录加密传输" class="headerlink" title="2.2基于SSH方式上传本地仓库到GitHub    实现免登录加密传输"></a>2.2基于SSH方式上传本地仓库到GitHub    实现免登录加密传输</h3><p>生成SSH key</p>
-<p><em>①打开Git Bash</em><br><em>②粘贴如下的命令,并将your_ <a href="mailto:&#101;&#x6d;&#x61;&#x69;&#x6c;&#64;&#x65;&#120;&#x61;&#109;&#112;&#108;&#101;&#x2e;&#x63;&#x6f;&#x6d;">&#101;&#x6d;&#x61;&#x69;&#x6c;&#64;&#x65;&#120;&#x61;&#109;&#112;&#108;&#101;&#x2e;&#x63;&#x6f;&#x6d;</a>替换为注册Github账号时填写的邮箱:<br>●ssh-keygen -t rsa -b 4096 -C “your <a href="mailto:&#x65;&#x6d;&#x61;&#105;&#x6c;&#64;&#x65;&#x78;&#97;&#109;&#x70;&#108;&#x65;&#46;&#x63;&#x6f;&#109;">&#x65;&#x6d;&#x61;&#105;&#x6c;&#64;&#x65;&#x78;&#97;&#109;&#x70;&#108;&#x65;&#46;&#x63;&#x6f;&#109;</a>“</em><br><em>③连续敲击3次回车，即可在C:\Users\用户名文件夹.ssh,目录中生成id_ rsa 和 id rsa.pub 两个文件</em></p>
+<p><em>①打开Git Bash</em><br><em>②粘贴如下的命令,并将your_ <a href="mailto:&#101;&#x6d;&#x61;&#105;&#108;&#64;&#101;&#120;&#97;&#109;&#112;&#x6c;&#101;&#x2e;&#99;&#111;&#x6d;">&#101;&#x6d;&#x61;&#105;&#108;&#64;&#101;&#120;&#97;&#109;&#112;&#x6c;&#101;&#x2e;&#99;&#111;&#x6d;</a>替换为注册Github账号时填写的邮箱:<br>●ssh-keygen -t rsa -b 4096 -C “your <a href="mailto:&#101;&#109;&#x61;&#x69;&#x6c;&#64;&#101;&#120;&#97;&#x6d;&#112;&#108;&#101;&#46;&#99;&#x6f;&#109;">&#101;&#109;&#x61;&#x69;&#x6c;&#64;&#101;&#120;&#97;&#x6d;&#112;&#108;&#101;&#46;&#99;&#x6f;&#109;</a>“</em><br><em>③连续敲击3次回车，即可在C:\Users\用户名文件夹.ssh,目录中生成id_ rsa 和 id rsa.pub 两个文件</em></p>
 <p>配置SSH key</p>
 <p><em>①使用记事本打开id_ rsa.pub 文件，复制里面的文本内容<br>②在浏览器中登录Github, 点击头像-&gt; Settings -&gt; SSH and GPG Keys -&gt; New SSH key<br>③将id _rsa.pub 文件中的内容,粘贴到Key对应的文本框中</em><br><em>④在Title文本框中任意填写-个名称，来标识这个Key从何而来</em></p>
 <p>上传时就参考HTTPS的方式就行</p>
@@ -787,14 +787,6 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CSS3</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">特效 - HTML5 - 启发</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
@@ -803,15 +795,23 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">CSS3</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">特效 - HTML5 - 启发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">笔记 - 数据结构 - 原创</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">笔记 - 前端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -824,6 +824,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">笔记 - 前端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -855,6 +863,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">中间件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
@@ -864,10 +876,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">SCREEPS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">中间件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -883,11 +891,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+                <a href="javascript:void(0)" class="js-tag color5">函数进阶</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">函数进阶</a>
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">
