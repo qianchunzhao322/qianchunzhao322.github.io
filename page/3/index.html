@@ -309,6 +309,125 @@
             
 
   
+    <article id="post-稀疏数组" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/10/07/%E7%A8%80%E7%96%8F%E6%95%B0%E7%BB%84/" target="_blank">稀疏数组</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/10/07/%E7%A8%80%E7%96%8F%E6%95%B0%E7%BB%84/" class="archive-article-date">
+        <time datetime="2021-10-07T05:03:05.992Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-07</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="数据结构和算法概述"><a href="#数据结构和算法概述" class="headerlink" title="数据结构和算法概述"></a>数据结构和算法概述</h1><p>数据结构是算法的基础，程序=数据结构+算法</p>
+<p>数据结构包括线性结构和非线性结构</p>
+<h2 id="线性结构"><a href="#线性结构" class="headerlink" title="线性结构"></a>线性结构</h2><ol>
+<li>线性结构作为最常用的数据结构，其特点是数据元素之间存在一对一的线性关系<pre><code> 2)线性结构有两种不同的存储结构，即顺序存储结构（数组）和链式存储结构（链表）。顺序存储的线性表称为顺序表，顺序表中的存储元素是连续的
+ 3)链式存储的线性表称为链表，链表中的存储元素不一定是连续的，元素节点中存放数据元素以及相邻元素的地址信息
+ 4)线性结构常见的有:数组、队列、链表和栈
+</code></pre>
+</li>
+</ol>
+<h2 id="非线性结构"><a href="#非线性结构" class="headerlink" title="非线性结构"></a>非线性结构</h2><p>非线性结构包括:二维数组，多维数组，广义表，树结构，图结构</p>
+<h2 id="稀疏数组"><a href="#稀疏数组" class="headerlink" title="稀疏数组"></a>稀疏数组</h2><p>使用的情况，当一个数组矩阵中包含了多个相同的值时，可以使用稀疏数组来标识，其中稀疏数组的第一列表示原数组中有几行、几列、包含多少个不同的值；之后的几行依次是每个不同的数在几行、几列、值是多少。</p>
+<p>图例如下：</p>
+<img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210918095614957.png" alt="image-20210918095614957" style="zoom:33%;" />
+
+<p>二维数组转稀疏数组的思路：<br>遍历原始的二维数组，得到有效的数据个数<code>sum</code><br>根据<code>sum</code>就创建稀疏数组<code>sparseArr int[sum+1][3]</code><br>将二维数组的有效数据存入到稀疏数组</p>
+<p>稀疏数组转原始的二维数组的思路：<br>先读取稀疏数组的第一行，根据第一行的数据创建出原书的二维数组，，<code>chessArr2 = int [11][11]</code><br>在读取稀疏数组后几行的数据，并赋值给原始的二维数组即可</p>
+<p>实现代码如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> sparse_matrix;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SparseArray</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> chessArr1[][] = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">11</span>][<span class="number">11</span>];</span><br><span class="line">		chessArr1[<span class="number">1</span>][<span class="number">2</span>] = <span class="number">1</span>;</span><br><span class="line">		chessArr1[<span class="number">2</span>][<span class="number">3</span>] = <span class="number">2</span>;</span><br><span class="line">		chessArr1[<span class="number">6</span>][<span class="number">3</span>] = <span class="number">2</span>;</span><br><span class="line">		<span class="comment">//输出原始的二维数组</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span>[] row : chessArr1) &#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> data : row) &#123;</span><br><span class="line">				System.out.printf(<span class="string">&quot;%d\t&quot;</span>, data);</span><br><span class="line">			&#125;</span><br><span class="line">			System.out.println();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//二维数组转化为稀疏数组</span></span><br><span class="line">		<span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">0</span>; i&lt;<span class="number">11</span>; i++) &#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j =<span class="number">0</span>; j&lt;<span class="number">11</span>; j++) &#123;</span><br><span class="line">				<span class="keyword">if</span>(chessArr1[i][j] != <span class="number">0</span>) &#123;</span><br><span class="line">					sum++;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//创建对应的稀疏数组</span></span><br><span class="line">		<span class="keyword">int</span> sparseArr[][] = <span class="keyword">new</span> <span class="keyword">int</span>[sum+<span class="number">1</span>][<span class="number">3</span>];</span><br><span class="line">		<span class="comment">//赋值</span></span><br><span class="line">		sparseArr[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">11</span>;</span><br><span class="line">		sparseArr[<span class="number">0</span>][<span class="number">1</span>] = <span class="number">11</span>;</span><br><span class="line">		sparseArr[<span class="number">0</span>][<span class="number">2</span>] = sum;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">int</span> count = <span class="number">0</span>;<span class="comment">//count 当作一个计数器</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">0</span>; i&lt;<span class="number">11</span>; i++) &#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j =<span class="number">0</span>; j&lt;<span class="number">11</span>; j++) &#123;</span><br><span class="line">				<span class="keyword">if</span>(chessArr1[i][j] != <span class="number">0</span>) &#123;</span><br><span class="line">					count++;</span><br><span class="line">					sparseArr[count][<span class="number">0</span>] = i;</span><br><span class="line">					sparseArr[count][<span class="number">1</span>] = j;</span><br><span class="line">					sparseArr[count][<span class="number">2</span>] = chessArr1[i][j];</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//输出稀疏数组</span></span><br><span class="line">		System.out.println(<span class="string">&quot;以下是稀疏数组&quot;</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">0</span>; i&lt;sparseArr.length;i++) &#123;</span><br><span class="line">			System.out.printf(<span class="string">&quot;%d\t%d\t%d\t\n&quot;</span>,sparseArr[i][<span class="number">0</span>],sparseArr[i][<span class="number">1</span>],sparseArr[i][<span class="number">2</span>]);</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println();</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//稀疏数组转原始数组</span></span><br><span class="line">		<span class="keyword">int</span> chessArr2[][] = <span class="keyword">new</span> <span class="keyword">int</span>[sparseArr[<span class="number">0</span>][<span class="number">0</span>]][sparseArr[<span class="number">0</span>][<span class="number">1</span>]];</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">1</span>; i&lt;sparseArr.length; i++) &#123;</span><br><span class="line">			chessArr2[sparseArr[i][<span class="number">0</span>]][sparseArr[i][<span class="number">1</span>]]=sparseArr[i][<span class="number">2</span>];</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//输出原始数组</span></span><br><span class="line">		System.out.println(<span class="string">&quot;以下是最新转成的稀疏数组&quot;</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span>[] row : chessArr2) &#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> data : row) &#123;</span><br><span class="line">				System.out.printf(<span class="string">&quot;%d\t&quot;</span>, data);</span><br><span class="line">			&#125;</span><br><span class="line">			System.out.println();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">笔记 - Java - 原创</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/数据结构//" class="article-tag-list-link color5">数据结构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/10/07/%E7%A8%80%E7%96%8F%E6%95%B0%E7%BB%84/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-同源策略和跨域" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1773,7 +1892,7 @@
 <p><strong>模块化</strong>——(js的模块化、CsS 的模块化、资源的模块化)<br><strong>组件化</strong>——(复用现有的UI结构、样式、行为)<br><strong>规范化</strong>——(目录结构的划分、编码规范化、接口规范化、文档规范化、Git 分支管理)<br><strong>自动化</strong>——(自动化构建、自动部署、自动化测试)</p>
 <p>前端工程化的解决方案是webpack</p>
 <h1 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h1><p>主要功能:它提供了友好的前端模块化开发支持，以及代码压缩混淆、处理浏览器端JavaScript的兼容性、性能优化等强大的功能。</p>
-<h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><p>安装<br>npm install <a href="mailto:&#x77;&#101;&#x62;&#x70;&#97;&#x63;&#x6b;&#x40;&#53;&#x2e;&#x34;&#x32;&#x2e;&#49;">&#x77;&#101;&#x62;&#x70;&#97;&#x63;&#x6b;&#x40;&#53;&#x2e;&#x34;&#x32;&#x2e;&#49;</a> <a href="mailto:&#x77;&#101;&#x62;&#112;&#97;&#99;&#107;&#45;&#x63;&#108;&#x69;&#64;&#52;&#x2e;&#x37;&#46;&#x32;">&#x77;&#101;&#x62;&#112;&#97;&#99;&#107;&#45;&#x63;&#108;&#x69;&#64;&#52;&#x2e;&#x37;&#46;&#x32;</a> -D</p>
+<h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><p>安装<br>npm install <a href="mailto:&#119;&#101;&#x62;&#112;&#x61;&#99;&#x6b;&#x40;&#53;&#46;&#52;&#x32;&#46;&#49;">&#119;&#101;&#x62;&#112;&#x61;&#99;&#x6b;&#x40;&#53;&#46;&#52;&#x32;&#46;&#49;</a> <a href="mailto:&#x77;&#101;&#x62;&#x70;&#97;&#99;&#107;&#45;&#99;&#108;&#105;&#x40;&#x34;&#46;&#x37;&#46;&#50;">&#x77;&#101;&#x62;&#x70;&#97;&#99;&#107;&#45;&#99;&#108;&#105;&#x40;&#x34;&#46;&#x37;&#46;&#50;</a> -D</p>
 <p>此时，  -D将信息记录到package.json中的  “<strong>devDependencies”: {  只在开发阶段用的包  }<strong>节点中，而 -S记录到</strong>“dependencies”: {  开发和上线都需要的包  }</strong></p>
 <p>配置<br>①在项目根目录中，创建名为webpack.config.js的webpack配置文件，并初始化如下的基本配置:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">   <span class="attr">mode</span>:<span class="string">&#x27;development&#x27;</span> <span class="comment">//mode 用来指定构建模式。可选值有development 和production（上线模式）</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -1787,7 +1906,7 @@
 <p>webpack.config.js是webpack的配置文件。webpack 在真正开始打包构建之前（npm run dev），会先读取这个配置文件,从而基于给定的配置，对项目进行打包。</p>
 <p>注意事项<br>在webpack 4.x和5.x的版本中，有如下的默认约定:<br>①默认的打包入口文件为src -&gt; index.is<br>②默认的输出文件路径为dist -&gt; main.js</p>
 <h3 id="webpack-配置起来十分麻烦，但是开发体验好，于是vue-cli（好像是叫手脚架）起作用了"><a href="#webpack-配置起来十分麻烦，但是开发体验好，于是vue-cli（好像是叫手脚架）起作用了" class="headerlink" title="webpack 配置起来十分麻烦，但是开发体验好，于是vue-cli（好像是叫手脚架）起作用了"></a><strong>webpack 配置起来十分麻烦，但是开发体验好，于是vue-cli（好像是叫手脚架）起作用了</strong></h3><h2 id="webpack中的loader-加载器"><a href="#webpack中的loader-加载器" class="headerlink" title="webpack中的loader(加载器)"></a>webpack中的loader(加载器)</h2><p>在实际开发过程中，webpack 默认只能打包处理以js后缀名结尾的模块。其他非.js 后缀名结尾的模块,webpack默认处理不了，需要调用loader加载器才可以正常打包，否则会报错! <img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210816200056346.png" alt="image-20210816200056346"></p>
-<p>①运行npm i <a href="mailto:&#115;&#x74;&#121;&#x6c;&#x65;&#x2d;&#x6c;&#111;&#97;&#100;&#101;&#114;&#64;&#51;&#x2e;&#48;&#46;&#48;">&#115;&#x74;&#121;&#x6c;&#x65;&#x2d;&#x6c;&#111;&#97;&#100;&#101;&#114;&#64;&#51;&#x2e;&#48;&#46;&#48;</a> <a href="mailto:&#99;&#115;&#x73;&#45;&#108;&#x6f;&#97;&#x64;&#x65;&#114;&#64;&#x35;&#46;&#x32;&#x2e;&#x36;">&#99;&#115;&#x73;&#45;&#108;&#x6f;&#97;&#x64;&#x65;&#114;&#64;&#x35;&#46;&#x32;&#x2e;&#x36;</a> -D命令,安装处理Css文件的loader<br>②在webpack.config.js的module -&gt; rules数组中，添加loader规则如下:</p>
+<p>①运行npm i <a href="mailto:&#x73;&#x74;&#121;&#108;&#x65;&#x2d;&#x6c;&#x6f;&#x61;&#x64;&#101;&#x72;&#x40;&#51;&#46;&#48;&#46;&#x30;">&#x73;&#x74;&#121;&#108;&#x65;&#x2d;&#x6c;&#x6f;&#x61;&#x64;&#101;&#x72;&#x40;&#51;&#46;&#48;&#46;&#x30;</a> <a href="mailto:&#x63;&#115;&#x73;&#x2d;&#x6c;&#x6f;&#x61;&#100;&#x65;&#x72;&#64;&#53;&#46;&#x32;&#x2e;&#x36;">&#x63;&#115;&#x73;&#x2d;&#x6c;&#x6f;&#x61;&#100;&#x65;&#x72;&#64;&#53;&#46;&#x32;&#x2e;&#x36;</a> -D命令,安装处理Css文件的loader<br>②在webpack.config.js的module -&gt; rules数组中，添加loader规则如下:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">module: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      &#123; test: /\.css$/, use: [&#x27;style-loader&#x27;, &#x27;css-loader&#x27;] &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 
 <p>原理如下：<br>1.webpack默认只能打包处理.js结尾的文件，处理不了其它后缀的文件<br>2.由于代码中包含了index.css 这个文件，因此webpack默认处理不了<br>3.当webpack发现某个文件处理不了的时候，会查找webpack.config.js这个配置文件,看module.rules数组中，是否配置了对应的loader加载器。<br>4.webpack把index.css这个文件,先转交给最后-个loader进行处理(先转交给css-loader) .<br>5.当css-loader处理完毕之后，会把处理的结果，转交给下-个loader (转交给style-loader)<br>6.当style-loader处理完毕之后，发现没有下一个loader了,于是就把处理的结果，转交给了webpack<br>7.webpack把style-loader处理的结果，合并到/dist/bundle.js中,最终生成打包好的文件。</p>
@@ -2248,208 +2367,6 @@
 
 
   
-    <article id="post-计算机组成与体系结构" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/10/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E4%B8%8E%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" target="_blank">软件设计师笔记</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/10/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E4%B8%8E%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" class="archive-article-date">
-        <time datetime="2021-10-07T05:03:05.978Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-07</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="计算机组成与体系结构"><a href="#计算机组成与体系结构" class="headerlink" title="计算机组成与体系结构"></a>计算机组成与体系结构</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">数据的表示	！</span><br><span class="line">运算器和控制器	！</span><br><span class="line">Flynn分类法</span><br><span class="line">CISC  RISC</span><br><span class="line">流水线技术	！</span><br><span class="line">存储系统	！</span><br><span class="line">总线系统</span><br><span class="line">可靠性</span><br><span class="line">校验码</span><br></pre></td></tr></table></figure>
-
-<h2 id="数据的表示"><a href="#数据的表示" class="headerlink" title="数据的表示"></a>数据的表示</h2><p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210803150508440.png" alt="image-20210803150508440"></p>
-<p>原码，反码，补码，移码    数据的加减用补码</p>
-<p>正数的原码反码补码都一样，负数的反码是原码除了符号位之外全都取反，补码是反码+1</p>
-<h3 id="浮点数的运算"><a href="#浮点数的运算" class="headerlink" title="浮点数的运算"></a>浮点数的运算</h3><p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210803151856227.png" alt="image-20210803151856227"></p>
-<h3 id="计算机结构"><a href="#计算机结构" class="headerlink" title="计算机结构"></a>计算机结构</h3><p>CPU(运算器、控制器)、主存储器、辅助存储器、输入、输出</p>
-<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210803152239642.png" alt="image-20210803152239642"></p>
-<p>运算器<br>算术逻辑单元ALU :数据的算术运算和逻辑运算<br>累加寄存器AC :通用寄存器，为ALU提供一个工作区 ,用在暂存数据<br>数据缓冲寄存器DR :写内存时，暂存指令或数据<br>状态条件寄存器PSW :存状态标志与控制标志  (争议:也有将其归为控制器的)<br>控制器<br>程序计数器PC :存储下一条要执行指令的地址<br>指令寄存器IR :存储即将执行的指令<br>指令译码器ID :对指令中的操作码字段进行分析解释<br>时序部件;提供时序控制信号</p>
-<h3 id="Flynn分类"><a href="#Flynn分类" class="headerlink" title="Flynn分类"></a>Flynn分类</h3><table>
-<thead>
-<tr>
-<th>单指令流单数据流SISD</th>
-<th align="left">一个控制部分、一个处理器</th>
-<th></th>
-<th>单处理器系统</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>单指令流多数据流SIMD</td>
-<td align="left">一个控制部分、多个处理器</td>
-<td></td>
-<td>并行处理器</td>
-</tr>
-<tr>
-<td>多指令流单数据流MISD</td>
-<td align="left">多个控制部分、一个处理器</td>
-<td>不实际、不可能</td>
-<td></td>
-</tr>
-<tr>
-<td>多指令流多数据流MIMD</td>
-<td align="left">多个控制部分、多个处理器</td>
-<td></td>
-<td>多处理器系统</td>
-</tr>
-</tbody></table>
-<h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><p>二进制代码——操作码字段、地址码字段</p>
-<p><strong>操作码部分</strong>指出了计算机要执行什么性质的操作,如加法、减法、取数、存数等。<br><strong>地址码字段</strong>需要包含各操作数的地址及操作结果的存放地址等，从其地址结构的角度可以分为三地址指令、二地址指令、一地址指令和地址指令.</p>
-<h3 id="寻址方式"><a href="#寻址方式" class="headerlink" title="寻址方式"></a>寻址方式</h3><p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210803153648683.png" alt="image-20210803153648683"></p>
-<h3 id="CISC与RISC-指令集-reduce"><a href="#CISC与RISC-指令集-reduce" class="headerlink" title="CISC与RISC    指令集  reduce"></a>CISC与RISC    指令集  reduce</h3><p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210803153948529.png" alt="image-20210803153948529"></p>
-<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210805204757718.png" alt="image-20210805204757718"></p>
-<p>进程：程序的运行过程。有程序块进程控制块和数据块三部分组成。</p>
-<p>进程是程序的一次执行过程</p>
-<p>进程状态的三态图和五态图<img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210916101337171.png" alt="image-20210916101337171"></p>
-<p>运行到就绪——CPU时间片到了，，高优先级进程强制低优先级进程释放资源回到就绪</p>
-<p>同步和互斥</p>
-<p>PV操作p时申请操作V是释放操作    S是信号量（资源数）</p>
-<p>数据库系统——数据库模式，ER模型，关系代数，规范化理论，SQL语言，并发控制，数据库完整性约束</p>
-<p>三级模式-两层映射</p>
-<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210916165813348.png" alt="image-20210916165813348"></p>
-<p>外模式也叫用户模式（逻辑）、内模式也叫存储模式、概念模式也叫模式，三者之间有两个映射</p>
-<p>数据库设计过程</p>
-<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210916170157794.png" alt="image-20210916170157794"></p>
-<p>ER模型——1-1、1-N、N-N</p>
-<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210916170356799.png" alt="image-20210916170356799"></p>
-<p>其中，方框叫实体，椭圆叫属性，菱形叫实体之间的关系，三框叫弱实体，是实体的特殊化，他连接的是带圆线</p>
-<p>1-1联系可以将联系合并到任意一端的实体中</p>
-<p>1-N将联系合并到N端实体中</p>
-<p>N-N联系必须单独转成关系模式</p>
-<p>一个实体行转换为一个关系模式</p>
-<p>关系代数——并、交、差、笛卡尔积、投影、选择、联接</p>
-<p>笛卡尔积就是将第一个表中的每一项分别和第二个表中的连接组成新表</p>
-<p>连接就是将相同的属性留一个其他的合并<img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210916172328624.png" alt="image-20210916172328624"></p>
-<p>规范化理论——数据冗余导致修改异常等</p>
-<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210916172805038.png" alt="image-20210916172805038"></p>
-<p>候选键——唯一标识元组（记录，，一行），且无冗余,户口本中的身份证号</p>
-<p>主键——候选键的基础上任选一个</p>
-<p>外键——其他关系的主键</p>
-<p>求候选键的方法<img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210916173413436.png" alt="image-20210916173413436"></p>
-<p>组成候选码的属性就是主属性,其它的就是非主属性。</p>
-<p>范式</p>
-<p>第一范式( 1NF) : 在关系模式R中,当且仅当所有域只包含原子值,即每个属性都是不可再分的数据项,则称关系模式R是第一范式。</p>
-<p>第二范式( 2NF) :当且仅当关系模式R是第一范(1NF) ,且每个非主属性完全依赖候选键(没有不完全依赖)时称关系模式R是第二范式。一下是部分函数关系依赖<img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210916174836603.png" alt="image-20210916174836603"></p>
-<p>第三范式( 3NF) :当且仅当关系模式R是第二_范式( 2NF ) ,且R中没有非主属性传递依赖于候选键时,则称关系模式R是第三范式。<img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210916174934517.png" alt="image-20210916174934517"></p>
-<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210916175203459.png" alt="image-20210916175203459"></p>
-<p>什么是有损，什么又是无损?<br>有损:不能还原。<br>无损:可以还原。</p>
-<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210917101041620.png" alt="image-20210917101041620"></p>
-<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210917101303401.png" alt="image-20210917101303401"></p>
-<p>系统开发基础</p>
-<p>面向对象技术</p>
-<p>对象：属性+方法+对象ID</p>
-<p>类（实体类/控制类/边界类）</p>
-<p>继承与泛化：复用机制</p>
-<p>面向对象设计7大原则</p>
-<p>单一职责原则:设计目的单-的类<br>开放-封闭原则:对打展开放,对修改封闭<br>李氏( Liskov )替换原则:子类可以替换父类<br>依赖倒置原则:要依赖于抽象,而不是具体实现;针对接口编程不要针对实现编程<br>接口隔离原则:使用多个专门]的接口比使用单一的总接口要好<br>组合重用原则:要尽使用组合,而不是继承关系达到重用<br>迪米特( Demeter )原则(最少知识法则) :一个对象应当对象有尽可能少的了解</p>
-<p>UML——通用建模语言</p>
-<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210920094154403.png" alt="image-20210920094154403"></p>
-<p>类图</p>
-<p>依赖关系——一个事物发生变化的话影响另一个事物</p>
-<p>泛化关系——特殊/一般关系（父子关系）</p>
-<p>关联关系——描述了一组链，链是对象之间的连接</p>
-<p>聚合关系——整体与部分生命周期不同</p>
-<p>组合关系——整体与部分生命周期相同</p>
-<p>实现关系——集团口与类之间的关系</p>
-<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210920094646619.png" alt="image-20210920094646619"></p>
-<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210920094710508.png" alt="image-20210920094710508"></p>
-<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210920094735540.png" alt="image-20210920094735540"></p>
-<p>创建性模式</p>
-<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210920095230347.png" alt="image-20210920095230347"></p>
-<p>结构性模式</p>
-<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210920095532871.png" alt="image-20210920095532871"></p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">软件设计师</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/软件设计师//" class="article-tag-list-link color1">软件设计师</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/10/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E4%B8%8E%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
@@ -2599,6 +2516,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Express</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C语言</a>
               </li>
              
@@ -2607,19 +2528,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">前端通后端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2631,7 +2540,19 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">特效 - 前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">VSCode - 断点调试配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2643,10 +2564,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">VSCode - 断点调试配置</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
@@ -2655,19 +2572,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Node.js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">中间件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">笔记 - Java - 原创</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Node.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">中间件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2687,11 +2604,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">函数进阶</a>
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+                <a href="javascript:void(0)" class="js-tag color5">函数进阶</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2704,6 +2621,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">软件设计师</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
