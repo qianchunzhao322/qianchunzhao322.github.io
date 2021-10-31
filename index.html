@@ -309,6 +309,259 @@
             
 
   
+    <article id="post-关系数据库" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/10/31/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/" target="_blank">关系数据库</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/10/31/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/" class="archive-article-date">
+        <time datetime="2021-10-31T11:41:26.358Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-31</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="关系数据库"><a href="#关系数据库" class="headerlink" title="关系数据库"></a>关系数据库</h1><h2 id="关系模型"><a href="#关系模型" class="headerlink" title="关系模型"></a>关系模型</h2><h3 id="关系数据结构"><a href="#关系数据结构" class="headerlink" title="关系数据结构"></a>关系数据结构</h3><p>域是一组具有相同数据类型的值的集合；；笛卡尔积可以看着是关系的域，由域上的值构成的；；笛卡尔积的大小用基数来表示</p>
+<p>(1)关系D1 X D2X … D,的子集叫作在域D1, D2, ….，Dn上的关系，表示为R (D1， D2,…，Dn)；；R是关系名</p>
+<p>（2）码</p>
+<p>候选码——若关系中的某一属性组的值能唯一地标识一一个元组，则称该属性组为候选码。。简单的情况:候选码只包含一个属性</p>
+<p>全码——最极端的情况:关系模式的所有属性组是这个关系模式的候选码，称为全码(All-key)</p>
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20211028134107067.png" alt="image-20211028134107067"></p>
+<h3 id="关系完整性约束"><a href="#关系完整性约束" class="headerlink" title="关系完整性约束"></a>关系完整性约束</h3><p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20211028134216665.png" alt="image-20211028134216665"></p>
+<p>实体完整性</p>
+<p>关系的主属性不能取空值</p>
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20211028134802971.png" alt="image-20211028134802971"></p>
+<h2 id="关系代数"><a href="#关系代数" class="headerlink" title="关系代数"></a>关系代数</h2><h3 id="传统集合操作"><a href="#传统集合操作" class="headerlink" title="传统集合操作"></a>传统集合操作</h3><p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20211028135344158.png" alt="image-20211028135344158"></p>
+<p>差——R-S   由属于R而不属于S的所有元组构成</p>
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20211028135732420.png" alt="image-20211028135732420"></p>
+<p>叫——既属于 R又属于S的所有元组</p>
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20211028135850608.png" alt="image-20211028135850608"></p>
+<p>笛卡尔积——RXS是RS的串接</p>
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20211028140141863.png" alt="image-20211028140141863"></p>
+<h3 id="关系特有操作"><a href="#关系特有操作" class="headerlink" title="关系特有操作"></a>关系特有操作</h3><p>通过具体的例子来说</p>
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20211028140332617.png" alt="image-20211028140332617"></p>
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20211028140400708.png" alt="image-20211028140400708"></p>
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20211028140415069.png" alt="image-20211028140415069"></p>
+<p>1、选择</p>
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20211028140646318.png" alt="image-20211028140646318"></p>
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20211028140731043.png" alt="image-20211028140731043"></p>
+<p>2、投影</p>
+<p>从R中选择出若干属性列祖成新的关系</p>
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20211028140903076.png" alt="image-20211028140903076"></p>
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20211028140945062.png" alt="image-20211028140945062"></p>
+<p>3、连接</p>
+<p>先笛卡尔积后选择</p>
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20211028141118436.png" alt="image-20211028141118436"></p>
+<p>分等值连接和自然连接</p>
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20211028141327444.png" alt="image-20211028141327444"></p>
+<p>左外连接和右外连接</p>
+<p>4、除</p>
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20211028142111818.png" alt="image-20211028142111818"></p>
+<p>先挨个看A中的a1\a2\a3\a4,a1的像极是 B1 C2,B2 C3,B2 C1,这些真好处于R在S的投影BC上，R除S就是A1了。。D没有影响</p>
+<h3 id="综合例子"><a href="#综合例子" class="headerlink" title="综合例子"></a>综合例子</h3><h2 id="关系演算"><a href="#关系演算" class="headerlink" title="关系演算"></a>关系演算</h2>
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/数据库//" class="article-tag-list-link color4">数据库</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/10/31/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/10/31/%E6%8E%92%E5%BA%8F/" target="_blank">排序算法概述</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/10/31/%E6%8E%92%E5%BA%8F/" class="archive-article-date">
+        <time datetime="2021-10-31T11:37:06.984Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-31</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h1><h2 id="排序的分类包括内部排序和外部排序两种"><a href="#排序的分类包括内部排序和外部排序两种" class="headerlink" title="排序的分类包括内部排序和外部排序两种"></a>排序的分类包括内部排序和外部排序两种</h2><p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20211031175646456.png" alt="image-20211031175646456"></p>
+<h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>①事后统计法——当程序运行完之后进行评测</p>
+<p>②事前估算法——通过分析时间复杂度来判断</p>
+<h3 id="时间频度"><a href="#时间频度" class="headerlink" title="时间频度"></a>时间频度</h3><p>一个算法花费的时间和语句的执行次数成正比，一个算法中的语句执行次数就是时间频度</p>
+<p>可以忽略常数项和低次项和系数</p>
+<h3 id="时间复杂度-1"><a href="#时间复杂度-1" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>指能操作语句的重复执行次数的某个函数用<code>O(n)=</code>表示；</p>
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20211031191512960.png" alt="image-20211031191512960"></p>
+<p><strong>常见的算法时间复杂度由小到大依次为: ``O(1)&lt;O(log2n)&lt;O(n)&lt;O(nlog2n)&lt;O(n^2^)&lt;O(n^3^)&lt; O(n^k^) &lt; &lt;O(2”)&lt;O(n!)</strong>``</p>
+<p>其中<code>log2n</code>的代码可以是下面的形式</p>
+<blockquote>
+<p>while(i&lt;100){</p>
+<p>​    i = i * 2;//改成3就是log3n</p>
+<p>}</p>
+</blockquote>
+<p>常见的八大算法的平均时间复杂度和最坏时间复杂度的表示以及空间复杂度：</p>
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20211031192702802.png" alt="image-20211031192702802"></p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">笔记 - Java - 原创</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/数据结构//" class="article-tag-list-link color5">数据结构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/10/31/%E6%8E%92%E5%BA%8F/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-绪论" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -338,7 +591,7 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id=""><a href="#" class="headerlink" title=""></a></h1><h1 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h1><h2 id="数据库系统概述"><a href="#数据库系统概述" class="headerlink" title="数据库系统概述"></a>数据库系统概述</h2><h3 id="数据库系统的四个基本概念"><a href="#数据库系统的四个基本概念" class="headerlink" title="数据库系统的四个基本概念"></a>数据库系统的四个基本概念</h3><p><strong>数据（DATA）</strong>——数据是数据库中存储的基本对象，描述事物的符号记录</p>
+    <h1 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h1><h2 id="数据库系统概述"><a href="#数据库系统概述" class="headerlink" title="数据库系统概述"></a>数据库系统概述</h2><h3 id="数据库系统的四个基本概念"><a href="#数据库系统的四个基本概念" class="headerlink" title="数据库系统的四个基本概念"></a>数据库系统的四个基本概念</h3><p><strong>数据（DATA）</strong>——数据是数据库中存储的基本对象，描述事物的符号记录</p>
 <p><strong>种类</strong>：文本、图形、音频、视频、等</p>
 <p>特点：数据与其语义不可分割</p>
 <p>**数据库（DATABASE)**——数据库是长期存储在计算机内、有组织、可共享的大量数据的集合</p>
@@ -376,6 +629,9 @@
 <h3 id="关系模型——就像excel表格"><a href="#关系模型——就像excel表格" class="headerlink" title="关系模型——就像excel表格"></a>关系模型——就像excel表格</h3><p>一个元组就是表里的一行，属性就是表里的一列，与就是有相同数据类型的值的集合</p>
 <p><strong>最基本的规范条件:关系的每-一个分量必须是一个不可分的数据项，不允许表中还有表。</strong></p>
 <p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20211027232229216.png" alt="image-20211027232229216"></p>
+<h3 id="数据库系统结构"><a href="#数据库系统结构" class="headerlink" title="数据库系统结构"></a>数据库系统结构</h3><p>数据库系统结构分为——按应用开发人员来看（三级模式）和按最终用户看</p>
+<h4 id="三级模式"><a href="#三级模式" class="headerlink" title="三级模式"></a>三级模式</h4><p>模式  对数据库逻辑结构相对稳定；；实例  实例随数据库的数据更新而变化</p>
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20211028132846407.png" alt="image-20211028132846407"></p>
 
     
 
@@ -1424,257 +1680,6 @@
 
 
   
-    <article id="post-CSS特效——图片分层悬停" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/10/07/CSS%E7%89%B9%E6%95%88%E2%80%94%E2%80%94%E5%9B%BE%E7%89%87%E5%88%86%E5%B1%82%E6%82%AC%E5%81%9C/" target="_blank">CSS特效——图片分层悬停</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/10/07/CSS%E7%89%B9%E6%95%88%E2%80%94%E2%80%94%E5%9B%BE%E7%89%87%E5%88%86%E5%B1%82%E6%82%AC%E5%81%9C/" class="archive-article-date">
-        <time datetime="2021-10-07T05:03:06.011Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-07</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="CSS特效——图片分层悬停"><a href="#CSS特效——图片分层悬停" class="headerlink" title="CSS特效——图片分层悬停"></a>CSS特效——图片分层悬停</h1><p>为了实现以后可以直接拿来使用，这里就把他做成模块了。</p>
-<p>[TOC]</p>
-<h2 id="一、制作思路"><a href="#一、制作思路" class="headerlink" title="一、制作思路"></a>一、制作思路</h2><p>​         首先是一个大盒子来包裹所有的内容.outbox，在设置一个包裹img的盒子.imgbox，里面放置所有的img，为了好看在加上一个span，来体现更好的过度。其次，将所有的img叠加到一起，将所有的样式设置好。最后就是动画了，当鼠标经过最外层大盒子时，先将imgbox绕X，Z轴旋转，达到平面到立体的过程，再将每个img沿各个轴移动相应的距离，达到分层的效果，同时，透明度也要随之递减，最后设置一下span即可。</p>
-<h2 id="二、相关步骤"><a href="#二、相关步骤" class="headerlink" title="二、相关步骤"></a>二、相关步骤</h2><p>先设置好HTML页面</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;outbox&quot;</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;imgbox&quot;</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;1.png&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;#&quot;</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;1.png&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;#&quot;</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;1.png&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;#&quot;</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;1.png&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;#&quot;</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;1.png&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;#&quot;</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;bottom&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>在设置CSS</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">*&#123;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0px</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">0px</span>;</span><br><span class="line">    <span class="attribute">box-sizing</span>: border-box;<span class="comment">/* 这句话时为了所有的盒子在设置内边距和边框时，不撑成大盒子*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">body</span>&#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;<span class="comment">/* 进行流式布局*/</span></span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100vh</span>;<span class="comment">/* 高度为可视距高的100%*/</span></span><br><span class="line">    <span class="attribute">justify-content</span>: center;<span class="comment">/* 流式布局的子内容全部居中*/</span></span><br><span class="line">    <span class="attribute">align-items</span>: center;    <span class="comment">/* 居中对齐弹性盒的各项*/</span>     </span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgb</span>(<span class="number">46</span>, <span class="number">59</span>, <span class="number">77</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>此时，最好使用justify-content: center;   align-items: center;， 如果不想使用的话，也可以用margin:100px auto;</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.outbox</span>&#123;</span><br><span class="line">    <span class="comment">/* margin: 200px auto; */</span></span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">perspective</span>: <span class="number">2000px</span>;   <span class="comment">/* 通俗点就是你的眼睛距离3D内容的距离，最好远点*/</span> </span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.outbox</span> <span class="selector-class">.imgbox</span>&#123;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">38px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">260px</span>;</span><br><span class="line">    <span class="attribute">transition</span>: all <span class="number">0.5s</span>;<span class="comment">/* 所用动画效果在0.5s内完成*/</span> </span><br><span class="line">    <span class="attribute">transform-style</span>: preserve-<span class="number">3</span>d;<span class="comment">/* 子内容保留3D属性*/</span> </span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.outbox</span> <span class="selector-class">.imgbox</span> <span class="selector-tag">img</span>&#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">1000%</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">transition</span>: all <span class="number">1.5s</span>;<span class="comment">/* 完成全部动画用1.5s*/</span></span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">3px</span> <span class="built_in">rgb</span>(<span class="number">61</span>, <span class="number">138</span>, <span class="number">226</span>);</span><br><span class="line">    <span class="attribute">transform</span>:  <span class="built_in">translateZ</span>(<span class="number">0px</span>);<span class="comment">/* 平移*/</span> </span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.outbox</span> <span class="selector-class">.imgbox</span> <span class="selector-class">.bottom</span>&#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">transition</span>: all <span class="number">1.5s</span>;</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">0.1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>之后再设置鼠标经过时的动画效果</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.outbox</span> <span class="selector-pseudo">:hover</span>&#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">rotateX</span>(<span class="number">50deg</span>) <span class="built_in">rotateZ</span>(-<span class="number">50deg</span>) <span class="built_in">translateY</span>(-<span class="number">100px</span>) <span class="built_in">translateZ</span>(-<span class="number">30px</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.outbox</span> <span class="selector-pseudo">:hover</span> <span class="selector-tag">img</span><span class="selector-pseudo">:nth-child</span>(<span class="number">2</span>)&#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translateX</span>(-<span class="number">10px</span>) <span class="built_in">translateY</span>(<span class="number">10px</span>) <span class="built_in">translateZ</span>(-<span class="number">10px</span>);</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">0.8</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.outbox</span> <span class="selector-pseudo">:hover</span> <span class="selector-tag">img</span><span class="selector-pseudo">:nth-child</span>(<span class="number">3</span>)&#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translateX</span>(-<span class="number">20px</span>) <span class="built_in">translateY</span>(<span class="number">20px</span>) <span class="built_in">translateZ</span>(-<span class="number">20px</span>);</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">0.6</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.outbox</span> <span class="selector-pseudo">:hover</span> <span class="selector-tag">img</span><span class="selector-pseudo">:nth-child</span>(<span class="number">4</span>)&#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translateX</span>(-<span class="number">30px</span>) <span class="built_in">translateY</span>(<span class="number">30px</span>) <span class="built_in">translateZ</span>(-<span class="number">30px</span>);</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">0.4</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.outbox</span> <span class="selector-pseudo">:hover</span> <span class="selector-tag">img</span><span class="selector-pseudo">:nth-child</span>(<span class="number">5</span>)&#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translateX</span>(-<span class="number">40px</span>) <span class="built_in">translateY</span>(<span class="number">40px</span>) <span class="built_in">translateZ</span>(-<span class="number">40px</span>);</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">0.2</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.outbox</span> <span class="selector-pseudo">:hover</span> <span class="selector-class">.bottom</span>&#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translateX</span>(-<span class="number">50px</span>) <span class="built_in">translateY</span>(<span class="number">50px</span>) <span class="built_in">translateZ</span>(-<span class="number">50px</span>);</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">40px</span> <span class="built_in">rgb</span>(<span class="number">41</span>, <span class="number">151</span>, <span class="number">253</span>);    </span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgb</span>(<span class="number">41</span>, <span class="number">151</span>, <span class="number">253</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="三、完整代码"><a href="#三、完整代码" class="headerlink" title="三、完整代码"></a>三、完整代码</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;IE=edge&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span> <span class="attr">href</span>=<span class="string">&quot;index.css&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>图片分层悬停<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;outbox&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;imgbox&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;1.png&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;#&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;1.png&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;#&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;1.png&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;#&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;1.png&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;#&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;1.png&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;#&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;bottom&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">*&#123;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0px</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">0px</span>;</span><br><span class="line">    <span class="attribute">box-sizing</span>: border-box;<span class="comment">/* */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">body</span>&#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100vh</span>;</span><br><span class="line">    <span class="attribute">justify-content</span>: center;</span><br><span class="line">    <span class="attribute">align-items</span>: center;         </span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgb</span>(<span class="number">46</span>, <span class="number">59</span>, <span class="number">77</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.outbox</span>&#123;</span><br><span class="line">    <span class="comment">/* margin: 200px auto; */</span></span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">perspective</span>: <span class="number">2000px</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.outbox</span> <span class="selector-class">.imgbox</span>&#123;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">38px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">260px</span>;</span><br><span class="line">    <span class="attribute">transition</span>: all <span class="number">0.5s</span>;</span><br><span class="line">    <span class="attribute">transform-style</span>: preserve-<span class="number">3</span>d;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.outbox</span> <span class="selector-class">.imgbox</span> <span class="selector-tag">img</span>&#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">1000%</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">transition</span>: all <span class="number">1.5s</span>;<span class="comment">/* 完成全部动画用1.5s*/</span></span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">3px</span> <span class="built_in">rgb</span>(<span class="number">61</span>, <span class="number">138</span>, <span class="number">226</span>);</span><br><span class="line">    <span class="attribute">transform</span>:  <span class="built_in">translateZ</span>(<span class="number">0px</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.outbox</span> <span class="selector-class">.imgbox</span> <span class="selector-class">.bottom</span>&#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">transition</span>: all <span class="number">1.5s</span>;</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">0.1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.outbox</span> <span class="selector-pseudo">:hover</span>&#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">rotateX</span>(<span class="number">50deg</span>) <span class="built_in">rotateZ</span>(-<span class="number">50deg</span>) <span class="built_in">translateY</span>(-<span class="number">100px</span>) <span class="built_in">translateZ</span>(-<span class="number">30px</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.outbox</span> <span class="selector-pseudo">:hover</span> <span class="selector-tag">img</span><span class="selector-pseudo">:nth-child</span>(<span class="number">2</span>)&#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translateX</span>(-<span class="number">10px</span>) <span class="built_in">translateY</span>(<span class="number">10px</span>) <span class="built_in">translateZ</span>(-<span class="number">10px</span>);</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">0.8</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.outbox</span> <span class="selector-pseudo">:hover</span> <span class="selector-tag">img</span><span class="selector-pseudo">:nth-child</span>(<span class="number">3</span>)&#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translateX</span>(-<span class="number">20px</span>) <span class="built_in">translateY</span>(<span class="number">20px</span>) <span class="built_in">translateZ</span>(-<span class="number">20px</span>);</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">0.6</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.outbox</span> <span class="selector-pseudo">:hover</span> <span class="selector-tag">img</span><span class="selector-pseudo">:nth-child</span>(<span class="number">4</span>)&#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translateX</span>(-<span class="number">30px</span>) <span class="built_in">translateY</span>(<span class="number">30px</span>) <span class="built_in">translateZ</span>(-<span class="number">30px</span>);</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">0.4</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.outbox</span> <span class="selector-pseudo">:hover</span> <span class="selector-tag">img</span><span class="selector-pseudo">:nth-child</span>(<span class="number">5</span>)&#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translateX</span>(-<span class="number">40px</span>) <span class="built_in">translateY</span>(<span class="number">40px</span>) <span class="built_in">translateZ</span>(-<span class="number">40px</span>);</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">0.2</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.outbox</span> <span class="selector-pseudo">:hover</span> <span class="selector-class">.bottom</span>&#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translateX</span>(-<span class="number">50px</span>) <span class="built_in">translateY</span>(<span class="number">50px</span>) <span class="built_in">translateZ</span>(-<span class="number">50px</span>);</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">40px</span> <span class="built_in">rgb</span>(<span class="number">41</span>, <span class="number">151</span>, <span class="number">253</span>);    </span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgb</span>(<span class="number">41</span>, <span class="number">151</span>, <span class="number">253</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="四、效果展示"><a href="#四、效果展示" class="headerlink" title="四、效果展示"></a>四、效果展示</h2><p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comnum.gif" alt="num"></p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">CSS3</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">特效 - HTML5 - 启发</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/CSS特效系列//" class="article-tag-list-link color3">CSS特效系列</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/10/07/CSS%E7%89%B9%E6%95%88%E2%80%94%E2%80%94%E5%9B%BE%E7%89%87%E5%88%86%E5%B1%82%E6%82%AC%E5%81%9C/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-CSS特效——蛇形边框" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/10/07/CSS%E7%89%B9%E6%95%88%E2%80%94%E2%80%94%E8%9B%87%E5%BD%A2%E8%BE%B9%E6%A1%86/" target="_blank">CSS特效—蛇形边框</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/10/07/CSS%E7%89%B9%E6%95%88%E2%80%94%E2%80%94%E8%9B%87%E5%BD%A2%E8%BE%B9%E6%A1%86/" class="archive-article-date">
-        <time datetime="2021-10-07T05:03:06.010Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-07</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="CSS特效——蛇形边框"><a href="#CSS特效——蛇形边框" class="headerlink" title="CSS特效——蛇形边框"></a>CSS特效——蛇形边框</h1><h2 id="一、设计思路"><a href="#一、设计思路" class="headerlink" title="一、设计思路"></a>一、设计思路</h2><p>先设置好基本的轮廓，之后通过背景图片设置成两半颜色，再设置，鼠标经过之后的变色，最后设置一下动画，注意时间的推迟。</p>
-<h2 id="二、详细步骤"><a href="#二、详细步骤" class="headerlink" title="二、详细步骤"></a>二、详细步骤</h2><p>初始化和基本框架</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;outbox&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;inbox&quot;</span>&gt;</span></span><br><span class="line">            HANDSOME</span><br><span class="line">            <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;borders&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;borders&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;borders&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;borders&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">*&#123;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">body</span>&#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100vh</span>;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">    <span class="attribute">justify-content</span>: center;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgb</span>(<span class="number">4</span>, <span class="number">4</span>, <span class="number">19</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>定义一开始的样式</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.outbox</span>&#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">150px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">400px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.outbox</span> <span class="selector-class">.inbox</span>&#123;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">letter-spacing</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">55px</span>;</span><br><span class="line">    <span class="attribute">color</span>: <span class="built_in">rgb</span>(<span class="number">18</span>, <span class="number">190</span>, <span class="number">243</span>);</span><br><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">linear-gradient</span>(<span class="number">90deg</span> ,<span class="built_in">rgb</span>(<span class="number">40</span>, <span class="number">62</span>, <span class="number">161</span>) <span class="number">50%</span>,<span class="built_in">rgb</span>(<span class="number">31</span>, <span class="number">49</span>, <span class="number">133</span>) <span class="number">50%</span> );</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">150px</span>;</span><br><span class="line">    <span class="comment">/* text-transform: uppercase;   字母转换成大写 */</span></span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">    <span class="attribute">text-decoration</span>: none;</span><br><span class="line">    <span class="attribute">overflow</span>: hidden;</span><br><span class="line">    <span class="attribute">box-shadow</span>: inset <span class="number">0</span> <span class="number">0</span> <span class="number">10px</span> <span class="built_in">rgb</span>(<span class="number">14</span>, <span class="number">20</span>, <span class="number">105</span>), <span class="number">0</span> <span class="number">0</span> <span class="number">5px</span> <span class="built_in">rgb</span>(<span class="number">9</span>, <span class="number">208</span>, <span class="number">235</span>);</span><br><span class="line">    <span class="attribute">transition</span>: all  <span class="number">0.5s</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>定义鼠标经过之后的样式</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.outbox</span> <span class="selector-class">.inbox</span><span class="selector-pseudo">:hover</span>&#123;</span><br><span class="line">    <span class="attribute">text-shadow</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">5px</span> <span class="built_in">rgb</span>(<span class="number">18</span>, <span class="number">190</span>, <span class="number">243</span>),</span><br><span class="line">    <span class="number">0</span> <span class="number">0</span> <span class="number">8px</span> <span class="built_in">rgb</span>(<span class="number">18</span>, <span class="number">190</span>, <span class="number">243</span>),</span><br><span class="line">    <span class="number">0</span> <span class="number">0</span> <span class="number">10px</span> <span class="built_in">rgb</span>(<span class="number">18</span>, <span class="number">190</span>, <span class="number">243</span>); </span><br><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">linear-gradient</span>(<span class="number">90deg</span>, <span class="built_in">rgb</span>(<span class="number">25</span>, <span class="number">38</span>, <span class="number">99</span>) <span class="number">50%</span>,<span class="built_in">rgb</span>(<span class="number">13</span>, <span class="number">22</span>, <span class="number">58</span>) <span class="number">50%</span> );</span><br><span class="line">    <span class="attribute">box-shadow</span>: inset </span><br><span class="line">    <span class="number">0</span> <span class="number">0</span> <span class="number">10px</span> <span class="built_in">rgb</span>(<span class="number">14</span>, <span class="number">20</span>, <span class="number">105</span>),</span><br><span class="line">    <span class="number">0</span> <span class="number">0</span> <span class="number">5px</span> <span class="built_in">rgb</span>(<span class="number">9</span>, <span class="number">208</span>, <span class="number">235</span>),</span><br><span class="line">    <span class="number">0</span> <span class="number">0</span> <span class="number">10px</span> <span class="built_in">rgb</span>(<span class="number">9</span>, <span class="number">208</span>, <span class="number">235</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>定义动画</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.outbox</span> <span class="selector-class">.inbox</span> <span class="selector-class">.borders</span>&#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.outbox</span> <span class="selector-class">.inbox</span> <span class="selector-class">.borders</span><span class="selector-pseudo">:nth-child</span>(<span class="number">1</span>)&#123;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">linear-gradient</span>(to right, transparent , <span class="built_in">rgb</span>(<span class="number">0</span>, <span class="number">153</span>, <span class="number">255</span>) );</span><br><span class="line">    <span class="attribute">animation</span>: move1 <span class="number">2s</span> linear infinite;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@keyframes</span> move1&#123;</span><br><span class="line">    <span class="number">0%</span>&#123;</span><br><span class="line">        <span class="attribute">transform</span>:<span class="built_in">translateX</span>(-<span class="number">100%</span>) ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="number">100%</span>&#123;</span><br><span class="line">        <span class="attribute">transform</span>:<span class="built_in">translateX</span>(<span class="number">100%</span>) ;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.outbox</span> <span class="selector-class">.inbox</span> <span class="selector-class">.borders</span><span class="selector-pseudo">:nth-child</span>(<span class="number">2</span>)&#123;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">linear-gradient</span>(to bottom, transparent , <span class="built_in">rgb</span>(<span class="number">0</span>, <span class="number">153</span>, <span class="number">255</span>) );</span><br><span class="line">    <span class="attribute">animation</span>: move2 <span class="number">2s</span> linear infinite;</span><br><span class="line">    <span class="attribute">animation-delay</span>: <span class="number">1s</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@keyframes</span> move2&#123;</span><br><span class="line">    <span class="number">0%</span>&#123;</span><br><span class="line">        <span class="attribute">transform</span>:<span class="built_in">translateY</span>(-<span class="number">100%</span>) ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="number">100%</span>&#123;</span><br><span class="line">        <span class="attribute">transform</span>:<span class="built_in">translateY</span>(<span class="number">100%</span>) ;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.outbox</span> <span class="selector-class">.inbox</span> <span class="selector-class">.borders</span><span class="selector-pseudo">:nth-child</span>(<span class="number">3</span>)&#123;</span><br><span class="line">    <span class="attribute">bottom</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">linear-gradient</span>(to left, transparent , <span class="built_in">rgb</span>(<span class="number">0</span>, <span class="number">153</span>, <span class="number">255</span>) );</span><br><span class="line">    <span class="attribute">animation</span>: move3 <span class="number">2s</span> linear infinite;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@keyframes</span> move3&#123;</span><br><span class="line">    <span class="number">0%</span>&#123;</span><br><span class="line">        <span class="attribute">transform</span>:<span class="built_in">translateX</span>(<span class="number">100%</span>) ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="number">100%</span>&#123;</span><br><span class="line">        <span class="attribute">transform</span>:<span class="built_in">translateX</span>(-<span class="number">100%</span>) ;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.outbox</span> <span class="selector-class">.inbox</span> <span class="selector-class">.borders</span><span class="selector-pseudo">:nth-child</span>(<span class="number">4</span>)&#123;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">linear-gradient</span>(to top, transparent , <span class="built_in">rgb</span>(<span class="number">0</span>, <span class="number">153</span>, <span class="number">255</span>) );</span><br><span class="line">    <span class="attribute">animation</span>: move4 <span class="number">2s</span> linear infinite;</span><br><span class="line">    <span class="attribute">animation-delay</span>: <span class="number">1s</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@keyframes</span> move4&#123;</span><br><span class="line">    <span class="number">0%</span>&#123;</span><br><span class="line">        <span class="attribute">transform</span>:<span class="built_in">translateY</span>(<span class="number">100%</span>) ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="number">100%</span>&#123;</span><br><span class="line">        <span class="attribute">transform</span>:<span class="built_in">translateY</span>(-<span class="number">100%</span>) ;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="三、整体代码"><a href="#三、整体代码" class="headerlink" title="三、整体代码"></a>三、整体代码</h2><p>HTML</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;IE=edge&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>蛇形边框<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span> <span class="attr">href</span>=<span class="string">&quot;index.css&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;outbox&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;inbox&quot;</span>&gt;</span></span><br><span class="line">            HANDSOME</span><br><span class="line">            <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;borders&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;borders&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;borders&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;borders&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>CSS</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line">*&#123;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">body</span>&#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100vh</span>;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">    <span class="attribute">justify-content</span>: center;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgb</span>(<span class="number">4</span>, <span class="number">4</span>, <span class="number">19</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.outbox</span>&#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">150px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">400px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.outbox</span> <span class="selector-class">.inbox</span>&#123;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">letter-spacing</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">55px</span>;</span><br><span class="line">    <span class="attribute">color</span>: <span class="built_in">rgb</span>(<span class="number">18</span>, <span class="number">190</span>, <span class="number">243</span>);</span><br><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">linear-gradient</span>(<span class="number">90deg</span> ,<span class="built_in">rgb</span>(<span class="number">40</span>, <span class="number">62</span>, <span class="number">161</span>) <span class="number">50%</span>,<span class="built_in">rgb</span>(<span class="number">31</span>, <span class="number">49</span>, <span class="number">133</span>) <span class="number">50%</span> );</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">150px</span>;</span><br><span class="line">    <span class="comment">/* text-transform: uppercase;   字母转换成大写 */</span></span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">    <span class="attribute">text-decoration</span>: none;</span><br><span class="line">    <span class="attribute">overflow</span>: hidden;</span><br><span class="line">    <span class="attribute">box-shadow</span>: inset <span class="number">0</span> <span class="number">0</span> <span class="number">10px</span> <span class="built_in">rgb</span>(<span class="number">14</span>, <span class="number">20</span>, <span class="number">105</span>), <span class="number">0</span> <span class="number">0</span> <span class="number">5px</span> <span class="built_in">rgb</span>(<span class="number">9</span>, <span class="number">208</span>, <span class="number">235</span>);</span><br><span class="line">    <span class="attribute">transition</span>: all  <span class="number">0.5s</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.outbox</span> <span class="selector-class">.inbox</span><span class="selector-pseudo">:hover</span>&#123;</span><br><span class="line">    <span class="attribute">text-shadow</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">5px</span> <span class="built_in">rgb</span>(<span class="number">18</span>, <span class="number">190</span>, <span class="number">243</span>),</span><br><span class="line">    <span class="number">0</span> <span class="number">0</span> <span class="number">8px</span> <span class="built_in">rgb</span>(<span class="number">18</span>, <span class="number">190</span>, <span class="number">243</span>),</span><br><span class="line">    <span class="number">0</span> <span class="number">0</span> <span class="number">10px</span> <span class="built_in">rgb</span>(<span class="number">18</span>, <span class="number">190</span>, <span class="number">243</span>); </span><br><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">linear-gradient</span>(<span class="number">90deg</span>, <span class="built_in">rgb</span>(<span class="number">25</span>, <span class="number">38</span>, <span class="number">99</span>) <span class="number">50%</span>,<span class="built_in">rgb</span>(<span class="number">13</span>, <span class="number">22</span>, <span class="number">58</span>) <span class="number">50%</span> );</span><br><span class="line">    <span class="attribute">box-shadow</span>: inset </span><br><span class="line">    <span class="number">0</span> <span class="number">0</span> <span class="number">10px</span> <span class="built_in">rgb</span>(<span class="number">14</span>, <span class="number">20</span>, <span class="number">105</span>),</span><br><span class="line">    <span class="number">0</span> <span class="number">0</span> <span class="number">5px</span> <span class="built_in">rgb</span>(<span class="number">9</span>, <span class="number">208</span>, <span class="number">235</span>),</span><br><span class="line">    <span class="number">0</span> <span class="number">0</span> <span class="number">10px</span> <span class="built_in">rgb</span>(<span class="number">9</span>, <span class="number">208</span>, <span class="number">235</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.outbox</span> <span class="selector-class">.inbox</span> <span class="selector-class">.borders</span>&#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.outbox</span> <span class="selector-class">.inbox</span> <span class="selector-class">.borders</span><span class="selector-pseudo">:nth-child</span>(<span class="number">1</span>)&#123;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">linear-gradient</span>(to right, transparent , <span class="built_in">rgb</span>(<span class="number">0</span>, <span class="number">153</span>, <span class="number">255</span>) );</span><br><span class="line">    <span class="attribute">animation</span>: move1 <span class="number">2s</span> linear infinite;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@keyframes</span> move1&#123;</span><br><span class="line">    <span class="number">0%</span>&#123;</span><br><span class="line">        <span class="attribute">transform</span>:<span class="built_in">translateX</span>(-<span class="number">100%</span>) ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="number">100%</span>&#123;</span><br><span class="line">        <span class="attribute">transform</span>:<span class="built_in">translateX</span>(<span class="number">100%</span>) ;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.outbox</span> <span class="selector-class">.inbox</span> <span class="selector-class">.borders</span><span class="selector-pseudo">:nth-child</span>(<span class="number">2</span>)&#123;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">linear-gradient</span>(to bottom, transparent , <span class="built_in">rgb</span>(<span class="number">0</span>, <span class="number">153</span>, <span class="number">255</span>) );</span><br><span class="line">    <span class="attribute">animation</span>: move2 <span class="number">2s</span> linear infinite;</span><br><span class="line">    <span class="attribute">animation-delay</span>: <span class="number">1s</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@keyframes</span> move2&#123;</span><br><span class="line">    <span class="number">0%</span>&#123;</span><br><span class="line">        <span class="attribute">transform</span>:<span class="built_in">translateY</span>(-<span class="number">100%</span>) ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="number">100%</span>&#123;</span><br><span class="line">        <span class="attribute">transform</span>:<span class="built_in">translateY</span>(<span class="number">100%</span>) ;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.outbox</span> <span class="selector-class">.inbox</span> <span class="selector-class">.borders</span><span class="selector-pseudo">:nth-child</span>(<span class="number">3</span>)&#123;</span><br><span class="line">    <span class="attribute">bottom</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">linear-gradient</span>(to left, transparent , <span class="built_in">rgb</span>(<span class="number">0</span>, <span class="number">153</span>, <span class="number">255</span>) );</span><br><span class="line">    <span class="attribute">animation</span>: move3 <span class="number">2s</span> linear infinite;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@keyframes</span> move3&#123;</span><br><span class="line">    <span class="number">0%</span>&#123;</span><br><span class="line">        <span class="attribute">transform</span>:<span class="built_in">translateX</span>(<span class="number">100%</span>) ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="number">100%</span>&#123;</span><br><span class="line">        <span class="attribute">transform</span>:<span class="built_in">translateX</span>(-<span class="number">100%</span>) ;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.outbox</span> <span class="selector-class">.inbox</span> <span class="selector-class">.borders</span><span class="selector-pseudo">:nth-child</span>(<span class="number">4</span>)&#123;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">linear-gradient</span>(to top, transparent , <span class="built_in">rgb</span>(<span class="number">0</span>, <span class="number">153</span>, <span class="number">255</span>) );</span><br><span class="line">    <span class="attribute">animation</span>: move4 <span class="number">2s</span> linear infinite;</span><br><span class="line">    <span class="attribute">animation-delay</span>: <span class="number">1s</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@keyframes</span> move4&#123;</span><br><span class="line">    <span class="number">0%</span>&#123;</span><br><span class="line">        <span class="attribute">transform</span>:<span class="built_in">translateY</span>(<span class="number">100%</span>) ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="number">100%</span>&#123;</span><br><span class="line">        <span class="attribute">transform</span>:<span class="built_in">translateY</span>(-<span class="number">100%</span>) ;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="四、知识点"><a href="#四、知识点" class="headerlink" title="四、知识点"></a>四、知识点</h2><p>letter-spacing: 10px;   表示的是字母之间的距离为10px</p>
-<p>text-transform：uppercase全部字母为大写。<br>user-select：none文本不可选中。</p>
-<p>linear-gradient：渐变色。transparent为透明色。</p>
-<h2 id="五、效果展示"><a href="#五、效果展示" class="headerlink" title="五、效果展示"></a>五、效果展示</h2><p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comnum.gif" alt="num"></p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">CSS3</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">特效 - HTML5 - 启发</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/CSS特效系列//" class="article-tag-list-link color3">CSS特效系列</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/10/07/CSS%E7%89%B9%E6%95%88%E2%80%94%E2%80%94%E8%9B%87%E5%BD%A2%E8%BE%B9%E6%A1%86/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1828,14 +1833,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">笔记 - 数据结构 - 原创</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">前端通后端</a>
               </li>
              
@@ -1848,11 +1845,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
+                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+                <a href="javascript:void(0)" class="js-tag color5">笔记 - 数据结构 - 原创</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1860,15 +1861,11 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">VSCode - 断点调试配置</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1880,6 +1877,18 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Node.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
@@ -1888,11 +1897,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Node.js</a>
+                <a href="javascript:void(0)" class="js-tag color4">中间件</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">中间件</a>
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1912,11 +1921,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
+                <a href="javascript:void(0)" class="js-tag color5">函数进阶</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">函数进阶</a>
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1929,10 +1938,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">软件设计师</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
