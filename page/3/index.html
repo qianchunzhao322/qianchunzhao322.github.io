@@ -309,6 +309,129 @@
             
 
   
+    <article id="post-约瑟夫环" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/10/07/%E7%BA%A6%E7%91%9F%E5%A4%AB%E7%8E%AF/" target="_blank">约瑟夫环</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/10/07/%E7%BA%A6%E7%91%9F%E5%A4%AB%E7%8E%AF/" class="archive-article-date">
+        <time datetime="2021-10-07T05:03:05.998Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-07</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="约瑟夫环"><a href="#约瑟夫环" class="headerlink" title="约瑟夫环"></a><strong>约瑟夫环</strong></h1><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p><code>Josephu</code>问题为:设编号为<code>1, 2, ..n的n</code>个人围坐一圈，约定编号为<code>k (1&lt;=k&lt;=n) </code>的人从1开始报数，数到<code>m</code>的那个人出列，它的下一位又从1开始报数，数到<code>m</code>的那个人又出列，依次类推，直到所有人出列为止，由此产生一个出队编号的序列。</p>
+<p><img src="C:\Users\墨宝\AppData\Roaming\Typora\typora-user-images\image-20210924103053425.png" alt="image-20210924103053425"></p>
+<h2 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a><strong>解决思路</strong></h2><p>首先是创建一个没有头节点的单向链表，同时让这个链表成环，接着使用算法循环找到对应的节点进行删除</p>
+<h2 id="具体思路如下："><a href="#具体思路如下：" class="headerlink" title="具体思路如下："></a>具体思路如下：</h2><h3 id="1、构建一个单向的环形链表思路"><a href="#1、构建一个单向的环形链表思路" class="headerlink" title="1、构建一个单向的环形链表思路"></a>1、构建一个单向的环形链表思路</h3><p>1.先创建第一个节点,让<code>first</code>指向该节点，并形成环形<br>2.后面当我们每创建一个新的节点，就把该节点，加入到已有的环形链表中即可.</p>
+<p><img src="C:\Users\墨宝\AppData\Roaming\Typora\typora-user-images\image-20210924103810656.png" alt="image-20210924103810656"></p>
+<p><u><em><strong>代码如下</strong></em></u>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个first节点,当前没有编号</span></span><br><span class="line">	<span class="keyword">private</span> Boy first = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 添加小孩节点，构建成一个环形的链表</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addBoy</span><span class="params">(<span class="keyword">int</span> nums)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// nums 做一个数据校验</span></span><br><span class="line">		<span class="keyword">if</span> (nums &lt; <span class="number">1</span>) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;nums的值不正确&quot;</span>);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		Boy curBoy = <span class="keyword">null</span>; <span class="comment">// 辅助指针，帮助构建环形链表最主要的就是辅助作用</span></span><br><span class="line">		<span class="comment">// 使用for来创建我们的环形链表</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= nums; i++) &#123;</span><br><span class="line">			<span class="comment">// 根据编号，创建小孩节点</span></span><br><span class="line">			Boy boy = <span class="keyword">new</span> Boy(i);</span><br><span class="line">			<span class="comment">// 如果是第一个小孩</span></span><br><span class="line">			<span class="keyword">if</span> (i == <span class="number">1</span>) &#123;</span><br><span class="line">				first = boy;</span><br><span class="line">				first.setNext(first); <span class="comment">// 自己构成环</span></span><br><span class="line">				curBoy = first; <span class="comment">// 让curBoy指向第一个小孩</span></span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				curBoy.setNext(boy);<span class="comment">//把新boy连接到最后一个上面去</span></span><br><span class="line">				boy.setNext(first);<span class="comment">//将新BOY指向头节点</span></span><br><span class="line">				curBoy = boy;<span class="comment">//辅助指针后移</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、遍历环形链表思路"><a href="#2、遍历环形链表思路" class="headerlink" title="2、遍历环形链表思路"></a>2、遍历环形链表思路</h3><p>1.先让一个辅助指针(变量)<code>curBoy</code>,指向<code>first</code>节点<br>2.然后通过一个<code>while</code>循环遍历该环形链表即可<code>curBoy.next == first</code>结束</p>
+<p><u><em><strong>代码如下</strong></em></u>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 遍历当前的环形链表</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showBoy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 判断链表是否为空</span></span><br><span class="line">		<span class="keyword">if</span> (first == <span class="keyword">null</span>) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;没有任何小孩~~&quot;</span>);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 因为first不能动，因此我们仍然使用一个辅助指针完成遍历</span></span><br><span class="line">		Boy curBoy = first;</span><br><span class="line">		<span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">			System.out.printf(<span class="string">&quot;小孩的编号 %d \n&quot;</span>, curBoy.getNo());</span><br><span class="line">			<span class="keyword">if</span> (curBoy.getNext() == first) &#123;<span class="comment">// 说明已经遍历完毕</span></span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			curBoy = curBoy.getNext(); <span class="comment">// curBoy后移</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="3、查找小孩并删除的思路"><a href="#3、查找小孩并删除的思路" class="headerlink" title="3、查找小孩并删除的思路"></a>3、查找小孩并删除的思路</h3><p>1、需求创建一个辅助指针(变 量) <code>helper</code>,事先应该指向环形链表的最后这个节点.<br>2、小孩报数前，先让<code>first</code>和<code>helper</code>移动<code>k-1</code>次<br>3.当小孩报数时，让<code>first</code>和<code>helper</code>指针同时的移动<code>m -1</code>次，这时就可以将<code>first</code>指向的小孩节点出圈<br>4.<code>first= first .next；  helper.next = first ；</code>     原来<code>first</code>指向的节点就没有任何引用，就会被回收</p>
+<blockquote>
+<p>说明，上面说的k-1表示让两个指针移动到开始数数的位置，m-1表示的是每次移动的距离（  这个-1  精妙），还有，helper指针一直在Frist指针的后面一个距离处</p>
+<p>同时删除节点的时候的操作值得借鉴，显然Frist前进一个距离，在让helper直接执行新Frist，通过回收机制将节点删除，</p>
+</blockquote>
+<p><img src="C:\Users\墨宝\AppData\Roaming\Typora\typora-user-images\image-20210924103835522.png" alt="image-20210924103835522"></p>
+<p><u><em><strong>代码如下</strong></em></u>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 根据用户的输入，计算出小孩出圈的顺序</span></span><br><span class="line">	 </span><br><span class="line">	<span class="comment">//startNo  表示从第几个小孩开始数数</span></span><br><span class="line">	<span class="comment">//countNum  表示数几下</span></span><br><span class="line">	<span class="comment">//nums  表示最初有多少小孩在圈中</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">countBoy</span><span class="params">(<span class="keyword">int</span> startNo, <span class="keyword">int</span> countNum, <span class="keyword">int</span> nums)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 先对数据进行校验</span></span><br><span class="line">		<span class="keyword">if</span> (first == <span class="keyword">null</span> || startNo &lt; <span class="number">1</span> || startNo &gt; nums) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;参数输入有误， 请重新输入&quot;</span>);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 创建要给辅助指针,帮助完成小孩出圈</span></span><br><span class="line">		Boy helper = first;</span><br><span class="line">		<span class="comment">// 需求创建一个辅助指针(变量) helper , 事先应该指向环形链表的最后这个节点</span></span><br><span class="line">		<span class="comment">//故下面的这个循环是让helper指向链表最后一个节点</span></span><br><span class="line">		<span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span> (helper.getNext() == first) &#123; <span class="comment">// 说明helper指向最后小孩节点</span></span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			helper = helper.getNext();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//小孩报数前，先让 first 和  helper 移动 k - 1次也就是说题目给你得信息是让小孩在第几个开始报数，显然小孩去哪个地方</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; startNo - <span class="number">1</span>; j++) &#123;</span><br><span class="line">			first = first.getNext();</span><br><span class="line">			helper = helper.getNext();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//当小孩报数时，让first 和 helper 指针同时 的移动  m  - 1 次, 然后出圈</span></span><br><span class="line">		<span class="comment">//这里是一个循环操作，知道圈中只有一个节点</span></span><br><span class="line">		<span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(helper == first) &#123; <span class="comment">//说明圈中只有一个节点</span></span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">//让 first 和 helper 指针同时 的移动 countNum - 1</span></span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; countNum - <span class="number">1</span>; j++) &#123;</span><br><span class="line">				first = first.getNext();</span><br><span class="line">				helper = helper.getNext();</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">//这时first指向的节点，就是要出圈的小孩节点</span></span><br><span class="line">			System.out.printf(<span class="string">&quot;小孩%d出圈\n&quot;</span>, first.getNo());</span><br><span class="line">			<span class="comment">//这时将first指向的小孩节点出圈</span></span><br><span class="line">			first = first.getNext();</span><br><span class="line">			helper.setNext(first); <span class="comment">//</span></span><br><span class="line">			</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.printf(<span class="string">&quot;最后留在圈中的小孩编号%d \n&quot;</span>, first.getNo());</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a><strong>完整代码</strong></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> linkedlist;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Josepfu</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 测试一把看看构建环形链表，和遍历是否ok</span></span><br><span class="line">		CircleSingleLinkedList circleSingleLinkedList = <span class="keyword">new</span> CircleSingleLinkedList();</span><br><span class="line">		circleSingleLinkedList.addBoy(<span class="number">25</span>);</span><br><span class="line">		circleSingleLinkedList.showBoy();</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//测试一把小孩出圈是否正确</span></span><br><span class="line">		circleSingleLinkedList.countBoy(<span class="number">4</span>, <span class="number">5</span>, <span class="number">25</span>); </span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//创建一个环形的单向链表</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CircleSingleLinkedList</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 创建一个first节点,当前没有编号</span></span><br><span class="line">	<span class="keyword">private</span> Boy first = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 添加小孩节点，构建成一个环形的链表</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addBoy</span><span class="params">(<span class="keyword">int</span> nums)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// nums 做一个数据校验</span></span><br><span class="line">		<span class="keyword">if</span> (nums &lt; <span class="number">1</span>) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;nums的值不正确&quot;</span>);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		Boy curBoy = <span class="keyword">null</span>; <span class="comment">// 辅助指针，帮助构建环形链表最主要的就是辅助作用</span></span><br><span class="line">		<span class="comment">// 使用for来创建我们的环形链表</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= nums; i++) &#123;</span><br><span class="line">			<span class="comment">// 根据编号，创建小孩节点</span></span><br><span class="line">			Boy boy = <span class="keyword">new</span> Boy(i);</span><br><span class="line">			<span class="comment">// 如果是第一个小孩</span></span><br><span class="line">			<span class="keyword">if</span> (i == <span class="number">1</span>) &#123;</span><br><span class="line">				first = boy;</span><br><span class="line">				first.setNext(first); <span class="comment">// 自己构成环</span></span><br><span class="line">				curBoy = first; <span class="comment">// 让curBoy指向第一个小孩</span></span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				curBoy.setNext(boy);<span class="comment">//把新boy连接到最后一个上面去</span></span><br><span class="line">				boy.setNext(first);<span class="comment">//将新BOY指向头节点</span></span><br><span class="line">				curBoy = boy;<span class="comment">//辅助指针后移</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 遍历当前的环形链表</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showBoy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 判断链表是否为空</span></span><br><span class="line">		<span class="keyword">if</span> (first == <span class="keyword">null</span>) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;没有任何小孩~~&quot;</span>);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 因为first不能动，因此我们仍然使用一个辅助指针完成遍历</span></span><br><span class="line">		Boy curBoy = first;</span><br><span class="line">		<span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">			System.out.printf(<span class="string">&quot;小孩的编号 %d \n&quot;</span>, curBoy.getNo());</span><br><span class="line">			<span class="keyword">if</span> (curBoy.getNext() == first) &#123;<span class="comment">// 说明已经遍历完毕</span></span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			curBoy = curBoy.getNext(); <span class="comment">// curBoy后移</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 根据用户的输入，计算出小孩出圈的顺序</span></span><br><span class="line">	 </span><br><span class="line">	<span class="comment">//startNo  表示从第几个小孩开始数数</span></span><br><span class="line">	<span class="comment">//countNum  表示数几下</span></span><br><span class="line">	<span class="comment">//nums  表示最初有多少小孩在圈中</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">countBoy</span><span class="params">(<span class="keyword">int</span> startNo, <span class="keyword">int</span> countNum, <span class="keyword">int</span> nums)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 先对数据进行校验</span></span><br><span class="line">		<span class="keyword">if</span> (first == <span class="keyword">null</span> || startNo &lt; <span class="number">1</span> || startNo &gt; nums) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;参数输入有误， 请重新输入&quot;</span>);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 创建要给辅助指针,帮助完成小孩出圈</span></span><br><span class="line">		Boy helper = first;</span><br><span class="line">		<span class="comment">// 需求创建一个辅助指针(变量) helper , 事先应该指向环形链表的最后这个节点</span></span><br><span class="line">		<span class="comment">//故下面的这个循环是让helper指向链表最后一个节点</span></span><br><span class="line">		<span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span> (helper.getNext() == first) &#123; <span class="comment">// 说明helper指向最后小孩节点</span></span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			helper = helper.getNext();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//小孩报数前，先让 first 和  helper 移动 k - 1次也就是说题目给你得信息是让小孩在第几个开始报数，显然小孩去哪个地方</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; startNo - <span class="number">1</span>; j++) &#123;</span><br><span class="line">			first = first.getNext();</span><br><span class="line">			helper = helper.getNext();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//当小孩报数时，让first 和 helper 指针同时 的移动  m  - 1 次, 然后出圈</span></span><br><span class="line">		<span class="comment">//这里是一个循环操作，知道圈中只有一个节点</span></span><br><span class="line">		<span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(helper == first) &#123; <span class="comment">//说明圈中只有一个节点</span></span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">//让 first 和 helper 指针同时 的移动 countNum - 1</span></span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; countNum - <span class="number">1</span>; j++) &#123;</span><br><span class="line">				first = first.getNext();</span><br><span class="line">				helper = helper.getNext();</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">//这时first指向的节点，就是要出圈的小孩节点</span></span><br><span class="line">			System.out.printf(<span class="string">&quot;小孩%d出圈\n&quot;</span>, first.getNo());</span><br><span class="line">			<span class="comment">//这时将first指向的小孩节点出圈</span></span><br><span class="line">			first = first.getNext();</span><br><span class="line">			helper.setNext(first); <span class="comment">//</span></span><br><span class="line">			</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.printf(<span class="string">&quot;最后留在圈中的小孩编号%d \n&quot;</span>, first.getNo());</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建一个Boy类，表示一个节点</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Boy</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> no;<span class="comment">// 编号</span></span><br><span class="line">	<span class="keyword">private</span> Boy next; <span class="comment">// 指向下一个节点,默认null</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">//设置get,set方法</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Boy</span><span class="params">(<span class="keyword">int</span> no)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.no = no;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getNo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> no;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setNo</span><span class="params">(<span class="keyword">int</span> no)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.no = no;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Boy <span class="title">getNext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> next;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setNext</span><span class="params">(Boy next)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.next = next;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">笔记 - Java - 原创</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/数据结构//" class="article-tag-list-link color5">数据结构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/10/07/%E7%BA%A6%E7%91%9F%E5%A4%AB%E7%8E%AF/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-原生JS中函数进阶" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -2309,7 +2432,7 @@
 <p><strong>模块化</strong>——(js的模块化、CsS 的模块化、资源的模块化)<br><strong>组件化</strong>——(复用现有的UI结构、样式、行为)<br><strong>规范化</strong>——(目录结构的划分、编码规范化、接口规范化、文档规范化、Git 分支管理)<br><strong>自动化</strong>——(自动化构建、自动部署、自动化测试)</p>
 <p>前端工程化的解决方案是webpack</p>
 <h1 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h1><p>主要功能:它提供了友好的前端模块化开发支持，以及代码压缩混淆、处理浏览器端JavaScript的兼容性、性能优化等强大的功能。</p>
-<h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><p>安装<br>npm install <a href="mailto:&#x77;&#101;&#x62;&#x70;&#97;&#99;&#107;&#x40;&#53;&#46;&#x34;&#50;&#46;&#49;">&#x77;&#101;&#x62;&#x70;&#97;&#99;&#107;&#x40;&#53;&#46;&#x34;&#50;&#46;&#49;</a> <a href="mailto:&#119;&#101;&#x62;&#112;&#x61;&#x63;&#107;&#x2d;&#99;&#108;&#x69;&#64;&#52;&#46;&#x37;&#x2e;&#50;">&#119;&#101;&#x62;&#112;&#x61;&#x63;&#107;&#x2d;&#99;&#108;&#x69;&#64;&#52;&#46;&#x37;&#x2e;&#50;</a> -D</p>
+<h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><p>安装<br>npm install <a href="mailto:&#x77;&#x65;&#x62;&#x70;&#x61;&#99;&#x6b;&#x40;&#x35;&#x2e;&#52;&#50;&#46;&#49;">&#x77;&#x65;&#x62;&#x70;&#x61;&#99;&#x6b;&#x40;&#x35;&#x2e;&#52;&#50;&#46;&#49;</a> <a href="mailto:&#119;&#x65;&#x62;&#x70;&#x61;&#99;&#107;&#45;&#99;&#x6c;&#x69;&#64;&#x34;&#x2e;&#55;&#x2e;&#50;">&#119;&#x65;&#x62;&#x70;&#x61;&#99;&#107;&#45;&#99;&#x6c;&#x69;&#64;&#x34;&#x2e;&#55;&#x2e;&#50;</a> -D</p>
 <p>此时，  -D将信息记录到package.json中的  “<strong>devDependencies”: {  只在开发阶段用的包  }<strong>节点中，而 -S记录到</strong>“dependencies”: {  开发和上线都需要的包  }</strong></p>
 <p>配置<br>①在项目根目录中，创建名为webpack.config.js的webpack配置文件，并初始化如下的基本配置:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">   <span class="attr">mode</span>:<span class="string">&#x27;development&#x27;</span> <span class="comment">//mode 用来指定构建模式。可选值有development 和production（上线模式）</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -2323,7 +2446,7 @@
 <p>webpack.config.js是webpack的配置文件。webpack 在真正开始打包构建之前（npm run dev），会先读取这个配置文件,从而基于给定的配置，对项目进行打包。</p>
 <p>注意事项<br>在webpack 4.x和5.x的版本中，有如下的默认约定:<br>①默认的打包入口文件为src -&gt; index.is<br>②默认的输出文件路径为dist -&gt; main.js</p>
 <h3 id="webpack-配置起来十分麻烦，但是开发体验好，于是vue-cli（好像是叫手脚架）起作用了"><a href="#webpack-配置起来十分麻烦，但是开发体验好，于是vue-cli（好像是叫手脚架）起作用了" class="headerlink" title="webpack 配置起来十分麻烦，但是开发体验好，于是vue-cli（好像是叫手脚架）起作用了"></a><strong>webpack 配置起来十分麻烦，但是开发体验好，于是vue-cli（好像是叫手脚架）起作用了</strong></h3><h2 id="webpack中的loader-加载器"><a href="#webpack中的loader-加载器" class="headerlink" title="webpack中的loader(加载器)"></a>webpack中的loader(加载器)</h2><p>在实际开发过程中，webpack 默认只能打包处理以js后缀名结尾的模块。其他非.js 后缀名结尾的模块,webpack默认处理不了，需要调用loader加载器才可以正常打包，否则会报错! <img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210816200056346.png" alt="image-20210816200056346"></p>
-<p>①运行npm i <a href="mailto:&#x73;&#x74;&#121;&#108;&#x65;&#45;&#108;&#x6f;&#x61;&#x64;&#101;&#114;&#64;&#x33;&#46;&#x30;&#46;&#48;">&#x73;&#x74;&#121;&#108;&#x65;&#45;&#108;&#x6f;&#x61;&#x64;&#101;&#114;&#64;&#x33;&#46;&#x30;&#46;&#48;</a> <a href="mailto:&#x63;&#115;&#x73;&#45;&#108;&#111;&#97;&#100;&#x65;&#114;&#64;&#x35;&#46;&#x32;&#46;&#54;">&#x63;&#115;&#x73;&#45;&#108;&#111;&#97;&#100;&#x65;&#114;&#64;&#x35;&#46;&#x32;&#46;&#54;</a> -D命令,安装处理Css文件的loader<br>②在webpack.config.js的module -&gt; rules数组中，添加loader规则如下:</p>
+<p>①运行npm i <a href="mailto:&#115;&#x74;&#121;&#x6c;&#x65;&#x2d;&#x6c;&#x6f;&#x61;&#100;&#x65;&#114;&#64;&#51;&#x2e;&#48;&#x2e;&#x30;">&#115;&#x74;&#121;&#x6c;&#x65;&#x2d;&#x6c;&#x6f;&#x61;&#100;&#x65;&#114;&#64;&#51;&#x2e;&#48;&#x2e;&#x30;</a> <a href="mailto:&#99;&#x73;&#x73;&#45;&#x6c;&#x6f;&#97;&#x64;&#x65;&#114;&#64;&#x35;&#46;&#x32;&#x2e;&#54;">&#99;&#x73;&#x73;&#45;&#x6c;&#x6f;&#97;&#x64;&#x65;&#114;&#64;&#x35;&#46;&#x32;&#x2e;&#54;</a> -D命令,安装处理Css文件的loader<br>②在webpack.config.js的module -&gt; rules数组中，添加loader规则如下:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">module: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      &#123; test: /\.css$/, use: [&#x27;style-loader&#x27;, &#x27;css-loader&#x27;] &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 
 <p>原理如下：<br>1.webpack默认只能打包处理.js结尾的文件，处理不了其它后缀的文件<br>2.由于代码中包含了index.css 这个文件，因此webpack默认处理不了<br>3.当webpack发现某个文件处理不了的时候，会查找webpack.config.js这个配置文件,看module.rules数组中，是否配置了对应的loader加载器。<br>4.webpack把index.css这个文件,先转交给最后-个loader进行处理(先转交给css-loader) .<br>5.当css-loader处理完毕之后，会把处理的结果，转交给下-个loader (转交给style-loader)<br>6.当style-loader处理完毕之后，发现没有下一个loader了,于是就把处理的结果，转交给了webpack<br>7.webpack把style-loader处理的结果，合并到/dist/bundle.js中,最终生成打包好的文件。</p>
@@ -2375,126 +2498,6 @@
     
     <p class="article-more-link">
       <a class="article-more-a" href="/2021/10/07/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-逆波兰表达式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/10/07/%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F/" target="_blank">逆波兰表达式</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/10/07/%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="archive-article-date">
-        <time datetime="2021-10-07T05:03:05.982Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-07</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="逆波兰表达式"><a href="#逆波兰表达式" class="headerlink" title="逆波兰表达式"></a><strong>逆波兰表达式</strong></h1><h2 id="前缀、中缀、后缀表达式的规则"><a href="#前缀、中缀、后缀表达式的规则" class="headerlink" title="前缀、中缀、后缀表达式的规则"></a>前缀、中缀、后缀表达式的规则</h2><h3 id="前缀表达式"><a href="#前缀表达式" class="headerlink" title="前缀表达式"></a>前缀表达式</h3><p>前缀表达式也叫波兰表达式，他的运算符位于操作数之前。规则如下：</p>
-<p>1）从右到左扫描，将数字压入堆栈中，<br>2）遇到运算符将栈顶元素和栈顶次元素弹出计算，<br>3）将计算结果压入栈中，重复上述操作知道得出最后结果</p>
-<p>前缀表达式的样子—— <code> - * + 3 4 5 6   ==&gt;(3+4)*5-6</code></p>
-<h3 id="中缀表达式"><a href="#中缀表达式" class="headerlink" title="中缀表达式"></a>中缀表达式</h3><p>中缀表达式就是我们常见的那种表达式，这种表达式方便人去理解，但是计算机不容易理解。</p>
-<p>中缀表达式的样子——    <code>（3+4）*5-6</code></p>
-<h3 id="后缀表达式"><a href="#后缀表达式" class="headerlink" title="后缀表达式"></a>后缀表达式</h3><p>后缀表达式也叫逆波兰表达式，他是计算机最容易理解的一种方式。</p>
-<p>1）从左至右扫描表达式，遇到数字时，将数字压入堆栈，<br>2）遇到运算符时，弹出栈顶的两个数，用运算符对它们做相应的计算(次顶元素和栈顶元素)，并将结果入栈;<br>3）重复上述过程直到表达式最右端，最后运算得出的值即为表达式的结果</p>
-<p>后缀表达式的样子——    <code>3 4 + 5 * 6 -   ==&gt;  (3+4)*5-6</code></p>
-<p>接下来是用逆波兰表达式实现计算器</p>
-<h2 id="计算器的实现"><a href="#计算器的实现" class="headerlink" title="计算器的实现"></a>计算器的实现</h2><blockquote>
-<p>实现栈的操作</p>
-<p>Stack<String> s1 = new Stack<String>();</p>
-</blockquote>
-<h3 id="思路如下"><a href="#思路如下" class="headerlink" title="思路如下"></a>思路如下</h3><p>这里是要将<code>list </code>辅助栈来实现的，先将字符串遍历加入到<code>list</code>里面，通过循环遍历<code>list</code>来实现计算</p>
-<h3 id="详细代码"><a href="#详细代码" class="headerlink" title="详细代码"></a>详细代码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO 自动生成的方法存根</span></span><br><span class="line">		<span class="comment">//先定义给逆波兰表达式</span></span><br><span class="line">		<span class="comment">//(30+4)X5-6 =&gt; 304+5 X 6-=&gt; 164</span></span><br><span class="line">		<span class="comment">//4*5-8+60+8/2-&gt;45*8-60+82/+</span></span><br><span class="line">		<span class="comment">//测试</span></span><br><span class="line">		<span class="comment">//说明为了方便，逆波兰表达式的数字和符号使用空格隔开</span></span><br><span class="line">		<span class="comment">//String suffixExpression= &quot;304+5*6-&quot;;</span></span><br><span class="line">		String sufixExpression= <span class="string">&quot;45* 8-60+82/+&quot;</span>;<span class="comment">// 76</span></span><br><span class="line">		<span class="comment">//思路</span></span><br><span class="line">		<span class="comment">//1.先将&quot;34+5 X 6-&quot;=&gt;放到ArrayList中.</span></span><br><span class="line">		<span class="comment">//2.将ArrayList 传递给一个方法，遍历ArrayList配合栈完成计算</span></span><br><span class="line">		List&lt;String&gt; list = getListString(sufixExpression);</span><br><span class="line">		System.out.println(<span class="string">&quot;rpnList=&quot;</span> + list);</span><br><span class="line">		<span class="keyword">int</span> res = calculate(list);</span><br><span class="line">		System.out.println(<span class="string">&quot;计算的结果是=&quot;</span> + res);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;String&gt; <span class="title">parseSuffixExpreesionList</span><span class="params">(List&lt;String&gt; ls)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//定义两个栈</span></span><br><span class="line">		Stack&lt;String&gt; s1 = <span class="keyword">new</span> Stack&lt;String&gt;(); <span class="comment">// 符号栈</span></span><br><span class="line">		<span class="comment">//说明：因为s2 这个栈，在整个转换过程中，没有pop操作，而且后面我们还需要逆序输出</span></span><br><span class="line">		<span class="comment">//因此比较麻烦，这里我们就不用 Stack&lt;String&gt; 直接使用 List&lt;String&gt; s2</span></span><br><span class="line">		<span class="comment">//Stack&lt;String&gt; s2 = new Stack&lt;String&gt;(); // 储存中间结果的栈s2</span></span><br><span class="line">		List&lt;String&gt; s2 = <span class="keyword">new</span> ArrayList&lt;String&gt;(); <span class="comment">// 储存中间结果的Lists2</span></span><br><span class="line">		</span><br><span class="line">		<span class="comment">//遍历ls</span></span><br><span class="line">		<span class="keyword">for</span>(String item: ls) &#123;</span><br><span class="line">			<span class="comment">//如果是一个数，加入s2</span></span><br><span class="line">			<span class="keyword">if</span>(item.matches(<span class="string">&quot;\\d+&quot;</span>)) &#123;</span><br><span class="line">				s2.add(item);</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> (item.equals(<span class="string">&quot;(&quot;</span>)) &#123;</span><br><span class="line">				s1.push(item);</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> (item.equals(<span class="string">&quot;)&quot;</span>)) &#123;</span><br><span class="line">				<span class="comment">//如果是右括号“)”，则依次弹出s1栈顶的运算符，并压入s2，直到遇到左括号为止，此时将这一对括号丢弃</span></span><br><span class="line">				<span class="keyword">while</span>(!s1.peek().equals(<span class="string">&quot;(&quot;</span>)) &#123;</span><br><span class="line">					s2.add(s1.pop());</span><br><span class="line">				&#125;</span><br><span class="line">				s1.pop();<span class="comment">//!!! 将 ( 弹出 s1栈， 消除小括号</span></span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="comment">//当item的优先级小于等于s1栈顶运算符, 将s1栈顶的运算符弹出并加入到s2中，再次转到(4.1)与s1中新的栈顶运算符相比较</span></span><br><span class="line">				<span class="comment">//问题：我们缺少一个比较优先级高低的方法</span></span><br><span class="line">				<span class="keyword">while</span>(s1.size() != <span class="number">0</span> &amp;&amp; Operation.getValue(s1.peek()) &gt;= Operation.getValue(item) ) &#123;</span><br><span class="line">					s2.add(s1.pop());</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="comment">//还需要将item压入栈</span></span><br><span class="line">				s1.push(item);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//将s1中剩余的运算符依次弹出并加入s2</span></span><br><span class="line">		<span class="keyword">while</span>(s1.size() != <span class="number">0</span>) &#123;</span><br><span class="line">			s2.add(s1.pop());</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> s2; <span class="comment">//注意因为是存放到List, 因此按顺序输出就是对应的后缀表达式对应的List</span></span><br><span class="line">		</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">calculate</span><span class="params">(List&lt;String&gt; ls)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 创建给栈, 只需要一个栈即可</span></span><br><span class="line">		Stack&lt;String&gt; stack = <span class="keyword">new</span> Stack&lt;String&gt;();</span><br><span class="line">		<span class="comment">// 遍历 ls</span></span><br><span class="line">		<span class="keyword">for</span> (String item : ls) &#123;</span><br><span class="line">			<span class="comment">// 这里使用正则表达式来取出数</span></span><br><span class="line">			<span class="keyword">if</span> (item.matches(<span class="string">&quot;\\d+&quot;</span>)) &#123; <span class="comment">// 匹配的是多位数</span></span><br><span class="line">				<span class="comment">// 入栈</span></span><br><span class="line">				stack.push(item);</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="comment">// pop出两个数，并运算， 再入栈</span></span><br><span class="line">				<span class="keyword">int</span> num2 = Integer.parseInt(stack.pop());</span><br><span class="line">				<span class="keyword">int</span> num1 = Integer.parseInt(stack.pop());</span><br><span class="line">				<span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">				<span class="keyword">if</span> (item.equals(<span class="string">&quot;+&quot;</span>)) &#123;</span><br><span class="line">					res = num1 + num2;</span><br><span class="line">				&#125; <span class="keyword">else</span> <span class="keyword">if</span> (item.equals(<span class="string">&quot;-&quot;</span>)) &#123;</span><br><span class="line">					res = num1 - num2;</span><br><span class="line">				&#125; <span class="keyword">else</span> <span class="keyword">if</span> (item.equals(<span class="string">&quot;*&quot;</span>)) &#123;</span><br><span class="line">					res = num1 * num2;</span><br><span class="line">				&#125; <span class="keyword">else</span> <span class="keyword">if</span> (item.equals(<span class="string">&quot;/&quot;</span>)) &#123;</span><br><span class="line">					res = num1 / num2;</span><br><span class="line">				&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">					<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">&quot;运算符有误&quot;</span>);</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="comment">//把res 入栈</span></span><br><span class="line">				stack.push(<span class="string">&quot;&quot;</span> + res);</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//最后留在stack中的数据是运算结果</span></span><br><span class="line">		<span class="keyword">return</span> Integer.parseInt(stack.pop());</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">笔记 - Java - 原创</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数据结构//" class="article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/10/07/%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F/">展开全文 >></a>
     </p>
     
 
@@ -2673,11 +2676,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Express</a>
+                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">笔记 - 数据结构 - 原创</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">前端通后端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2689,19 +2700,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">笔记 - 数据结构 - 原创</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">特效 - 前端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2709,7 +2708,19 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">特效 - 前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">VSCode - 断点调试配置</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2725,11 +2736,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
+                <a href="javascript:void(0)" class="js-tag color3">SCREEPS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color4">中间件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2741,15 +2752,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">中间件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">数据库</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">SCREEPS</a>
               </li>
              
               <li class="article-tag-list-item">

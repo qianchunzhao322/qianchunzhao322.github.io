@@ -309,6 +309,126 @@
             
 
   
+    <article id="post-逆波兰表达式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/10/07/%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F/" target="_blank">逆波兰表达式</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/10/07/%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="archive-article-date">
+        <time datetime="2021-10-07T05:03:05.982Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-07</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="逆波兰表达式"><a href="#逆波兰表达式" class="headerlink" title="逆波兰表达式"></a><strong>逆波兰表达式</strong></h1><h2 id="前缀、中缀、后缀表达式的规则"><a href="#前缀、中缀、后缀表达式的规则" class="headerlink" title="前缀、中缀、后缀表达式的规则"></a>前缀、中缀、后缀表达式的规则</h2><h3 id="前缀表达式"><a href="#前缀表达式" class="headerlink" title="前缀表达式"></a>前缀表达式</h3><p>前缀表达式也叫波兰表达式，他的运算符位于操作数之前。规则如下：</p>
+<p>1）从右到左扫描，将数字压入堆栈中，<br>2）遇到运算符将栈顶元素和栈顶次元素弹出计算，<br>3）将计算结果压入栈中，重复上述操作知道得出最后结果</p>
+<p>前缀表达式的样子—— <code> - * + 3 4 5 6   ==&gt;(3+4)*5-6</code></p>
+<h3 id="中缀表达式"><a href="#中缀表达式" class="headerlink" title="中缀表达式"></a>中缀表达式</h3><p>中缀表达式就是我们常见的那种表达式，这种表达式方便人去理解，但是计算机不容易理解。</p>
+<p>中缀表达式的样子——    <code>（3+4）*5-6</code></p>
+<h3 id="后缀表达式"><a href="#后缀表达式" class="headerlink" title="后缀表达式"></a>后缀表达式</h3><p>后缀表达式也叫逆波兰表达式，他是计算机最容易理解的一种方式。</p>
+<p>1）从左至右扫描表达式，遇到数字时，将数字压入堆栈，<br>2）遇到运算符时，弹出栈顶的两个数，用运算符对它们做相应的计算(次顶元素和栈顶元素)，并将结果入栈;<br>3）重复上述过程直到表达式最右端，最后运算得出的值即为表达式的结果</p>
+<p>后缀表达式的样子——    <code>3 4 + 5 * 6 -   ==&gt;  (3+4)*5-6</code></p>
+<p>接下来是用逆波兰表达式实现计算器</p>
+<h2 id="计算器的实现"><a href="#计算器的实现" class="headerlink" title="计算器的实现"></a>计算器的实现</h2><blockquote>
+<p>实现栈的操作</p>
+<p>Stack<String> s1 = new Stack<String>();</p>
+</blockquote>
+<h3 id="思路如下"><a href="#思路如下" class="headerlink" title="思路如下"></a>思路如下</h3><p>这里是要将<code>list </code>辅助栈来实现的，先将字符串遍历加入到<code>list</code>里面，通过循环遍历<code>list</code>来实现计算</p>
+<h3 id="详细代码"><a href="#详细代码" class="headerlink" title="详细代码"></a>详细代码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO 自动生成的方法存根</span></span><br><span class="line">		<span class="comment">//先定义给逆波兰表达式</span></span><br><span class="line">		<span class="comment">//(30+4)X5-6 =&gt; 304+5 X 6-=&gt; 164</span></span><br><span class="line">		<span class="comment">//4*5-8+60+8/2-&gt;45*8-60+82/+</span></span><br><span class="line">		<span class="comment">//测试</span></span><br><span class="line">		<span class="comment">//说明为了方便，逆波兰表达式的数字和符号使用空格隔开</span></span><br><span class="line">		<span class="comment">//String suffixExpression= &quot;304+5*6-&quot;;</span></span><br><span class="line">		String sufixExpression= <span class="string">&quot;45* 8-60+82/+&quot;</span>;<span class="comment">// 76</span></span><br><span class="line">		<span class="comment">//思路</span></span><br><span class="line">		<span class="comment">//1.先将&quot;34+5 X 6-&quot;=&gt;放到ArrayList中.</span></span><br><span class="line">		<span class="comment">//2.将ArrayList 传递给一个方法，遍历ArrayList配合栈完成计算</span></span><br><span class="line">		List&lt;String&gt; list = getListString(sufixExpression);</span><br><span class="line">		System.out.println(<span class="string">&quot;rpnList=&quot;</span> + list);</span><br><span class="line">		<span class="keyword">int</span> res = calculate(list);</span><br><span class="line">		System.out.println(<span class="string">&quot;计算的结果是=&quot;</span> + res);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;String&gt; <span class="title">parseSuffixExpreesionList</span><span class="params">(List&lt;String&gt; ls)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//定义两个栈</span></span><br><span class="line">		Stack&lt;String&gt; s1 = <span class="keyword">new</span> Stack&lt;String&gt;(); <span class="comment">// 符号栈</span></span><br><span class="line">		<span class="comment">//说明：因为s2 这个栈，在整个转换过程中，没有pop操作，而且后面我们还需要逆序输出</span></span><br><span class="line">		<span class="comment">//因此比较麻烦，这里我们就不用 Stack&lt;String&gt; 直接使用 List&lt;String&gt; s2</span></span><br><span class="line">		<span class="comment">//Stack&lt;String&gt; s2 = new Stack&lt;String&gt;(); // 储存中间结果的栈s2</span></span><br><span class="line">		List&lt;String&gt; s2 = <span class="keyword">new</span> ArrayList&lt;String&gt;(); <span class="comment">// 储存中间结果的Lists2</span></span><br><span class="line">		</span><br><span class="line">		<span class="comment">//遍历ls</span></span><br><span class="line">		<span class="keyword">for</span>(String item: ls) &#123;</span><br><span class="line">			<span class="comment">//如果是一个数，加入s2</span></span><br><span class="line">			<span class="keyword">if</span>(item.matches(<span class="string">&quot;\\d+&quot;</span>)) &#123;</span><br><span class="line">				s2.add(item);</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> (item.equals(<span class="string">&quot;(&quot;</span>)) &#123;</span><br><span class="line">				s1.push(item);</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> (item.equals(<span class="string">&quot;)&quot;</span>)) &#123;</span><br><span class="line">				<span class="comment">//如果是右括号“)”，则依次弹出s1栈顶的运算符，并压入s2，直到遇到左括号为止，此时将这一对括号丢弃</span></span><br><span class="line">				<span class="keyword">while</span>(!s1.peek().equals(<span class="string">&quot;(&quot;</span>)) &#123;</span><br><span class="line">					s2.add(s1.pop());</span><br><span class="line">				&#125;</span><br><span class="line">				s1.pop();<span class="comment">//!!! 将 ( 弹出 s1栈， 消除小括号</span></span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="comment">//当item的优先级小于等于s1栈顶运算符, 将s1栈顶的运算符弹出并加入到s2中，再次转到(4.1)与s1中新的栈顶运算符相比较</span></span><br><span class="line">				<span class="comment">//问题：我们缺少一个比较优先级高低的方法</span></span><br><span class="line">				<span class="keyword">while</span>(s1.size() != <span class="number">0</span> &amp;&amp; Operation.getValue(s1.peek()) &gt;= Operation.getValue(item) ) &#123;</span><br><span class="line">					s2.add(s1.pop());</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="comment">//还需要将item压入栈</span></span><br><span class="line">				s1.push(item);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//将s1中剩余的运算符依次弹出并加入s2</span></span><br><span class="line">		<span class="keyword">while</span>(s1.size() != <span class="number">0</span>) &#123;</span><br><span class="line">			s2.add(s1.pop());</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> s2; <span class="comment">//注意因为是存放到List, 因此按顺序输出就是对应的后缀表达式对应的List</span></span><br><span class="line">		</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">calculate</span><span class="params">(List&lt;String&gt; ls)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 创建给栈, 只需要一个栈即可</span></span><br><span class="line">		Stack&lt;String&gt; stack = <span class="keyword">new</span> Stack&lt;String&gt;();</span><br><span class="line">		<span class="comment">// 遍历 ls</span></span><br><span class="line">		<span class="keyword">for</span> (String item : ls) &#123;</span><br><span class="line">			<span class="comment">// 这里使用正则表达式来取出数</span></span><br><span class="line">			<span class="keyword">if</span> (item.matches(<span class="string">&quot;\\d+&quot;</span>)) &#123; <span class="comment">// 匹配的是多位数</span></span><br><span class="line">				<span class="comment">// 入栈</span></span><br><span class="line">				stack.push(item);</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="comment">// pop出两个数，并运算， 再入栈</span></span><br><span class="line">				<span class="keyword">int</span> num2 = Integer.parseInt(stack.pop());</span><br><span class="line">				<span class="keyword">int</span> num1 = Integer.parseInt(stack.pop());</span><br><span class="line">				<span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">				<span class="keyword">if</span> (item.equals(<span class="string">&quot;+&quot;</span>)) &#123;</span><br><span class="line">					res = num1 + num2;</span><br><span class="line">				&#125; <span class="keyword">else</span> <span class="keyword">if</span> (item.equals(<span class="string">&quot;-&quot;</span>)) &#123;</span><br><span class="line">					res = num1 - num2;</span><br><span class="line">				&#125; <span class="keyword">else</span> <span class="keyword">if</span> (item.equals(<span class="string">&quot;*&quot;</span>)) &#123;</span><br><span class="line">					res = num1 * num2;</span><br><span class="line">				&#125; <span class="keyword">else</span> <span class="keyword">if</span> (item.equals(<span class="string">&quot;/&quot;</span>)) &#123;</span><br><span class="line">					res = num1 / num2;</span><br><span class="line">				&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">					<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">&quot;运算符有误&quot;</span>);</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="comment">//把res 入栈</span></span><br><span class="line">				stack.push(<span class="string">&quot;&quot;</span> + res);</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//最后留在stack中的数据是运算结果</span></span><br><span class="line">		<span class="keyword">return</span> Integer.parseInt(stack.pop());</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">笔记 - Java - 原创</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/数据结构//" class="article-tag-list-link color5">数据结构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/10/07/%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-链表面试题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1404,11 +1524,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
         		</li>
       		
 		</ul>
@@ -1553,190 +1673,6 @@
     
     <p class="article-more-link">
       <a class="article-more-a" href="/2021/10/07/VSCode%20-%20%E6%96%AD%E7%82%B9%E8%B0%83%E8%AF%95%E9%85%8D%E7%BD%AE/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-node.js" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/10/07/node.js/" target="_blank">Node.js学习</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/10/07/node.js/" class="archive-article-date">
-        <time datetime="2021-10-07T05:03:05.969Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-07</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="Node-js学习"><a href="#Node-js学习" class="headerlink" title="Node.js学习"></a>Node.js学习</h1><h2 id="一、fs文件系统模块"><a href="#一、fs文件系统模块" class="headerlink" title="一、fs文件系统模块"></a>一、fs文件系统模块</h2><p>fs.readFile()    读取指定文件中的内容</p>
-<p>fs.writeFile()    向指定文件写入内容</p>
-<p>使用这个模块需要提前导入    const fs = require(‘fs’)</p>
-<h2 id="1、fs-readFile-读取指定文件中的内容"><a href="#1、fs-readFile-读取指定文件中的内容" class="headerlink" title="1、fs.readFile()    读取指定文件中的内容"></a>1、fs.readFile()    读取指定文件中的内容</h2><p>fs.readFile( path , [options], callback)</p>
-<p>options     表示用什么样的格式读取文件</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)<span class="comment">//引入模块</span></span><br><span class="line">fs.readFile(<span class="string">&#x27;./1.js&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err,dataStr</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(err);<span class="comment">//null</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;-------&quot;</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(dataStr);<span class="comment">//文件中的内容</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210730153129226.png" alt="image-20210730153129226"></p>
-<p>//如果读取成功，则err的值为null<br>//如果读取失败，则err的值为错误对象，dataStr 的值为undefined</p>
-<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210730153307021.png" alt="image-20210730153307021"></p>
-<h2 id="2、判断是否读取成功"><a href="#2、判断是否读取成功" class="headerlink" title="2、判断是否读取成功"></a>2、判断是否读取成功</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line">fs.readFile(<span class="string">&#x27;./11.txt&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err,dataStr</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// console.log(err);</span></span><br><span class="line">  <span class="comment">// console.log(&quot;-------&quot;);</span></span><br><span class="line">  <span class="comment">// console.log(dataStr);</span></span><br><span class="line">  <span class="keyword">if</span>(err)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;读取文失败！&#x27;</span>+err);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;读取文件成功！&#x27;</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210730153814734.png" alt="image-20210730153814734"></p>
-<h2 id="3、fs-writeFile-向指定文件写入内容"><a href="#3、fs-writeFile-向指定文件写入内容" class="headerlink" title="3、fs.writeFile()    向指定文件写入内容"></a>3、fs.writeFile()    向指定文件写入内容</h2><p>fs.writeFile( file, data, [options], callback)</p>
-<p>data是必选参数，表示要写入文件的内容</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line">fs.writeFile(<span class="string">&#x27;./1.txt&#x27;</span>,<span class="string">&#x27;456&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(err);</span><br><span class="line">  <span class="keyword">if</span>(err)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">&#x27;写入文失败！&#x27;</span>+err);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;写入文件成功！&#x27;</span>);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//如果文件写入成功，err就是null</span></span><br><span class="line"><span class="comment">//如果文件写入失败，err就是一个真正的错误对象</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>注意：这里的文件写入他是覆盖原内容写入。。。</strong></p>
-<p>如果你想一个未创建的文件写入内容时，是先创建文件，再写入</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line">fs.readFile(__dirname+<span class="string">&#x27;./1.txt&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err, dataStr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(err)&#123;</span><br><span class="line">    <span class="keyword">return</span>  <span class="built_in">console</span>.log(err);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// console.log(&#x27;文件读取成功！&#x27;+dataStr);</span></span><br><span class="line">  <span class="keyword">const</span> arr = dataStr.split(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">  <span class="keyword">const</span> arr1 = []</span><br><span class="line">  arr.forEach(<span class="function"><span class="params">item</span>=&gt;</span>&#123;</span><br><span class="line">    arr1.push(item.replace(<span class="string">&#x27;=&#x27;</span>,<span class="string">&#x27;: &#x27;</span>))</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">const</span> str = arr1.join(<span class="string">&#x27;\r\n&#x27;</span>)</span><br><span class="line">  fs.writeFile(<span class="string">&#x27;./2.txt&#x27;</span>,str, <span class="string">&#x27;utf-8&#x27;</span>,<span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">      <span class="keyword">return</span>  <span class="built_in">console</span>.log(err);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;文件写入成功！&#x27;</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h4 id="为了防止node动态拼接路径产生错误，可以将文件的相对地址改成绝对地址，但是这样移植性差，不好维护。"><a href="#为了防止node动态拼接路径产生错误，可以将文件的相对地址改成绝对地址，但是这样移植性差，不好维护。" class="headerlink" title="为了防止node动态拼接路径产生错误，可以将文件的相对地址改成绝对地址，但是这样移植性差，不好维护。"></a>为了防止node动态拼接路径产生错误，可以将文件的相对地址改成绝对地址，但是这样移植性差，不好维护。</h4><p>__dirname    表示当前文件的目录</p>
-<h2 id="二、path路径模块"><a href="#二、path路径模块" class="headerlink" title="二、path路径模块"></a>二、path路径模块</h2><p>path.join()    将多个路径片段拼接成一个完整的路径字符串</p>
-<p>path.basename()    从路径字符串中将文件名解析出来</p>
-<p>先导入这个模块    const path = require(‘path’)</p>
-<h2 id="1、path-join-将多个路径片段拼接成一个完整的路径字符串"><a href="#1、path-join-将多个路径片段拼接成一个完整的路径字符串" class="headerlink" title="1、path.join()    将多个路径片段拼接成一个完整的路径字符串"></a>1、path.join()    将多个路径片段拼接成一个完整的路径字符串</h2><p>path.join([…path])</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> pathStr = path.join(<span class="string">&#x27;/a&#x27;</span>, <span class="string">&#x27;/b/c&#x27;</span>, <span class="string">&#x27;../&#x27;</span>,<span class="string">&#x27;./d&#x27;</span>, <span class="string">&#x27;e&#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>. log(pathStr) <span class="comment">//输出\a\b\d\e	其中../会抵消一个路径片段</span></span><br><span class="line"><span class="keyword">const</span> pathStr2 = path.join(_ dirname, <span class="string">&#x27;./files/1.txt&#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>. log(pathStr2) <span class="comment">// 输出当前文件所处目录\files\1.txt</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>以后所有的路径拼接都不要用+了 </p>
-<h2 id="2、path-basename-从路径字符串中将文件名解析出来"><a href="#2、path-basename-从路径字符串中将文件名解析出来" class="headerlink" title="2、path.basename()    从路径字符串中将文件名解析出来"></a>2、path.basename()    从路径字符串中将文件名解析出来</h2><p>path.basename(path, [ext])    ext指的是文件拓展名</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fpath = <span class="string">&#x27;/a/b/c/index.html&#x27;</span> <span class="comment">//文件的存放路径</span></span><br><span class="line"><span class="keyword">var</span> fullName = path.basename(fpath)</span><br><span class="line"><span class="built_in">console</span>.log(fullName) <span class="comment">//输出index.html</span></span><br><span class="line"><span class="keyword">var</span> nameWi thoutExt = path. basename(fpath，<span class="string">&#x27;.html&#x27;</span> )</span><br><span class="line"><span class="built_in">console</span>.log(nameWithoutExt) <span class="comment">//输出index</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="3、path-extname-path-从路径中获取文件扩展名"><a href="#3、path-extname-path-从路径中获取文件扩展名" class="headerlink" title="3、path.extname(path)    从路径中获取文件扩展名"></a>3、path.extname(path)    从路径中获取文件扩展名</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fpath = <span class="string">&#x27;/a/b/c/index.html&#x27;</span></span><br><span class="line"><span class="keyword">var</span> extname = path.extname(fpath)</span><br><span class="line"><span class="built_in">console</span>.log(extname) <span class="comment">//.html</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210730190328939.png" alt="image-20210730190328939"></p>
-<h2 id="三、HTTPweb服务器模块"><a href="#三、HTTPweb服务器模块" class="headerlink" title="三、HTTPweb服务器模块"></a>三、HTTPweb服务器模块</h2><p>http模块是Node.js官方提供的、用来创建web服务器的模块。通过http模块提供的http.createServer0方法，就<br>能方便的把一台普通的电脑，变成一台Web服务器,从而对外提供Web资源服务。</p>
-<p>先导入const http = require(‘http’),在使用http.createServer()</p>
-<p>服务器和普通电脑的区别是web服务器软件，就像IIS或者apache</p>
-<h2 id="1-创建web服务器的基本步骤"><a href="#1-创建web服务器的基本步骤" class="headerlink" title="1.创建web服务器的基本步骤"></a>1.创建web服务器的基本步骤</h2><p>①导入http模块.    const http = require(‘http’)<br>②创建web服务器实例    const server = http.createServer()<br>③为服务器实例绑定request事件，监听客户端的请求    server.on(‘request’, (req,res) =&gt;{<br>                                                                                                        console.log(‘有人访问了！’)<br>                                                                        })//只要有人访问我们的服务器，就会触发这个事件，调用回调函数<br>④启动服务器    server.listen(80, ()=&gt;{<br>        console.log(‘开始了’)<br>    })</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> server = http.createServer()</span><br><span class="line">server.on(<span class="string">&#x27;request&#x27;</span>, <span class="function">(<span class="params">req,res</span>) =&gt;</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;有人访问我的服务器&#x27;</span>);</span><br><span class="line">  res.end(<span class="string">&#x27;there are some data for customer&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line">server.listen(<span class="number">8080</span>, <span class="function">() =&gt;</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;开始运行服务器了&#x27;</span>);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//req是请求对象，包含了与客户端相关的数据和属性</span></span><br><span class="line"><span class="comment">// req.rul是客户端请求的URL地址</span></span><br><span class="line"><span class="comment">// req.method是客户端请求的method方法</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// res是响应对象，包含的服务器向客户端响应的数据，并结束这次响应，调用res.end()方法响应内容</span></span><br></pre></td></tr></table></figure>
-
-<p>当返回数据时，中文会出现乱码，解决方法如下：</p>
-<p>需要设置一个响应头，content-type的值时text/html； charset=utf-8</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">res.setHeader(<span class="string">&#x27;Content-Type&#x27;</span>, <span class="string">&#x27;text/html; charset=utf-8&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> server = http.createServer()</span><br><span class="line">server.on(<span class="string">&#x27;request&#x27;</span>, <span class="function">(<span class="params">req,res</span>) =&gt;</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;有人访问我的服务器&#x27;</span>);</span><br><span class="line">  res.setHeader(<span class="string">&#x27;Content-Type&#x27;</span>, <span class="string">&#x27;text/html; charset=utf-8&#x27;</span>)</span><br><span class="line">  res.end(<span class="string">&#x27;there are some data for customer,这次好了&#x27;</span>)</span><br><span class="line">  </span><br><span class="line">&#125;)</span><br><span class="line">server.listen(<span class="number">8080</span>, <span class="function">() =&gt;</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;开始运行服务器了&#x27;</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>根据不同URL响应不同的HTML内容</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">server.on(<span class="string">&#x27;request&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">const</span> url = req.url<span class="comment">// 1.获取请求的url 地址</span></span><br><span class="line">	<span class="keyword">let</span> content = <span class="string">&#x27;&lt;h1&gt;404 Not found!&lt;/h1&gt;&#x27;</span> <span class="comment">// 2.设置默认的内容为404 Not found</span></span><br><span class="line">	<span class="keyword">if</span> (url === <span class="string">&#x27;/&#x27;</span>|| url === <span class="string">&#x27;/index.html&#x27;</span>)&#123;</span><br><span class="line">		content = <span class="string">&#x27;&lt;h1&gt;首页&lt;/h1&gt;&#x27;</span><span class="comment">// 3.用户请求的是首页</span></span><br><span class="line">	&#125;<span class="keyword">else</span> <span class="keyword">if</span> (url === <span class="string">&#x27;/about.html&#x27;</span>)&#123;</span><br><span class="line">		content = <span class="string">&#x27;&lt;h1&gt;关于页面&lt;/h1&gt;&#x27;</span><span class="comment">// 4.用户请求的是关于页面</span></span><br><span class="line">	&#125;</span><br><span class="line">	res.setHeader( <span class="string">&#x27;Content-Type&#x27;</span>，<span class="string">&#x27;text/html; charset=utf-8&#x27;</span>) <span class="comment">// 5.设置Content-Type 响应头，防止中文乱码</span></span><br><span class="line">	res.end(content)<span class="comment">// 6.把内容发送给客户端</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="四、模块化"><a href="#四、模块化" class="headerlink" title="四、模块化"></a>四、模块化</h2><p>就是遵守固定的规则，把一个大文件拆成独立并互相依赖的多个小模块。</p>
-<p><strong>模块化规范</strong>就是对代码进行模块化的拆分与组合时，需要遵守的那些规则。<br>例如:<br>●使用什么样的语法格式来引用模块<br>●在模块中使用什么样的语法格式向外暴露成员</p>
-<h3 id="1、分类"><a href="#1、分类" class="headerlink" title="1、分类"></a>1、分类</h3><p>内置模块    fs,path,http</p>
-<p>自定义模块    我们创建的每一个js文件</p>
-<p>第三方模块    第三方的，需要下载使用</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.加载内置的fs模块</span></span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>( <span class="string">&#x27;fs&#x27;</span> )</span><br><span class="line"><span class="comment">// 2.加载用户的自定义模块	文件的相对路径</span></span><br><span class="line"><span class="keyword">const</span> custom = <span class="built_in">require</span>(<span class="string">&#x27;./custom.js&#x27;</span>)</span><br><span class="line"><span class="comment">// 3.加载第三方模块(关于第三方模块的下载和使用，会在后面的课程中进行专]的讲解)</span></span><br><span class="line"><span class="keyword">const</span> moment = <span class="built_in">require</span>(<span class="string">&#x27;moment&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>使用require加载自定义的模块时可以省略文件拓展名</p>
-<h3 id="2、模块作用域"><a href="#2、模块作用域" class="headerlink" title="2、模块作用域"></a>2、模块作用域</h3><p>类似函数的作用域，好处是防止了全局变量污染问题</p>
-<h3 id="3、向外共享模块中的成员"><a href="#3、向外共享模块中的成员" class="headerlink" title="3、向外共享模块中的成员"></a>3、向外共享模块中的成员</h3><h3 id="3-1、module对象"><a href="#3-1、module对象" class="headerlink" title="3.1、module对象"></a>3.1、module对象</h3><p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210731181731591.png" alt="image-20210731181731591"></p>
-<p>module.exports对象可以将模块成员共享出去，require（）获得的对象就是这个exports的对象</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// console.log(module);</span></span><br><span class="line"><span class="keyword">const</span> age = <span class="number">20</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;zs&#x27;</span>,</span><br><span class="line">  <span class="attr">say</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;hello&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">module</span>.exports.age = age<span class="comment">//向对象上挂载一个属性</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210731182534757.png" alt="image-20210731182534757"></p>
-<p>使用require0方法导入模块时，导入的结果，永远以module.exports指向的对象为准。就是最后指向的对象，如下图所示</p>
-<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comzqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210731182754169.png" alt="image-20210731182754169"></p>
-<h3 id="3-2、exports-对象"><a href="#3-2、exports-对象" class="headerlink" title="3.2、exports 对象"></a>3.2、exports 对象</h3><p>和module。exports一样的作用，只是这样写更见的方便，像下图中一样，就是我添加了不同的属性和方法，导致了两者的不同</p>
-<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210731183542257.png" alt="image-20210731183542257"></p>
-<h4 id="使用误区：：：永远谨记-永远以module-exports指向的对象为准"><a href="#使用误区：：：永远谨记-永远以module-exports指向的对象为准" class="headerlink" title="使用误区：：：永远谨记    永远以module.exports指向的对象为准"></a>使用误区：：：永远谨记    <strong>永远以module.exports指向的对象为准</strong></h4><p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210731184359190.png" alt="image-20210731184359190"></p>
-<h2 id="五、包"><a href="#五、包" class="headerlink" title="五、包"></a>五、包</h2><p><strong>什么是包</strong>，通俗的说就是第三方模块    电脑=计算机</p>
-<p>可以在    <a target="_blank" rel="noopener" href="https://www.npmjs.com/%E4%B8%8B%E8%BD%BD%E7%9B%B8%E5%BA%94%E7%9A%84%E5%8C%85%EF%BC%8C%E4%BD%86%E6%98%AF%E9%9C%80%E8%A6%81%E8%80%90%E5%BF%83%E7%94%A8%E8%BF%99%E4%B8%AA%E6%90%9C%E5%8C%85%EF%BC%8C%E7%94%A8https://registry.npmjs.org/%E4%B8%8B%E8%BD%BD%E5%8C%85">https://www.npmjs.com/下载相应的包，但是需要耐心用这个搜包，用https://registry.npmjs.org/下载包</a></p>
-<p><strong>安装包的命令</strong>    npm install 包名   或者 npm i 包名</p>
-<p>node_ modules 文件夹用来存放所有已安装到项目中的包。require（） 导入第三方包时，就是从这个目录中查找并加载包。<br>package-lock.json配置文件用来记录node_ modules 录下的每一个包的下载信息， 例如包的名字、版本号、下载地址等。<br><strong>若安装指定版本的包</strong>    在包名后加上@ 版本号（点分十进制）</p>
-<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210801111541373.png" alt="image-20210801111541373"></p>
-<p><strong>如何在项目中记录安装了那些包</strong>——创建一个package.json文件    –npm init -y（快速创建这个文件且只用一次）</p>
-<p>上述命令智能在英文目录下创建，不能有中文和空格</p>
-<p><strong>一次性下载所有的包</strong>——  npm i     先读取节点中的饱和版本，再一次性下载</p>
-<p><strong>卸载包</strong>——    npm uninstall 包名</p>
-<p>如果某些包只在项目开发阶段会用到，在项目上线之后不会用到，则建议把这些包记录到devDependencies节点中。要使用 npm i -D（具体可以在项目文档中找）<br>与之对应的,如果某些包在开发和项目上线之J后都需要用到，则建议把这些包记录到dependencies节点中。</p>
-<p>解决下包速度慢——淘宝NPM镜像服务器——npm config get registry(检查下包源),</p>
-<p>npm config set registry=<a target="_blank" rel="noopener" href="https://registry.npm.taobao.org/">https://registry.npm.taobao.org/</a>    切换下包的地址</p>
-<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210801114613431.png" alt="image-20210801114613431"></p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Node.js</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Node-js//" class="article-tag-list-link color3">Node.js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/10/07/node.js/">展开全文 >></a>
     </p>
     
 
@@ -1915,11 +1851,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Express</a>
+                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">笔记 - 数据结构 - 原创</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">前端通后端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Express</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1931,19 +1875,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">笔记 - 数据结构 - 原创</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">JS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">特效 - 前端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1951,7 +1883,19 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">特效 - 前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">VSCode - 断点调试配置</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1967,11 +1911,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
+                <a href="javascript:void(0)" class="js-tag color3">SCREEPS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color4">中间件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1983,15 +1927,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">中间件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">数据库</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">SCREEPS</a>
               </li>
              
               <li class="article-tag-list-item">
