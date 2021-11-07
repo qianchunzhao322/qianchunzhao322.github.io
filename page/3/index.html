@@ -309,6 +309,145 @@
             
 
   
+    <article id="post-栈" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/10/07/%E6%A0%88/" target="_blank">栈</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/10/07/%E6%A0%88/" class="archive-article-date">
+        <time datetime="2021-10-07T05:03:05.999Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-07</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="栈"><a href="#栈" class="headerlink" title="栈"></a><strong>栈</strong></h1><h2 id="栈的定义"><a href="#栈的定义" class="headerlink" title="栈的定义"></a>栈的定义</h2><p>栈就是一个先入后出的有序列表，同时，栈是限制相信列表中元素的插入和删除只能在线性表的同一端进行的一种特殊的线性表。允许插入删除的一端也就是变化的一端，叫做栈顶，另一端是固定的一端就是栈底。当加入数据时，先加在栈底，然后依次栈顶往上走，删除数据时，也是有栈顶开始向外释放数据。其中学术名词出栈（<code>POP</code>）、入栈（<code>PUSH</code>）。</p>
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210927203227763.png" alt="image-20210927203227763"></p>
+<h2 id="栈的应用场景"><a href="#栈的应用场景" class="headerlink" title="栈的应用场景"></a>栈的应用场景</h2><ol>
+<li>子程序的调用:在跳往子程序前，会先将下个指令的地址存到堆栈中，直到子程序执行完后再将地址取出，以回到原来的程序中。</li>
+<li>处理递归调用:和子程序的调用类似，只是除了储存下一个指令的地址外，也将参数、区域变量等数据存入堆栈中。</li>
+<li>表达式的转换[中缀表达式转后缀表达式]与求值(实际解决)。</li>
+<li>二叉树的遍历。</li>
+<li>图形的深度优先(<code>depth - - first</code>)搜索法。</li>
+</ol>
+<h2 id="这里将用数组来模拟栈的使用"><a href="#这里将用数组来模拟栈的使用" class="headerlink" title="这里将用数组来模拟栈的使用"></a>这里将用数组来模拟栈的使用</h2><p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210927203759853.png" alt="image-20210927203759853"></p>
+<h3 id="定义栈"><a href="#定义栈" class="headerlink" title="定义栈"></a>定义栈</h3><p>思路</p>
+<p>就是先定义一个类，设置类的常见属性栈的大小<code>maxsize</code>、<code>数组 == 栈</code>、栈顶<code>top</code>，进一步完善构造器</p>
+<blockquote>
+<p>这里注意一下，由于我们设置的栈顶是-1，所以当栈满是为最大容量-1，栈空时为-1.</p>
+</blockquote>
+<p><u><em><strong>代码如下</strong></em></u></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定一个类表示栈结构</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ArrayStack</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> maxSize;<span class="comment">//栈的大小</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span>[] stack;<span class="comment">//数组，来模拟栈</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> top = -<span class="number">1</span>;<span class="comment">//top表示栈顶，初始化为-1</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">//构造器</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">ArrayStack</span><span class="params">(<span class="keyword">int</span> maxSize)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.maxSize = maxSize;</span><br><span class="line">		stack = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="keyword">this</span>.maxSize];</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isFull</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> top == maxSize-<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> top == -<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="栈的显示"><a href="#栈的显示" class="headerlink" title="栈的显示"></a>栈的显示</h3><p>思路</p>
+<p>栈的显示就是将这个数组循环遍历一下，值得注意的是，我们要遵循栈的原理，即先进后出，<code>倒叙遍历</code>数组</p>
+<p><u><em><strong>代码如下</strong></em></u></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//遍历栈,从栈顶显示数据</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">list</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(isEmpty()) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;栈空,没有数据~~&quot;</span>);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//需要从栈顶开始显示数据</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = top ;i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">			System.out.printf(<span class="string">&quot;stack[%d]=%d&quot;</span>, i, stack[i]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="入栈"><a href="#入栈" class="headerlink" title="入栈"></a>入栈</h3><p>思路</p>
+<p>很简单，就是将栈顶<code> top</code>上移一个，将数据放入这个数组中<code>   top++ ;  stack[top] = value ;</code>  </p>
+<p><u><em><strong>代码如下</strong></em></u></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//入栈-push</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//先判断栈是否满</span></span><br><span class="line">		<span class="keyword">if</span>(isFull()) &#123;</span><br><span class="line">			System. out. println(<span class="string">&quot;栈满&quot;</span>);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		top++ ;</span><br><span class="line">		stack[top] = value ;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="出栈"><a href="#出栈" class="headerlink" title="出栈"></a>出栈</h3><p>思路</p>
+<p>出栈如同入栈，将数据先保存出来，在将栈顶向下<code>减一</code></p>
+<p><u><em><strong>代码如下</strong></em></u></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//出栈，就是将栈顶数据返回</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(isEmpty()) &#123;</span><br><span class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">&quot;栈为空&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">int</span> value = stack[top];</span><br><span class="line">		top--;</span><br><span class="line">		<span class="keyword">return</span> value;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">笔记 - Java - 原创</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/数据结构//" class="article-tag-list-link color5">数据结构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/10/07/%E6%A0%88/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-约瑟夫环" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -2399,134 +2538,6 @@
 
 
   
-    <article id="post-前端工程化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/10/07/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96/" target="_blank">webpack</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/10/07/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96/" class="archive-article-date">
-        <time datetime="2021-10-07T05:03:05.984Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-07</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="前端工程化"><a href="#前端工程化" class="headerlink" title="前端工程化"></a>前端工程化</h1><p>前端工程化指的是:在企业级的前端项目开发中，把前端开发所需的工具、技术、流程、经验等进行规范化、标准化。</p>
-<p><strong>模块化</strong>——(js的模块化、CsS 的模块化、资源的模块化)<br><strong>组件化</strong>——(复用现有的UI结构、样式、行为)<br><strong>规范化</strong>——(目录结构的划分、编码规范化、接口规范化、文档规范化、Git 分支管理)<br><strong>自动化</strong>——(自动化构建、自动部署、自动化测试)</p>
-<p>前端工程化的解决方案是webpack</p>
-<h1 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h1><p>主要功能:它提供了友好的前端模块化开发支持，以及代码压缩混淆、处理浏览器端JavaScript的兼容性、性能优化等强大的功能。</p>
-<h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><p>安装<br>npm install <a href="mailto:&#x77;&#x65;&#x62;&#x70;&#x61;&#99;&#x6b;&#x40;&#x35;&#x2e;&#52;&#50;&#46;&#49;">&#x77;&#x65;&#x62;&#x70;&#x61;&#99;&#x6b;&#x40;&#x35;&#x2e;&#52;&#50;&#46;&#49;</a> <a href="mailto:&#119;&#x65;&#x62;&#x70;&#x61;&#99;&#107;&#45;&#99;&#x6c;&#x69;&#64;&#x34;&#x2e;&#55;&#x2e;&#50;">&#119;&#x65;&#x62;&#x70;&#x61;&#99;&#107;&#45;&#99;&#x6c;&#x69;&#64;&#x34;&#x2e;&#55;&#x2e;&#50;</a> -D</p>
-<p>此时，  -D将信息记录到package.json中的  “<strong>devDependencies”: {  只在开发阶段用的包  }<strong>节点中，而 -S记录到</strong>“dependencies”: {  开发和上线都需要的包  }</strong></p>
-<p>配置<br>①在项目根目录中，创建名为webpack.config.js的webpack配置文件，并初始化如下的基本配置:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">   <span class="attr">mode</span>:<span class="string">&#x27;development&#x27;</span> <span class="comment">//mode 用来指定构建模式。可选值有development 和production（上线模式）</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>②在package.json的scripts节点下，新增dev脚本如下:</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;dev&quot;</span>: <span class="string">&quot;webpack&quot;</span> <span class="comment">// script 节点下的脚本，可以通过npm run执行。例如npm run dev</span></span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-
-<p>③在终端中运行npm run dev命令,启动webpack进行项目的打包构建</p>
-<p>此时根目录中会出现一个dist文件夹，里面有一个main.js，这个就是打包好的index.js，就像TS生成ES6一样，引入时要引入这个main.js文件，而非你自己书写的源文件</p>
-<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210815194156613.png" alt="image-20210815194156613"></p>
-<p>webpack.config.js是webpack的配置文件。webpack 在真正开始打包构建之前（npm run dev），会先读取这个配置文件,从而基于给定的配置，对项目进行打包。</p>
-<p>注意事项<br>在webpack 4.x和5.x的版本中，有如下的默认约定:<br>①默认的打包入口文件为src -&gt; index.is<br>②默认的输出文件路径为dist -&gt; main.js</p>
-<h3 id="webpack-配置起来十分麻烦，但是开发体验好，于是vue-cli（好像是叫手脚架）起作用了"><a href="#webpack-配置起来十分麻烦，但是开发体验好，于是vue-cli（好像是叫手脚架）起作用了" class="headerlink" title="webpack 配置起来十分麻烦，但是开发体验好，于是vue-cli（好像是叫手脚架）起作用了"></a><strong>webpack 配置起来十分麻烦，但是开发体验好，于是vue-cli（好像是叫手脚架）起作用了</strong></h3><h2 id="webpack中的loader-加载器"><a href="#webpack中的loader-加载器" class="headerlink" title="webpack中的loader(加载器)"></a>webpack中的loader(加载器)</h2><p>在实际开发过程中，webpack 默认只能打包处理以js后缀名结尾的模块。其他非.js 后缀名结尾的模块,webpack默认处理不了，需要调用loader加载器才可以正常打包，否则会报错! <img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210816200056346.png" alt="image-20210816200056346"></p>
-<p>①运行npm i <a href="mailto:&#115;&#x74;&#121;&#x6c;&#x65;&#x2d;&#x6c;&#x6f;&#x61;&#100;&#x65;&#114;&#64;&#51;&#x2e;&#48;&#x2e;&#x30;">&#115;&#x74;&#121;&#x6c;&#x65;&#x2d;&#x6c;&#x6f;&#x61;&#100;&#x65;&#114;&#64;&#51;&#x2e;&#48;&#x2e;&#x30;</a> <a href="mailto:&#99;&#x73;&#x73;&#45;&#x6c;&#x6f;&#97;&#x64;&#x65;&#114;&#64;&#x35;&#46;&#x32;&#x2e;&#54;">&#99;&#x73;&#x73;&#45;&#x6c;&#x6f;&#97;&#x64;&#x65;&#114;&#64;&#x35;&#46;&#x32;&#x2e;&#54;</a> -D命令,安装处理Css文件的loader<br>②在webpack.config.js的module -&gt; rules数组中，添加loader规则如下:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">module: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      &#123; test: /\.css$/, use: [&#x27;style-loader&#x27;, &#x27;css-loader&#x27;] &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>原理如下：<br>1.webpack默认只能打包处理.js结尾的文件，处理不了其它后缀的文件<br>2.由于代码中包含了index.css 这个文件，因此webpack默认处理不了<br>3.当webpack发现某个文件处理不了的时候，会查找webpack.config.js这个配置文件,看module.rules数组中，是否配置了对应的loader加载器。<br>4.webpack把index.css这个文件,先转交给最后-个loader进行处理(先转交给css-loader) .<br>5.当css-loader处理完毕之后，会把处理的结果，转交给下-个loader (转交给style-loader)<br>6.当style-loader处理完毕之后，发现没有下一个loader了,于是就把处理的结果，转交给了webpack<br>7.webpack把style-loader处理的结果，合并到/dist/bundle.js中,最终生成打包好的文件。</p>
-<h3 id="base64-与jpg区别"><a href="#base64-与jpg区别" class="headerlink" title="base64 与jpg区别"></a>base64 与jpg区别</h3><p>base64可以防止发送不必要的请求，但是代码杂乱；jpg会额外发送一次请求，请求图片，但是代码简单</p>
-<p>打包处理图片</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logo <span class="keyword">from</span> <span class="string">&#x27;./images/1.png&#x27;</span><span class="comment">//logo是base64的字符串</span></span><br><span class="line"></span><br><span class="line">$(<span class="string">&#x27;.box&#x27;</span>).attr(<span class="string">&#x27;src&#x27;</span>, logo)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#123; <span class="attr">test</span>: <span class="regexp">/\.jpg|png|gif$/</span>, use: <span class="string">&#x27;url-loader?limit=22229&#x27;</span> &#125;<span class="comment">//指定的是图片限制大小，在相应大小内才会转化成base64格式</span></span><br></pre></td></tr></table></figure>
-
-<p>webpack只能打包处理一部分高级的JavaScript语法。对于那些webpack无法处理的高级js语法,需要借<br>助于babel-loader进行打包处理。例如webpack无法处理下面的JavaScript代码——react中的装饰器</p>
-<p>建议大家使用@表示src源代码目录，从外往里查找;不要使用../ 从里往外查找</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">webpack</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">笔记 - 前后端交互 - 前端工程化</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/webpack//" class="article-tag-list-link color3">webpack</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/10/07/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
@@ -2660,6 +2671,14 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">CSS3</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">特效 - HTML5 - 启发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
@@ -2668,11 +2687,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CSS3</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">特效 - HTML5 - 启发</a>
+                <a href="javascript:void(0)" class="js-tag color1">前端通后端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2684,19 +2699,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">前端通后端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">笔记 - 前端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2708,11 +2711,23 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">笔记 - 前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">特效 - 前端</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">VSCode - 断点调试配置</a>
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2720,7 +2735,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
+                <a href="javascript:void(0)" class="js-tag color1">VSCode - 断点调试配置</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Node.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2732,18 +2751,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Node.js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">SCREEPS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">中间件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
@@ -2752,7 +2759,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+                <a href="javascript:void(0)" class="js-tag color4">中间件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">SCREEPS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS - 前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2764,15 +2783,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS - 前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">函数进阶</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">

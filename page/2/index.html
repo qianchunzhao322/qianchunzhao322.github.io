@@ -309,6 +309,127 @@
             
 
   
+    <article id="post-CSS特效——音波加载" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/10/07/CSS%E7%89%B9%E6%95%88%E2%80%94%E2%80%94%E9%9F%B3%E6%B3%A2%E5%8A%A0%E8%BD%BD/" target="_blank">CSS特效——音波加载</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/10/07/CSS%E7%89%B9%E6%95%88%E2%80%94%E2%80%94%E9%9F%B3%E6%B3%A2%E5%8A%A0%E8%BD%BD/" class="archive-article-date">
+        <time datetime="2021-10-07T05:03:06.014Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-07</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="音波加载"><a href="#音波加载" class="headerlink" title="音波加载"></a>音波加载</h1><p>[TOC]</p>
+<p>接上一篇的内容</p>
+<h2 id="一、搭建思路"><a href="#一、搭建思路" class="headerlink" title="一、搭建思路"></a>一、搭建思路</h2><p>首先，造一个大的盒子outbox，接着往里面填充10个小盒子span。设置他们的布局，先让大盒子绕X轴旋转一定的角度，达到斜俯视的效果，更像3D.接着，将小盒子按顺序缩小，做成套环的样子，最后，设置动画效果，让每个小的盒子 都按向上后下的动画动起来，在按顺序延迟一定的秒数。这样就成了联动效果。</p>
+<h2 id="二、步骤代码"><a href="#二、步骤代码" class="headerlink" title="二、步骤代码"></a>二、步骤代码</h2><p>先设置HTML的</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;outbox&quot;</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">span</span> <span class="attr">style</span>=<span class="string">&quot;--num:1&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">span</span> <span class="attr">style</span>=<span class="string">&quot;--num:2&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">span</span> <span class="attr">style</span>=<span class="string">&quot;--num:3&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">span</span> <span class="attr">style</span>=<span class="string">&quot;--num:4&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">span</span> <span class="attr">style</span>=<span class="string">&quot;--num:5&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">span</span> <span class="attr">style</span>=<span class="string">&quot;--num:6&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">span</span> <span class="attr">style</span>=<span class="string">&quot;--num:7&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">span</span> <span class="attr">style</span>=<span class="string">&quot;--num:8&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">span</span> <span class="attr">style</span>=<span class="string">&quot;--num:9&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">span</span> <span class="attr">style</span>=<span class="string">&quot;--num:10&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="style-”–num-1”-对于这个不懂的话下面有讲解。"><a href="#style-”–num-1”-对于这个不懂的话下面有讲解。" class="headerlink" title="style=”–num:1”      对于这个不懂的话下面有讲解。"></a>style=”–num:1”      对于这个不懂的话下面有讲解。</h6><p>再初始化大盒子和背景</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">*&#123;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">body</span>&#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100vh</span>;</span><br><span class="line">    <span class="attribute">justify-content</span>: center;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgb</span>(<span class="number">4</span>, <span class="number">6</span>, <span class="number">17</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.outbox</span>&#123;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">transform-style</span>: preserve-<span class="number">3</span>d;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">perspective</span>(<span class="number">600px</span>) <span class="built_in">rotateX</span>(<span class="number">50deg</span>) <span class="built_in">translateZ</span>(<span class="number">50px</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后设置span的样式</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.outbox</span> <span class="selector-tag">span</span>&#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">top</span>: <span class="built_in">calc</span>(-<span class="number">8px</span> * <span class="built_in">var</span>(--num));</span><br><span class="line">    <span class="attribute">left</span>: <span class="built_in">calc</span>(-<span class="number">8px</span> * <span class="built_in">var</span>(--num));</span><br><span class="line">    <span class="attribute">bottom</span>: <span class="built_in">calc</span>(-<span class="number">8px</span> * <span class="built_in">var</span>(--num));</span><br><span class="line">    <span class="attribute">right</span>: <span class="built_in">calc</span>(-<span class="number">8px</span> * <span class="built_in">var</span>(--num));</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">8px</span> solid <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">162</span>, <span class="number">255</span>,<span class="number">0.8</span>);</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">6px</span> <span class="number">0</span> <span class="built_in">rgb</span>(<span class="number">0</span>, <span class="number">162</span>, <span class="number">255</span>),</span><br><span class="line">    inset <span class="number">0</span> <span class="number">6px</span> <span class="number">0</span> <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">162</span>, <span class="number">255</span>,.<span class="number">9</span>);</span><br><span class="line">    <span class="comment">/* background-color: rgba(0, 162, 255,0); */</span></span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">animation</span>: move <span class="number">1.5s</span> ease-in-out infinite alternate;</span><br><span class="line">    <span class="attribute">animation-delay</span>: <span class="built_in">calc</span>(<span class="built_in">var</span>(--num) * <span class="number">0.1s</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中，小盒子的宽高我没有设置，让他继承父级的宽高，方便使用CSS函数。</p>
+<p>move  是我定义的一个函数。在后面会有。</p>
+<p>top: calc(-8px * var(–num));<br>left: calc(-8px * var(–num));<br>bottom: calc(-8px * var(–num));<br>right: calc(-8px * var(–num));</p>
+<p>这是动态的计算小盒子再大盒子里面的方位，强制让他变小</p>
+<h6 id="定义一个先下后上的动画"><a href="#定义一个先下后上的动画" class="headerlink" title="定义一个先下后上的动画"></a>定义一个先下后上的动画</h6><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@keyframes</span> move&#123;</span><br><span class="line">    <span class="number">0%</span>,<span class="number">100%</span>&#123;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">translateZ</span>(<span class="number">0px</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="number">50%</span>&#123;</span><br><span class="line">       <span class="attribute">transform</span>: <span class="built_in">translateZ</span>(-<span class="number">100px</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、CSS函数var"><a href="#三、CSS函数var" class="headerlink" title="三、CSS函数var()"></a>三、CSS函数var()</h2><p>这个函数必须要求定义一个“–XXX：XX”的属性，写在行内样式中。之后用var(–XXX)来使用，相当于JS中遍历这个数组一样。</p>
+<p>[<a target="_blank" rel="noopener" href="https://www.runoob.com/cssref/func-var.html">CSS var() 函数 | 菜鸟教程 (runoob.com)</a></p>
+<h2 id="四、效果展示"><a href="#四、效果展示" class="headerlink" title="四、效果展示"></a>四、效果展示</h2><p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comnum.gif" alt="num"></p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">CSS3</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">特效 - HTML5 - 启发</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/CSS特效系列//" class="article-tag-list-link color3">CSS特效系列</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/10/07/CSS%E7%89%B9%E6%95%88%E2%80%94%E2%80%94%E9%9F%B3%E6%B3%A2%E5%8A%A0%E8%BD%BD/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-CSS特效——旋转相册" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1437,145 +1558,6 @@
 
 
   
-    <article id="post-栈" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/10/07/%E6%A0%88/" target="_blank">栈</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/10/07/%E6%A0%88/" class="archive-article-date">
-        <time datetime="2021-10-07T05:03:05.999Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-07</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="栈"><a href="#栈" class="headerlink" title="栈"></a><strong>栈</strong></h1><h2 id="栈的定义"><a href="#栈的定义" class="headerlink" title="栈的定义"></a>栈的定义</h2><p>栈就是一个先入后出的有序列表，同时，栈是限制相信列表中元素的插入和删除只能在线性表的同一端进行的一种特殊的线性表。允许插入删除的一端也就是变化的一端，叫做栈顶，另一端是固定的一端就是栈底。当加入数据时，先加在栈底，然后依次栈顶往上走，删除数据时，也是有栈顶开始向外释放数据。其中学术名词出栈（<code>POP</code>）、入栈（<code>PUSH</code>）。</p>
-<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210927203227763.png" alt="image-20210927203227763"></p>
-<h2 id="栈的应用场景"><a href="#栈的应用场景" class="headerlink" title="栈的应用场景"></a>栈的应用场景</h2><ol>
-<li>子程序的调用:在跳往子程序前，会先将下个指令的地址存到堆栈中，直到子程序执行完后再将地址取出，以回到原来的程序中。</li>
-<li>处理递归调用:和子程序的调用类似，只是除了储存下一个指令的地址外，也将参数、区域变量等数据存入堆栈中。</li>
-<li>表达式的转换[中缀表达式转后缀表达式]与求值(实际解决)。</li>
-<li>二叉树的遍历。</li>
-<li>图形的深度优先(<code>depth - - first</code>)搜索法。</li>
-</ol>
-<h2 id="这里将用数组来模拟栈的使用"><a href="#这里将用数组来模拟栈的使用" class="headerlink" title="这里将用数组来模拟栈的使用"></a>这里将用数组来模拟栈的使用</h2><p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210927203759853.png" alt="image-20210927203759853"></p>
-<h3 id="定义栈"><a href="#定义栈" class="headerlink" title="定义栈"></a>定义栈</h3><p>思路</p>
-<p>就是先定义一个类，设置类的常见属性栈的大小<code>maxsize</code>、<code>数组 == 栈</code>、栈顶<code>top</code>，进一步完善构造器</p>
-<blockquote>
-<p>这里注意一下，由于我们设置的栈顶是-1，所以当栈满是为最大容量-1，栈空时为-1.</p>
-</blockquote>
-<p><u><em><strong>代码如下</strong></em></u></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定一个类表示栈结构</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ArrayStack</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> maxSize;<span class="comment">//栈的大小</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span>[] stack;<span class="comment">//数组，来模拟栈</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> top = -<span class="number">1</span>;<span class="comment">//top表示栈顶，初始化为-1</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">//构造器</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">ArrayStack</span><span class="params">(<span class="keyword">int</span> maxSize)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.maxSize = maxSize;</span><br><span class="line">		stack = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="keyword">this</span>.maxSize];</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isFull</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> top == maxSize-<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> top == -<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="栈的显示"><a href="#栈的显示" class="headerlink" title="栈的显示"></a>栈的显示</h3><p>思路</p>
-<p>栈的显示就是将这个数组循环遍历一下，值得注意的是，我们要遵循栈的原理，即先进后出，<code>倒叙遍历</code>数组</p>
-<p><u><em><strong>代码如下</strong></em></u></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//遍历栈,从栈顶显示数据</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">list</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(isEmpty()) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;栈空,没有数据~~&quot;</span>);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//需要从栈顶开始显示数据</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = top ;i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">			System.out.printf(<span class="string">&quot;stack[%d]=%d&quot;</span>, i, stack[i]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="入栈"><a href="#入栈" class="headerlink" title="入栈"></a>入栈</h3><p>思路</p>
-<p>很简单，就是将栈顶<code> top</code>上移一个，将数据放入这个数组中<code>   top++ ;  stack[top] = value ;</code>  </p>
-<p><u><em><strong>代码如下</strong></em></u></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//入栈-push</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//先判断栈是否满</span></span><br><span class="line">		<span class="keyword">if</span>(isFull()) &#123;</span><br><span class="line">			System. out. println(<span class="string">&quot;栈满&quot;</span>);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		top++ ;</span><br><span class="line">		stack[top] = value ;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="出栈"><a href="#出栈" class="headerlink" title="出栈"></a>出栈</h3><p>思路</p>
-<p>出栈如同入栈，将数据先保存出来，在将栈顶向下<code>减一</code></p>
-<p><u><em><strong>代码如下</strong></em></u></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//出栈，就是将栈顶数据返回</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(isEmpty()) &#123;</span><br><span class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">&quot;栈为空&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">int</span> value = stack[top];</span><br><span class="line">		top--;</span><br><span class="line">		<span class="keyword">return</span> value;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">笔记 - Java - 原创</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数据结构//" class="article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/10/07/%E6%A0%88/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
@@ -1709,6 +1691,14 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">CSS3</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">特效 - HTML5 - 启发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
@@ -1717,11 +1707,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CSS3</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">特效 - HTML5 - 启发</a>
+                <a href="javascript:void(0)" class="js-tag color1">前端通后端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1733,19 +1719,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">前端通后端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">笔记 - 前端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1757,11 +1731,23 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">笔记 - 前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">特效 - 前端</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">VSCode - 断点调试配置</a>
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1769,7 +1755,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
+                <a href="javascript:void(0)" class="js-tag color1">VSCode - 断点调试配置</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Node.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1781,18 +1771,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Node.js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">SCREEPS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">中间件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
@@ -1801,7 +1779,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+                <a href="javascript:void(0)" class="js-tag color4">中间件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">SCREEPS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS - 前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1813,15 +1803,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS - 前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">函数进阶</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">

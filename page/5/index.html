@@ -309,6 +309,129 @@
             
 
   
+    <article id="post-VSCode - 断点调试配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/10/07/VSCode%20-%20%E6%96%AD%E7%82%B9%E8%B0%83%E8%AF%95%E9%85%8D%E7%BD%AE/" target="_blank">VSCode-断点调试配置</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/10/07/VSCode%20-%20%E6%96%AD%E7%82%B9%E8%B0%83%E8%AF%95%E9%85%8D%E7%BD%AE/" class="archive-article-date">
+        <time datetime="2021-10-07T05:03:05.971Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-07</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="VSCode-断点调试配置"><a href="#VSCode-断点调试配置" class="headerlink" title="VSCode - 断点调试配置"></a>VSCode - 断点调试配置</h1><p>注意：<code>VSCode</code>调试TS代码是需要配置的。</p>
+<h2 id="配置步骤"><a href="#配置步骤" class="headerlink" title="配置步骤"></a>配置步骤</h2><h3 id="第一步：准备要调试的ts文件"><a href="#第一步：准备要调试的ts文件" class="headerlink" title="第一步：准备要调试的ts文件"></a>第一步：准备要调试的ts文件</h3><p>新建 <code>a.ts</code> 文件，作为要调试的ts文件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;1 准备开始执行 for 循环&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i: number = <span class="number">1</span>; i &lt;= <span class="number">3</span>; i++) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;...一锅装不下&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;2 for 循环执行结束&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="第二步：添加调试配置"><a href="#第二步：添加调试配置" class="headerlink" title="第二步：添加调试配置"></a>第二步：添加调试配置</h3><ol>
+<li><p>打开调试窗口：点击左侧活动栏倒数第二个按钮（Debug）</p>
+<p>如无此键，你可以找到创建launch.json文件这个按钮，点击即可。</p>
+</li>
+<li><p>生成默认配置：点击DEBUG后面的下拉框，选择添加配置</p>
+</li>
+<li><p>修改配置内容如下：</p>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="comment">// 使用 IntelliSense 了解相关属性。 </span></span><br><span class="line">  <span class="comment">// 悬停以查看现有属性的描述。</span></span><br><span class="line">  <span class="comment">// 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387</span></span><br><span class="line">  <span class="string">&quot;version&quot;</span>: <span class="string">&quot;0.2.0&quot;</span>,</span><br><span class="line">  <span class="string">&quot;configurations&quot;</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">&quot;type&quot;</span>: <span class="string">&quot;node&quot;</span>,</span><br><span class="line">      <span class="string">&quot;request&quot;</span>: <span class="string">&quot;launch&quot;</span>,</span><br><span class="line">      <span class="string">&quot;name&quot;</span>: <span class="string">&quot;调试TS代码&quot;</span>,</span><br><span class="line">      <span class="comment">// ts-node 命令： “直接”运行ts代码。</span></span><br><span class="line">      <span class="comment">// 作用：调试时加载ts-node包（在调试时“直接”运行ts代码）</span></span><br><span class="line">      <span class="string">&quot;runtimeArgs&quot;</span>: [<span class="string">&quot;-r&quot;</span>, <span class="string">&quot;ts-node/register&quot;</span>],</span><br><span class="line">      <span class="comment">// 此处的 a.ts 表示要调试的 TS 文件（ 可修改为其他要调试的ts文件 ）</span></span><br><span class="line">      <span class="string">&quot;args&quot;</span>: [<span class="string">&quot;$&#123;workspaceFolder&#125;/a.ts&quot;</span>]</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="第三步：安装调试用到的包"><a href="#第三步：安装调试用到的包" class="headerlink" title="第三步：安装调试用到的包"></a>第三步：安装调试用到的包</h3><ol>
+<li>在当前目录中，打开终端窗口</li>
+<li>在终端中输入以下命令：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 注意：原来通过 -g（全局）安装的包，在调试时不生效，需要在当前目录中单独安装</span></span><br><span class="line"><span class="comment"># 调试TS代码，依赖这两个包</span></span><br><span class="line">npm i ts-node typescript</span><br></pre></td></tr></table></figure>
+
+<h2 id="调试技巧"><a href="#调试技巧" class="headerlink" title="调试技巧"></a>调试技巧</h2><ul>
+<li><p>查看 <code>console.log</code> 输出（调试控制台）</p>
+</li>
+<li><p>监视变量的值（1 鼠标移入  2 <strong>添加到左侧监视窗口</strong>）</p>
+</li>
+</ul>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">VSCode - 断点调试配置</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/10/07/VSCode%20-%20%E6%96%AD%E7%82%B9%E8%B0%83%E8%AF%95%E9%85%8D%E7%BD%AE/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-node.js" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1150,7 +1273,7 @@
 <h3 id="2-1基于HTTPS方式上传本地仓库到GitHub"><a href="#2-1基于HTTPS方式上传本地仓库到GitHub" class="headerlink" title="2.1基于HTTPS方式上传本地仓库到GitHub"></a>2.1基于HTTPS方式上传本地仓库到GitHub</h3><p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210724115729026.png" alt="image-20210724115729026"></p>
 <p>当第二次或以后上传文件时直接输入git push 就行</p>
 <h3 id="2-2基于SSH方式上传本地仓库到GitHub-实现免登录加密传输"><a href="#2-2基于SSH方式上传本地仓库到GitHub-实现免登录加密传输" class="headerlink" title="2.2基于SSH方式上传本地仓库到GitHub    实现免登录加密传输"></a>2.2基于SSH方式上传本地仓库到GitHub    实现免登录加密传输</h3><p>生成SSH key</p>
-<p><em>①打开Git Bash</em><br><em>②粘贴如下的命令,并将your_ <a href="mailto:&#x65;&#109;&#97;&#105;&#x6c;&#64;&#101;&#x78;&#97;&#x6d;&#112;&#108;&#x65;&#46;&#99;&#x6f;&#109;">&#x65;&#109;&#97;&#105;&#x6c;&#64;&#101;&#x78;&#97;&#x6d;&#112;&#108;&#x65;&#46;&#99;&#x6f;&#109;</a>替换为注册Github账号时填写的邮箱:<br>●ssh-keygen -t rsa -b 4096 -C “your <a href="mailto:&#101;&#x6d;&#97;&#105;&#x6c;&#x40;&#x65;&#x78;&#97;&#x6d;&#x70;&#108;&#101;&#46;&#99;&#x6f;&#109;">&#101;&#x6d;&#97;&#105;&#x6c;&#x40;&#x65;&#x78;&#97;&#x6d;&#x70;&#108;&#101;&#46;&#99;&#x6f;&#109;</a>“</em><br><em>③连续敲击3次回车，即可在C:\Users\用户名文件夹.ssh,目录中生成id_ rsa 和 id rsa.pub 两个文件</em></p>
+<p><em>①打开Git Bash</em><br><em>②粘贴如下的命令,并将your_ <a href="mailto:&#x65;&#x6d;&#x61;&#105;&#108;&#64;&#101;&#x78;&#97;&#x6d;&#x70;&#x6c;&#101;&#x2e;&#99;&#111;&#109;">&#x65;&#x6d;&#x61;&#105;&#108;&#64;&#101;&#x78;&#97;&#x6d;&#x70;&#x6c;&#101;&#x2e;&#99;&#111;&#109;</a>替换为注册Github账号时填写的邮箱:<br>●ssh-keygen -t rsa -b 4096 -C “your <a href="mailto:&#x65;&#109;&#97;&#x69;&#x6c;&#x40;&#101;&#120;&#97;&#x6d;&#112;&#108;&#x65;&#46;&#99;&#111;&#109;">&#x65;&#109;&#97;&#x69;&#x6c;&#x40;&#101;&#120;&#97;&#x6d;&#112;&#108;&#x65;&#46;&#99;&#111;&#109;</a>“</em><br><em>③连续敲击3次回车，即可在C:\Users\用户名文件夹.ssh,目录中生成id_ rsa 和 id rsa.pub 两个文件</em></p>
 <p>配置SSH key</p>
 <p><em>①使用记事本打开id_ rsa.pub 文件，复制里面的文本内容<br>②在浏览器中登录Github, 点击头像-&gt; Settings -&gt; SSH and GPG Keys -&gt; New SSH key<br>③将id _rsa.pub 文件中的内容,粘贴到Key对应的文本框中</em><br><em>④在Title文本框中任意填写-个名称，来标识这个Key从何而来</em></p>
 <p>上传时就参考HTTPS的方式就行</p>
@@ -1518,6 +1641,14 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">CSS3</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">特效 - HTML5 - 启发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Ajax</a>
               </li>
              
@@ -1526,11 +1657,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CSS3</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">特效 - HTML5 - 启发</a>
+                <a href="javascript:void(0)" class="js-tag color1">前端通后端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1542,19 +1669,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">前端通后端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Express</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">笔记 - 前端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1566,11 +1681,23 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">笔记 - 前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">特效 - 前端</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">VSCode - 断点调试配置</a>
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1578,7 +1705,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
+                <a href="javascript:void(0)" class="js-tag color1">VSCode - 断点调试配置</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Node.js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1590,18 +1721,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Node.js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">SCREEPS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">中间件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
@@ -1610,7 +1729,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+                <a href="javascript:void(0)" class="js-tag color4">中间件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">SCREEPS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS - 前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1622,15 +1753,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS - 前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">函数进阶</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">正则表达式</a>
               </li>
              
               <li class="article-tag-list-item">

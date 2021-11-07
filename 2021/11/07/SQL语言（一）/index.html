@@ -6,25 +6,29 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://codermaniac.top">
-  <title>递归应用（一）--迷宫问题 | 博客小窝</title>
+  <title>SQL语言（一） | 博客小窝</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="递归应用（一）–迷宫问题使用场景 分析思路1、使用二维数组来代替迷宫，做个事前声明  map表示地图，其中数据有：为0表示该点没有走过；为1表示墙；2表示通路可以走；3表示该点已经走过，但是走不通。  2、循环遍历数组设置出墙来 2、指定个寻路方式如（上右下左、左右上下等） 4、进行寻路方法的递归，判断相应点的情况 代码实现步骤12345678&#x2F;&#x2F;设置地图		int[][] map &#x3D; new i">
+  <meta name="description" content="SQL语言（一）概述SQL特点：综合统一高度非过程化以同一种语言结构提供多种使用方法语言简洁易学易用  基本表本身独立存在的表一个关系就对应一个基本表一个或多个基本表对应一个存储文件一个表可以带若干索引 存储文件 视图（虚表） 数据定义     创建 删除 修改    模式 CREATE SCHEMA DROP SCHEMA    表 CREATE TABLE DROP TABLE ALTER T">
 <meta property="og:type" content="article">
-<meta property="og:title" content="递归应用（一）--迷宫问题">
-<meta property="og:url" content="http://codermaniac.top/2021/10/09/%E9%80%92%E5%BD%92%E5%BA%94%E7%94%A8%E2%80%94%E2%80%94%E8%BF%B7%E5%AE%AB%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:title" content="SQL语言（一）">
+<meta property="og:url" content="http://codermaniac.top/2021/11/07/SQL%E8%AF%AD%E8%A8%80%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
 <meta property="og:site_name" content="博客小窝">
-<meta property="og:description" content="递归应用（一）–迷宫问题使用场景 分析思路1、使用二维数组来代替迷宫，做个事前声明  map表示地图，其中数据有：为0表示该点没有走过；为1表示墙；2表示通路可以走；3表示该点已经走过，但是走不通。  2、循环遍历数组设置出墙来 2、指定个寻路方式如（上右下左、左右上下等） 4、进行寻路方法的递归，判断相应点的情况 代码实现步骤12345678&#x2F;&#x2F;设置地图		int[][] map &#x3D; new i">
+<meta property="og:description" content="SQL语言（一）概述SQL特点：综合统一高度非过程化以同一种语言结构提供多种使用方法语言简洁易学易用  基本表本身独立存在的表一个关系就对应一个基本表一个或多个基本表对应一个存储文件一个表可以带若干索引 存储文件 视图（虚表） 数据定义     创建 删除 修改    模式 CREATE SCHEMA DROP SCHEMA    表 CREATE TABLE DROP TABLE ALTER T">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20211009162722639.png">
-<meta property="article:published_time" content="2021-10-09T08:38:39.567Z">
-<meta property="article:modified_time" content="2021-10-09T08:37:40.685Z">
+<meta property="og:image" content="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20211107155139050.png">
+<meta property="og:image" content="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20211107155521320.png">
+<meta property="og:image" content="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20211107155853915.png">
+<meta property="og:image" content="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20211107161146165.png">
+<meta property="og:image" content="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20211107161346400.png">
+<meta property="article:published_time" content="2021-11-07T08:52:31.506Z">
+<meta property="article:modified_time" content="2021-11-07T08:52:05.530Z">
 <meta property="article:author" content="CoderMan">
+<meta property="article:tag" content="数据库">
 <meta property="article:tag" content="笔记">
-<meta property="article:tag" content="数据结构 - Java">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20211009162722639.png">
+<meta name="twitter:image" content="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20211107155139050.png">
   
     <link rel="alternative" href="/atom.xml" title="博客小窝" type="application/atom+xml">
   
@@ -308,14 +312,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-递归应用——迷宫问题" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-SQL语言（一）" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      递归应用（一）--迷宫问题
+      SQL语言（一）
     </h1>
   
 
@@ -327,8 +331,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2021/10/09/%E9%80%92%E5%BD%92%E5%BA%94%E7%94%A8%E2%80%94%E2%80%94%E8%BF%B7%E5%AE%AB%E9%97%AE%E9%A2%98/" class="archive-article-date">
-        <time datetime="2021-10-09T08:38:39.567Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-09</time>
+<a href="/2021/11/07/SQL%E8%AF%AD%E8%A8%80%EF%BC%88%E4%B8%80%EF%BC%89/" class="archive-article-date">
+        <time datetime="2021-11-07T08:52:31.506Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-07</time>
 </a>
 
   
@@ -341,7 +345,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">738字</span>
+      <span class="post-count">833字</span>
     </span>
   </span>
 
@@ -361,20 +365,65 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="递归应用（一）–迷宫问题"><a href="#递归应用（一）–迷宫问题" class="headerlink" title="递归应用（一）–迷宫问题"></a>递归应用（一）–迷宫问题</h1><h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20211009162722639.png" alt="image-20211009162722639"></p>
-<h2 id="分析思路"><a href="#分析思路" class="headerlink" title="分析思路"></a>分析思路</h2><p>1、使用二维数组来代替迷宫，做个事前声明</p>
-<blockquote>
-<p>map表示地图，其中数据有：为0表示该点没有走过；为1表示墙；2表示通路可以走；3表示该点已经走过，但是走不通。</p>
-</blockquote>
-<p>2、循环遍历数组设置出墙来</p>
-<p>2、指定个寻路方式如（上右下左、左右上下等）</p>
-<p>4、进行寻路方法的递归，判断相应点的情况</p>
-<h2 id="代码实现步骤"><a href="#代码实现步骤" class="headerlink" title="代码实现步骤"></a>代码实现步骤</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置地图</span></span><br><span class="line">		<span class="keyword">int</span>[][] map = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">8</span>][<span class="number">7</span>];</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;<span class="number">8</span>; i++) &#123;</span><br><span class="line">			map[i][<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">			map[i][<span class="number">6</span>]=<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		map[<span class="number">3</span>][<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">		map[<span class="number">3</span>][<span class="number">2</span>] = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span>[][] map, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(map[<span class="number">6</span>][<span class="number">5</span>] == <span class="number">2</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">		</span><br><span class="line">		&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">if</span>(map[i][j] == <span class="number">0</span>) &#123; <span class="comment">//如果当前这个点还没有走过</span></span><br><span class="line">				<span class="comment">//按照策略下-&gt;右-&gt;.上-&gt;左走</span></span><br><span class="line">				map[i][j] = <span class="number">2</span>; <span class="comment">//假定该点是可以走通。</span></span><br><span class="line">				<span class="keyword">if</span>(find(map, i+<span class="number">1</span>, j)) &#123;<span class="comment">//向下走</span></span><br><span class="line">					<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">				&#125; <span class="keyword">else</span> <span class="keyword">if</span> (find(map, i, j+<span class="number">1</span>)) &#123; <span class="comment">//向右走</span></span><br><span class="line">					<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">				&#125; <span class="keyword">else</span> <span class="keyword">if</span> (find(map, i-<span class="number">1</span>, j)) &#123; <span class="comment">//向上</span></span><br><span class="line">					<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">				&#125;<span class="keyword">else</span> <span class="keyword">if</span>(find(map, i, j-<span class="number">1</span>)) &#123; <span class="comment">//向左</span></span><br><span class="line">					<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">				&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">					<span class="comment">//说明该店是个死路</span></span><br><span class="line">					map[i][j] = <span class="number">3</span>;</span><br><span class="line">					<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">			&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> recursion;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Migong</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO 自动生成的方法存根</span></span><br><span class="line">		<span class="comment">//设置地图</span></span><br><span class="line">		<span class="keyword">int</span>[][] map = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">8</span>][<span class="number">7</span>];</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;<span class="number">8</span>; i++) &#123;</span><br><span class="line">			map[i][<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">			map[i][<span class="number">6</span>]=<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		map[<span class="number">3</span>][<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">		map[<span class="number">3</span>][<span class="number">2</span>] = <span class="number">1</span>;</span><br><span class="line">		<span class="comment">//输出地图</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;<span class="number">8</span>; i++) &#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j&lt;<span class="number">7</span>; j++) &#123;</span><br><span class="line">				System.out.print(map[i][j] + <span class="string">&quot; &quot;</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			System.out.println();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//递归找路</span></span><br><span class="line">		<span class="comment">//使用递归回溯来给小球找路</span></span><br><span class="line">		<span class="comment">//说明</span></span><br><span class="line">		<span class="comment">//1. map表示地图</span></span><br><span class="line">		<span class="comment">//2. i,j 表示从地图的哪个位置开始出发(1,1)</span></span><br><span class="line">		<span class="comment">//3.如果小球能到map[6][5]位置，则说明通路找到.</span></span><br><span class="line">		<span class="comment">//4. 约定:当map[i][j] 为0表示该点没有走过当为1表示墙; 2表示通路可以走; 3表示该点已经走过，但是走不通</span></span><br><span class="line">		<span class="comment">//5.在走迷宫时，需要确定一个策略(方法)下-&gt;右-&gt;上-&gt;左 ，如果该点走不通，再回溯</span></span><br><span class="line">		</span><br><span class="line">		find(map,<span class="number">1</span>,<span class="number">1</span>);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//输出新地图</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;<span class="number">8</span>; i++) &#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j&lt;<span class="number">7</span>; j++) &#123;</span><br><span class="line">				System.out.print(map[i][j] + <span class="string">&quot; &quot;</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			System.out.println();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span>[][] map, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(map[<span class="number">6</span>][<span class="number">5</span>] == <span class="number">2</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">		</span><br><span class="line">		&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">if</span>(map[i][j] == <span class="number">0</span>) &#123; <span class="comment">//如果当前这个点还没有走过</span></span><br><span class="line">				<span class="comment">//按照策略下-&gt;右-&gt;.上-&gt;左走</span></span><br><span class="line">				map[i][j] = <span class="number">2</span>; <span class="comment">//假定该点是可以走通。</span></span><br><span class="line">				<span class="keyword">if</span>(find(map, i+<span class="number">1</span>, j)) &#123;<span class="comment">//向下走</span></span><br><span class="line">					<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">				&#125; <span class="keyword">else</span> <span class="keyword">if</span> (find(map, i, j+<span class="number">1</span>)) &#123; <span class="comment">//向右走</span></span><br><span class="line">					<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">				&#125; <span class="keyword">else</span> <span class="keyword">if</span> (find(map, i-<span class="number">1</span>, j)) &#123; <span class="comment">//向上</span></span><br><span class="line">					<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">				&#125;<span class="keyword">else</span> <span class="keyword">if</span>(find(map, i, j-<span class="number">1</span>)) &#123; <span class="comment">//向左</span></span><br><span class="line">					<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">				&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">					<span class="comment">//说明该店是个死路</span></span><br><span class="line">					map[i][j] = <span class="number">3</span>;</span><br><span class="line">					<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">			&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
+    <h1 id="SQL语言（一）"><a href="#SQL语言（一）" class="headerlink" title="SQL语言（一）"></a>SQL语言（一）</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><strong>SQL</strong>特点：<br>综合统一<br>高度非过程化<br>以同一种语言结构提供多种使用方法<br>语言简洁易学易用</p>
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20211107155139050.png" alt="image-20211107155139050"></p>
+<p><strong>基本表</strong><br>本身独立存在的表<br>一个关系就对应一个基本表<br>一个或多个基本表对应一个存储文件<br>一个表可以带若干索引</p>
+<p><strong>存储文件</strong></p>
+<p><strong>视图（虚表）</strong></p>
+<h2 id="数据定义"><a href="#数据定义" class="headerlink" title="数据定义"></a>数据定义</h2><p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20211107155521320.png" alt="image-20211107155521320"></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>创建</th>
+<th>删除</th>
+<th>修改</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>模式</td>
+<td>CREATE SCHEMA</td>
+<td>DROP SCHEMA</td>
+<td></td>
+</tr>
+<tr>
+<td>表</td>
+<td>CREATE TABLE</td>
+<td>DROP TABLE</td>
+<td>ALTER TABLE</td>
+</tr>
+<tr>
+<td>视图</td>
+<td>CREATE VIEW</td>
+<td>DROP VIEW</td>
+<td></td>
+</tr>
+<tr>
+<td>索引</td>
+<td>CREATE INDEX</td>
+<td>DROP INDEX</td>
+<td>ALTER INDEX</td>
+</tr>
+</tbody></table>
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20211107155853915.png" alt="image-20211107155853915"></p>
+<h3 id="定义模式"><a href="#定义模式" class="headerlink" title="定义模式"></a>定义模式</h3><p><code>CREATE SSCHEMA &quot;模式名&quot; AUTHORIZATION (WANG 用户名)</code></p>
+<p>模式名可以缺省，表示采用和用户名一样的模式名</p>
+<p>定义模式实际上定义了一个命名空间（目录）定义模式的同时可以定义表和视图和授权定义的子句  <code> CREATE SCHEMA &lt;模式名&gt; AUTHORIZATION &lt;用户名&gt;[&lt;表定义子句&gt;|&lt;视图定义子句&gt;|&lt;授权定义子句&gt;]</code></p>
+<p><code>DROP SCHEMA &lt;模式名&gt; &lt;CASCADE | RESTRICT&gt;</code></p>
+<p><code>CASCADE</code>(级联)——删除模式的同时吧模式中的所有数据库对象全部删除</p>
+<p><code>RESTRICT</code>(限制)——如果模式中定义了相熟的数据库对象，拒绝执行，必须先删除下属对象</p>
+<p>定义基本表</p>
+<p><code>CREATE TABLE &lt;表名&gt; (&lt;列名&gt; &lt;数据类型&gt;[&lt;列级完整性约束条件&gt;]    组成 该表的列 [,&lt;列名&gt;&lt;数据类型&gt;[&lt;列级完整性约束条件&gt;]]…… [,&lt;表级完整性约束条件&gt;]);</code></p>
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20211107161146165.png" alt="image-20211107161146165"></p>
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20211107161346400.png" alt="image-20211107161346400"></p>
+<p>定义基本表所属模式的方式:<br>■方法一:  在表名中明显地给出模式名<br>    <code>Create table&quot;S-T&quot; Stde......     /*模式名为S-T*/     Create table &quot;S-T&quot;.Cource....);     Create table &quot;S-T&quot;.....;</code><br>■方法二:  在创建模式的同时创建表<br>■方法三:  设置所属的模式</p>
+<p>创建基本表(其他数据库对象也一样)时，若没有指定模式，系统根据搜索路径来确定该对象所属的模式关系数据库管理系统会以“搜索路径”指向的模式作为数据库对象的模式名设置搜索路径的方式:<br><code>SET search_ path TO &quot;S-T&quot;,PUBLIC;</code></p>
+<p><code>ALTER TABLE &lt;表名&gt; [ADD[COLUMN] &lt;新列名&gt;&lt;数据类型&gt; [完整性约束]] [ADD &lt;表级完整性约束&gt;] [DROP [ COLUMN] &lt;列名&gt; [CASCADE| RESTRICT]] [DROP CONSTRAINT&lt;完整性约束名&gt;[ RESTRICT | CASCADE ] ] [ALTER COLUMN &lt;列名&gt;&lt;数据类型&gt;] ;</code></p>
+<h2 id="索引的定义"><a href="#索引的定义" class="headerlink" title="索引的定义"></a>索引的定义</h2><p><strong>建立索引的目的</strong>：加快查询的速度</p>
+<p><strong>常见索引</strong>：顺表文件上的索引，B+树索引（动态平衡），哈希索引（快），位图索引</p>
+<p><code>CREATE [UNIQUE] [CLUSTER] INDEX &lt;索引名&gt;     ON &lt;表名&gt;(&lt;列名&gt;[&lt;次序&gt;][,&lt;列名&gt;[&lt;次序&gt;].].);    &lt;表名&gt;:要建索引的基本表的名字    索引:可以建立在该表的一列或多列上，各列名之间用逗号分隔 &lt;次序&gt;:指定索引值的排列次序，升序: ASC,降序: DESC。缺省值: ASC UNIQUE:此索引的每一个索引值只对应唯一的数据记录 CLUSTER: 表示要建立的索引是聚簇索引</code></p>
+<p>修改索引——<code>ALTER INDEX &lt;旧索引名&gt; RENAME TO &lt;新索引名&gt;</code></p>
+<p>删除索引——<code>DROP INDEX &lt;索引名&gt;;</code></p>
 
     
 
@@ -421,7 +470,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="http://codermaniac.top/2021/10/09/递归应用——迷宫问题/" title="递归应用（一）--迷宫问题" target="_blank">http://codermaniac.top/2021/10/09/递归应用——迷宫问题/</a>
+          <a href="http://codermaniac.top/2021/11/07/SQL语言（一）/" title="SQL语言（一）" target="_blank">http://codermaniac.top/2021/11/07/SQL语言（一）/</a>
         </li>
         
         <li>
@@ -443,11 +492,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">数据结构 - Java</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
         		</li>
       		
 		</ul>
@@ -459,7 +508,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/数据结构//" class="article-tag-list-link color5">数据结构</a>
+        			<a href="/categories/数据库//" class="article-tag-list-link color4">数据库</a>
         		</li>
       		
 		</ul>
@@ -514,7 +563,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://codermaniac.top/2021/10/09/%E9%80%92%E5%BD%92%E5%BA%94%E7%94%A8%E2%80%94%E2%80%94%E8%BF%B7%E5%AE%AB%E9%97%AE%E9%A2%98/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://codermaniac.top/2021/11/07/SQL%E8%AF%AD%E8%A8%80%EF%BC%88%E4%B8%80%EF%BC%89/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -529,18 +578,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2021/10/12/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%88%9B%E5%BB%BA%E7%A9%BA%E9%97%B4%E7%9A%84%E5%87%BD%E6%95%B0%E6%80%BB%E7%BB%93/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          C语言中创建空间的函数总结
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/10/08/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80v2.0/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">移动端布局</div>
+    <a href="/2021/11/03/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">排序问题（一）</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -567,7 +607,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%80%92%E5%BD%92%E5%BA%94%E7%94%A8%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%93%E8%BF%B7%E5%AE%AB%E9%97%AE%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">递归应用（一）–迷宫问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">1.1.</span> <span class="toc-text">使用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%9E%90%E6%80%9D%E8%B7%AF"><span class="toc-number">1.2.</span> <span class="toc-text">分析思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.3.</span> <span class="toc-text">代码实现步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81"><span class="toc-number">1.4.</span> <span class="toc-text">完整代码</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SQL%E8%AF%AD%E8%A8%80%EF%BC%88%E4%B8%80%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">SQL语言（一）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%AE%9A%E4%B9%89"><span class="toc-number">1.2.</span> <span class="toc-text">数据定义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.2.1.</span> <span class="toc-text">定义模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">1.3.</span> <span class="toc-text">索引的定义</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
