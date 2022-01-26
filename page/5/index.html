@@ -309,6 +309,173 @@
             
 
   
+    <article id="post-VUE知识铺垫" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/10/07/VUE%E7%9F%A5%E8%AF%86%E9%93%BA%E5%9E%AB/" target="_blank">VUE知识铺垫</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/10/07/VUE%E7%9F%A5%E8%AF%86%E9%93%BA%E5%9E%AB/" class="archive-article-date">
+        <time datetime="2021-10-07T05:03:05.972Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-07</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="VUE知识铺垫"><a href="#VUE知识铺垫" class="headerlink" title="VUE知识铺垫"></a>VUE知识铺垫</h1><p>◆ES6模块化<br>◆Promise<br>◆async/ await<br>◆EventLoop<br>◆宏任务和微任务<br>◆API 接口案例</p>
+<h1 id="一、ES6模块化"><a href="#一、ES6模块化" class="headerlink" title="一、ES6模块化"></a>一、ES6模块化</h1><p>回顾：node.js中的模块化规范，导入模块时用require()、对外共享模块时用module.exports（）<br>前端模块化规范分类多，官方推出了大一统的规范ES6模块化规范</p>
+<p>ES6模块化规范中定义:<br>●    每个js文件都是- -个独立的模块<br>●    导入其它模块成员使用import关键字<br>●    向外共享模块成员使用export关键字</p>
+<p>想要在node.js中使用，需要在package.json中加上type:module，，使用npm init -y生成这个文件</p>
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210814145433184.png" alt="image-20210814145433184"></p>
+<h2 id="1、默认导出导入——export-default-import-from"><a href="#1、默认导出导入——export-default-import-from" class="headerlink" title="1、默认导出导入——export default/import   from"></a>1、默认导出导入——export default/import   from</h2><p>默认导入的语法: import 接收名称from ‘模块标识符’<br>默认导出的语法: export default {成员1， 成员2}</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> n1=<span class="number">11</span></span><br><span class="line"><span class="keyword">let</span> n2 = <span class="number">12</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">show</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(n2);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span>&#123;</span><br><span class="line">  n1,</span><br><span class="line">  show</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> m1 <span class="keyword">from</span> <span class="string">&#x27;./1.js&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(m1)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210814150428290.png" alt="image-20210814150428290"></p>
+<p>注意事项：在每个模块中，只允许使用一次导出语句，导入时，接受的名称任意命名，但要合法</p>
+<h2 id="2、按需导入导出——export-成员-import-想要的成员们-from-‘路径’"><a href="#2、按需导入导出——export-成员-import-想要的成员们-from-‘路径’" class="headerlink" title="2、按需导入导出——export  成员/import {想要的成员们} from ‘路径’"></a>2、按需导入导出——export  成员/import {想要的成员们} from ‘路径’</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">let</span> n1=<span class="number">11</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">let</span> n2 = <span class="number">12</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">show</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(n2);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123;n1&#125; <span class="keyword">from</span> <span class="string">&#x27;./1.js&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(n1)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210814151126250.png" alt="image-20210814151126250"></p>
+<p>注意事项：按需导出可以使用多次，导入导出的名称必须一致，导入时可以使用as重命名,默认和按需可以配合使用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;n1 <span class="keyword">as</span> m1&#125; <span class="keyword">from</span> <span class="string">&#x27;./1.js&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(m1)</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> info，&#123;s1, s2 <span class="keyword">as</span> str2, say &#125; <span class="keyword">from</span> <span class="string">&#x27;./03.js&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="3、直接运行模块全部代码——import-‘路径’"><a href="#3、直接运行模块全部代码——import-‘路径’" class="headerlink" title="3、直接运行模块全部代码——import  ‘路径’"></a>3、直接运行模块全部代码——import  ‘路径’</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> index = <span class="number">0</span>; index &lt; <span class="number">5</span>; index++) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(index);</span><br><span class="line">  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;./1.js&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210814151843788.png" alt="image-20210814151843788"></p>
+<h1 id="二、Promise"><a href="#二、Promise" class="headerlink" title="二、Promise"></a>二、Promise</h1><h2 id="1、回调地狱——多层回调函数相互嵌套"><a href="#1、回调地狱——多层回调函数相互嵌套" class="headerlink" title="1、回调地狱——多层回调函数相互嵌套"></a>1、回调地狱——多层回调函数相互嵌套</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;第一秒&quot;</span>);</span><br><span class="line">  <span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;第二秒&quot;</span>);</span><br><span class="line">    <span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&quot;第三秒&quot;</span>);</span><br><span class="line">    &#125;, <span class="number">3000</span>);</span><br><span class="line">  &#125;, <span class="number">2000</span>);</span><br><span class="line">&#125;, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+
+<p>回调地狱的缺点:<br>●代码耦合性太强，牵一发而动全身，难以维护<br>●大量冗余的代码相互嵌套,代码的可读性变差</p>
+<p>promise是一个构造函数，可以创建实例new，代表一个异步操作<br>Promise.prototype.上包含一个.then()方法，可以通过原型链的方 式访问到.then()方法,例如p.then()<br>.then()方法用来预先指定成功和失败的回调函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">p.then(<span class="function"><span class="params">result</span> =&gt;</span>&#123; &#125;, <span class="function"><span class="params">error</span> =&gt;</span>&#123; &#125;)<span class="comment">//成功是必选，失败可选</span></span><br></pre></td></tr></table></figure>
+
+<p>首先npm 一个叫then.fs的模块</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> thenfs <span class="keyword">from</span> <span class="string">&#x27;then-fs&#x27;</span></span><br><span class="line">thenfs.readFile(<span class="string">&#x27;./files/1.txt&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>).then(<span class="function">(<span class="params">r1</span>) =&gt;</span> &#123;<span class="built_in">console</span>.log(r1);&#125;)</span><br><span class="line">thenfs.readFile(<span class="string">&#x27;./files/1.txt&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>).then(<span class="function">(<span class="params">r1</span>) =&gt;</span> &#123;<span class="built_in">console</span>.log(r1);&#125;)</span><br><span class="line">thenfs.readFile(<span class="string">&#x27;./files/2.txt&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>).then(<span class="function">(<span class="params">r1</span>) =&gt;</span> &#123;<span class="built_in">console</span>.log(r1);&#125;)</span><br><span class="line">thenfs.readFile(<span class="string">&#x27;./files/2.txt&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>).then(<span class="function">(<span class="params">r1</span>) =&gt;</span> &#123;<span class="built_in">console</span>.log(r1);&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>上述代码无法保证文件读取的顺序<img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210814153842152.png" alt="image-20210814153842152"></p>
+<p><strong>如果_上一个.then()方法中返回了一个新的Promise实例对象,则可以通过下一个.then()继续进行处理。通过.then()方法的链式调用，就解决了回调地狱的问题。则上述代码可以修改成</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> thenfs <span class="keyword">from</span> <span class="string">&#x27;then-fs&#x27;</span></span><br><span class="line">thenfs.readFile(<span class="string">&#x27;./files/1.txt&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>).then(<span class="function">(<span class="params">r1</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(r1);</span><br><span class="line">  <span class="keyword">return</span> thenfs.readFile(<span class="string">&#x27;./files/2.txt&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">&#125;).then(<span class="function">(<span class="params">r1</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(r1);</span><br><span class="line">  <span class="keyword">return</span> thenfs.readFile(<span class="string">&#x27;./files/1.txt&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">&#125;).then(<span class="function">(<span class="params">r1</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(r1);</span><br><span class="line">  <span class="keyword">return</span> thenfs.readFile(<span class="string">&#x27;./files/2.txt&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">&#125;).then(<span class="function">(<span class="params">r1</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(r1);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这样的话，读取的顺序就严格按照你的书写顺序</p>
+<p>如果链式操作中出现了错误，可以使用.catch()方法进行捕获错误</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.catch(<span class="function">(<span class="params">err</span>) =&gt;</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(err);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>为了卜影响后续链式操作终止，可以将此段代码提前，运行结果如下<img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210814155559505.png" alt="image-20210814155559505"></p>
+<p>Promise.all()方法会发起并行的Promise异步操作，等所有的异步操作全部结束后才会执行下一步的.then<br>操作( 等待机制)。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> pormiseArr = [</span><br><span class="line">  thenfs.readFile(<span class="string">&#x27;./files/1.txt&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>),</span><br><span class="line">  thenfs.readFile(<span class="string">&#x27;./files/2.txt&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>),</span><br><span class="line">  thenfs.readFile(<span class="string">&#x27;./files/1.txt&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>),</span><br><span class="line">  thenfs.readFile(<span class="string">&#x27;./files/1.txt&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">]</span><br><span class="line"><span class="built_in">Promise</span>.all(pormiseArr).then(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(result)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>Promise.race()方法会发起并行的Promise异步操作，只要任何一-个异步操作完成，就立即执行下一步的<br>.then操作(赛跑机制)。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> pormiseArr = [</span><br><span class="line">  thenfs.readFile(<span class="string">&#x27;./files/1.txt&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>),</span><br><span class="line">  thenfs.readFile(<span class="string">&#x27;./files/2.txt&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>),</span><br><span class="line">  thenfs.readFile(<span class="string">&#x27;./files/1.txt&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>),</span><br><span class="line">  thenfs.readFile(<span class="string">&#x27;./files/1.txt&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">]</span><br><span class="line"><span class="built_in">Promise</span>.race(pormiseArr).then(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(result)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、async-await"><a href="#三、async-await" class="headerlink" title="三、async/await"></a>三、async/await</h2><p>用来简化promise异步操作（.then()）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">getallfiles</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> r1 = <span class="keyword">await</span> thenfs.readFile(<span class="string">&#x27;./files/1.txt&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>)<span class="comment">//取出来是内容</span></span><br><span class="line">  <span class="built_in">console</span>.log(r1);</span><br><span class="line">  <span class="keyword">const</span> r2 = <span class="keyword">await</span> thenfs.readFile(<span class="string">&#x27;./files/2.txt&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">  <span class="built_in">console</span>.log(r2);</span><br><span class="line">  <span class="keyword">const</span> r3 = <span class="keyword">await</span> thenfs.readFile(<span class="string">&#x27;./files/2.txt&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">  <span class="built_in">console</span>.log(r3);</span><br><span class="line">  <span class="keyword">const</span> r4 = <span class="keyword">await</span> thenfs.readFile(<span class="string">&#x27;./files/1.txt&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">  <span class="built_in">console</span>.log(r4);</span><br><span class="line">&#125;</span><br><span class="line">getallfiles()</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意事项</strong></p>
+<p>如果在function中使用了await,则function必须被async修饰<br>在async方法中，第一个await之前的代码会同步执行, await 之后的代码会异步执行</p>
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210814195606300.png" alt="image-20210814195606300"></p>
+<p>输出的结果如下</p>
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210814195622584.png" alt="image-20210814195622584"></p>
+<h1 id="四、EventLoop"><a href="#四、EventLoop" class="headerlink" title="四、EventLoop"></a>四、EventLoop</h1><p>为了防止某个耗时任务导致程序假死的问题，JavaScript 把待执行的任务分为了两类:</p>
+<h3 id="①同步任务-synchronous"><a href="#①同步任务-synchronous" class="headerlink" title="①同步任务(synchronous)"></a>①同步任务(synchronous)</h3><p>●又 叫做非耗时任务,指的是在主线程上排队执行的那些任务<br>●只有前一个任务执行完毕， 才能执行后一个任务</p>
+<h3 id="②异步任务-asynchronous"><a href="#②异步任务-asynchronous" class="headerlink" title="②异步任务(asynchronous )"></a>②异步任务(asynchronous )</h3><p>●又叫做耗时任务,异步任务由JavaScript委托给宿主环境进行执行<br>●当异步任务 执行完成后,会通知JavaScript主线程执行异步任务的回调函数</p>
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210814200121748.png" alt="image-20210814200121748"></p>
+<p>①同步任务由JavaScript主线程次序执行<br>②异步任务委托给宿主环境执行<br>③已完成的异步任务对应的回调函数,会被加入到任务队列中等待执行<br>④JavaScript 主线程的执行栈被清空后，会.读取任务队列中的回调函数，次序执行<br>⑤JavaScript 主线程不断重复,上面的第4步</p>
+<h1 id="五、宏任务和微任务"><a href="#五、宏任务和微任务" class="headerlink" title="五、宏任务和微任务"></a>五、宏任务和微任务</h1><p>JavaScript对异步任务有进一步划分，分成宏任务和微任务</p>
+<h3 id="宏任务-macrotask"><a href="#宏任务-macrotask" class="headerlink" title="宏任务( macrotask)"></a>宏任务( macrotask)</h3><p>●异步 Ajax请求、<br>●setTimeout、 setInterval.<br>●文件操作<br>●其它宏任务</p>
+<h3 id="微任务-microtask"><a href="#微任务-microtask" class="headerlink" title="微任务( microtask )"></a>微任务( microtask )</h3><p>●Promise.then、 .catch 和.finally<br>●process.nextTick<br>●其它微任务</p>
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210814200930912.png" alt="image-20210814200930912"></p>
+<h3 id="宏微任务的执行顺序"><a href="#宏微任务的执行顺序" class="headerlink" title="宏微任务的执行顺序"></a>宏微任务的执行顺序</h3><p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210814201058343.png" alt="image-20210814201058343"></p>
+<p>每一个宏任务执行完之后，都会检查是否存在待执行的微任务,如果有，则执行完所有微任务之后，再继续执行下一个宏任务。</p>
+<p>示例如下：</p>
+<p>①小云和小腾志银行办业务。首先，需要取号之后进行排队<br>    ●宏任务队列<br>②假设当前银行网点只有- -个柜员,小云在办理存款业务时，小腾只能等待<br>    ●单线程，宏任务按次序执行<br>③小云办完存款业务后，柜员询问他是否还想办理其它业务?<br>    ●当前宏任务执行完，检查是否有微任务<br>④小云告诉柜员:想要买理财产品、再办个信用卡、最后再兑换点马年纪念币?<br>    ●执行微任务，后续宏任务被推迟.<br>⑤小云离开柜台后，柜员开始为小腾办理业务</p>
+<p><strong>一个经典面试题</strong></p>
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210814202212235.png" alt="image-20210814202212235"></p>
+<p>结果是156234789</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/VUE//" class="article-tag-list-link color4">VUE</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/10/07/VUE%E7%9F%A5%E8%AF%86%E9%93%BA%E5%9E%AB/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-VSCode - 断点调试配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     

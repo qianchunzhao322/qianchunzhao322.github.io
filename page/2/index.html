@@ -309,6 +309,151 @@
             
 
   
+    <article id="post-Express" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/10/07/Express/" target="_blank">Express</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/10/07/Express/" class="archive-article-date">
+        <time datetime="2021-10-07T05:03:06.015Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-07</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="Express"><a href="#Express" class="headerlink" title="Express"></a>Express</h1><h3 id="——express就是对HTTP模块进一步封装而来的，提供了更加方便快捷的操作，可以做web网站服务器、API接口服务器。"><a href="#——express就是对HTTP模块进一步封装而来的，提供了更加方便快捷的操作，可以做web网站服务器、API接口服务器。" class="headerlink" title="——express就是对HTTP模块进一步封装而来的，提供了更加方便快捷的操作，可以做web网站服务器、API接口服务器。"></a>——express就是对HTTP模块进一步封装而来的，提供了更加方便快捷的操作，可以做web网站服务器、API接口服务器。</h3><h2 id="1、基本使用：1、导入express，创建web服务器，启动web服务器"><a href="#1、基本使用：1、导入express，创建web服务器，启动web服务器" class="headerlink" title="1、基本使用：1、导入express，创建web服务器，启动web服务器"></a>1、基本使用：1、导入express，创建web服务器，启动web服务器</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)<span class="comment">//导入express</span></span><br><span class="line"><span class="keyword">const</span> app = express()<span class="comment">//创建服务器</span></span><br><span class="line">app.listen(<span class="number">80</span>, <span class="function">() =&gt;</span> &#123;<span class="comment">//启动服务器</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;服务器启动&#x27;</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、监听客户端两种请求-app-get-app-post"><a href="#2、监听客户端两种请求-app-get-app-post" class="headerlink" title="2、监听客户端两种请求    app.get|app.post"></a>2、监听客户端两种请求    app.get|app.post</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//监听GET  POST请求，并向客户端响应具体内容</span></span><br><span class="line">app.get(<span class="string">&#x27;/user&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  res.send(&#123; <span class="attr">name</span>: <span class="string">&#x27;zs&#x27;</span>, <span class="attr">age</span>: <span class="number">34</span>&#125;)</span><br><span class="line">&#125;)</span><br><span class="line">app.post(<span class="string">&#x27;/user&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  res.send(<span class="string">&#x27;请求成功&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210808210315387.png" alt="image-20210808210315387"></p>
+<h2 id="3、获取URL中携带的参数查询，通过req-query对象"><a href="#3、获取URL中携带的参数查询，通过req-query对象" class="headerlink" title="3、获取URL中携带的参数查询，通过req.query对象"></a>3、获取URL中携带的参数查询，通过req.query对象</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">app.get (<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(req.query);<span class="comment">//默认是个空对象，因为没有查询到携带的参数</span></span><br><span class="line">  res.send(<span class="string">&#x27;请求成功&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210808210745905.png" alt="image-20210808210745905"></p>
+<h2 id="4、获得URL中的动态参数-，通过：匹配到动态参数"><a href="#4、获得URL中的动态参数-，通过：匹配到动态参数" class="headerlink" title="4、获得URL中的动态参数  ，通过：匹配到动态参数"></a>4、获得URL中的动态参数  ，通过：匹配到动态参数</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">app.get (<span class="string">&#x27;/user/:id&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(req.params);<span class="comment">//默认是个空对象，因为没有查询到携带的动态参数</span></span><br><span class="line">  res.send(req.params)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210808211136356.png" alt="image-20210808211136356"></p>
+<p>其中冒号后面的字符串可以随机写，就像isd，也可以有多个动态参数就像/:id/:mame</p>
+<h2 id="5、托管静态资源"><a href="#5、托管静态资源" class="headerlink" title="5、托管静态资源"></a>5、托管静态资源</h2><p>express提供了-个非常好用的函数，叫做express.static0,过它，我们可以非常方便地创建一个静态资源服务器 ,<br>例如，通过如下代码就可以将public录下的图片、CSS 文件、JavaScript 文件对外开放访问了:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.use(express.static(<span class="string">&#x27;public&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>实际如下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line"></span><br><span class="line"><span class="comment">//这里调用express.static方法快速的对外提供资源,其中括号中的是对外资源的路径</span></span><br><span class="line">app.use(express.static(<span class="string">&#x27;./laf&#x27;</span>))</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">80</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;服务器开启&#x27;</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>当托管多个静态资源时，就重复写两次，注意：当查找时，按写的顺序查找对应的文件，</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">app.use(express.static(<span class="string">&#x27;./laf&#x27;</span>))</span><br><span class="line">app.use(express.static(<span class="string">&#x27;./lasedf&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<h2 id="6、挂载路径前缀"><a href="#6、挂载路径前缀" class="headerlink" title="6、挂载路径前缀"></a>6、挂载路径前缀</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.use(<span class="string">&#x27;ava&#x27;</span>, express.static(<span class="string">&#x27;./laf&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>就由<a target="_blank" rel="noopener" href="http://127.0.0.1/index.html">http://127.0.0.1/index.html</a>  变成了 <a target="_blank" rel="noopener" href="http://127.0.0.1/ava/index">http://127.0.0.1/ava/index</a></p>
+<h2 id="7、express路由"><a href="#7、express路由" class="headerlink" title="7、express路由"></a>7、express路由</h2><p>路由就是映射关系，是客户端请求和服务器处理函数之间的映射关系</p>
+<p>express中的路由分3部分，分别是请求的类型、请求的URL地址、处理函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">app.METHOD(PATH,HANDLER)</span><br><span class="line">以下示例都是路由</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">&#x27;/user&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  res.send(&#123; <span class="attr">name</span>: <span class="string">&#x27;zs&#x27;</span>, <span class="attr">age</span>: <span class="number">34</span>&#125;)</span><br><span class="line">&#125;)</span><br><span class="line">app.post(<span class="string">&#x27;/user&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  res.send(<span class="string">&#x27;请求成功&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line">app.get (<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(req.query);<span class="comment">//默认是个空对象，因为没有查询到携带的参数</span></span><br><span class="line">  res.send(<span class="string">&#x27;请求成功&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line">app.get (<span class="string">&#x27;/user/:id&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(req.params);<span class="comment">//默认是个空对象，因为没有查询到携带的动态参数</span></span><br><span class="line">  res.send(req.params)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>路由的匹配过程：每当一个请求到达服务器之后，需要先经过路由的匹配，只有匹配成功之后才会调用相应的处理函数。匹配时，会按照路由的顺序进行匹配，前两者都匹配成功之后才交给处理函数。</p>
+<h2 id="7、模块化路由"><a href="#7、模块化路由" class="headerlink" title="7、模块化路由"></a>7、模块化路由</h2><p>将路由抽离为单独的模块，具体操作如下：</p>
+<p>①创建路由模块对应的js文件<br>②调用express.Router0函数创建路由对象<br>③向路由对象上挂载具体的路由<br>④使用module.exports向外共享路由对象<br>⑤使佣app.use(函数注册路由模块</p>
+<p>创建模块</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)<span class="comment">//导入express</span></span><br><span class="line"><span class="keyword">const</span> router = express.Router()<span class="comment">//创建路由对象</span></span><br><span class="line">router.get(<span class="string">&#x27;/user/list&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;<span class="comment">//挂载具体的路由</span></span><br><span class="line">  res.send(<span class="string">&#x27;GET THIS LIST&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line">router.post(<span class="string">&#x27;/user/add&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;<span class="comment">//挂载具体的路由</span></span><br><span class="line">  res.send(<span class="string">&#x27;ADD THIS LIST&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">module</span>.exports = router<span class="comment">//向外导出路由</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>注册使用模块</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line"></span><br><span class="line"><span class="comment">//这里调用express.static方法快速的对外提供资源,其中括号中的是对外资源的路径</span></span><br><span class="line">app.use(express.static(<span class="string">&#x27;./laf&#x27;</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">//导入路由模块</span></span><br><span class="line"><span class="keyword">const</span> router = <span class="built_in">require</span>(<span class="string">&#x27;./router&#x27;</span>)</span><br><span class="line"><span class="comment">//注册路由模块</span></span><br><span class="line">app.use(router)</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">80</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;服务器开启&#x27;</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210809092124867.png" alt="image-20210809092124867"></p>
+<p><strong>app.use()    作用就是注册全局中间件</strong></p>
+<p>添加统一的前缀    和托管静态资源一样</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.use(<span class="string">&#x27;/api&#x27;</span>, router)</span><br></pre></td></tr></table></figure>
+
+<p>中间件的相关后续说明……</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">笔记 - 前后端交互</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Express</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Express//" class="article-tag-list-link color3">Express</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/10/07/Express/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-CSS特效——音波加载" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1402,133 +1547,6 @@
     
     <p class="article-more-link">
       <a class="article-more-a" href="/2021/10/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-栈实现简单计算器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/10/07/%E6%A0%88%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%E8%AE%A1%E7%AE%97%E5%99%A8/" target="_blank">利用栈实现简单的计算器</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/10/07/%E6%A0%88%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%E8%AE%A1%E7%AE%97%E5%99%A8/" class="archive-article-date">
-        <time datetime="2021-10-07T05:03:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-07</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="利用栈实现简单的计算器"><a href="#利用栈实现简单的计算器" class="headerlink" title="利用栈实现简单的计算器"></a><strong>利用栈实现简单的计算器</strong></h1><h2 id="具体思路"><a href="#具体思路" class="headerlink" title="具体思路"></a>具体思路</h2><p>1.通过一个<code>index</code>值(索引)，来遍历我们的表达式<br>2.如果我们发现是一个数字,就直接入数栈<br>3.如果发现扫描到是一个符号，就分如下情况<br>    3.1如果发现当前的符号栈为空，就直接入栈<br>    3.2如果符号栈有操作符，就进行比较,如果当前的操作符的优先级小于或者等于栈中的操作符，就需要从数栈中<code>pop</code>出两个数,从符号栈中<code>pop</code>出一个符号，进行运算，将得到结果，入数栈，然后将当前的操作符入符号栈，如果当前的操作符的优先级大于栈中的操作符，就直接入符号栈.<br>4.当表达式扫描完毕,就顺序的从数栈和符号栈中<code>pop</code>出相应的数和符号，并运行.<br>5.最后在数栈只有一个数字, 就是表达式的结果</p>
-<p><img src="https://zqc-blog-img.oss-cn-beijing.aliyuncs.com/https://zqc-blog-img.oss-cn-beijing.aliyuncs.comimage-20210928145520216.png" alt="image-20210928145520216"></p>
-<h2 id="分步细节"><a href="#分步细节" class="headerlink" title="分步细节"></a>分步细节</h2><h3 id="首先完成计算器中原栈没有的方法"><a href="#首先完成计算器中原栈没有的方法" class="headerlink" title="首先完成计算器中原栈没有的方法"></a>首先完成计算器中原栈没有的方法</h3><pre><code>``public int peek() &#123;
-    return stack[top];
-&#125;``
-</code></pre>
-<h3 id="判断运算符优先级"><a href="#判断运算符优先级" class="headerlink" title="判断运算符优先级"></a>判断运算符优先级</h3><p>利用数字的大小进一步代替</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//返回运算符的优先级</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">priority</span><span class="params">(<span class="keyword">int</span> oper)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(oper ==<span class="string">&#x27;*&#x27;</span>|| oper == <span class="string">&#x27;/&#x27;</span>)&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span>(oper == <span class="string">&#x27;+&#x27;</span> || oper == <span class="string">&#x27;-&#x27;</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> -<span class="number">1</span>; </span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="判断是否为一个运算符并计算"><a href="#判断是否为一个运算符并计算" class="headerlink" title="判断是否为一个运算符并计算"></a>判断是否为一个运算符并计算</h3><blockquote>
-<p>这里要注意运算顺序，不要直接赋值粘贴导致运算失败</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//判断是否为一个运算符</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isOper</span><span class="params">(<span class="keyword">char</span> val)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> val == <span class="string">&#x27;+&#x27;</span>||val == <span class="string">&#x27;-&#x27;</span>||val == <span class="string">&#x27;*&#x27;</span>||val == <span class="string">&#x27;/&#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//计算</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">cal</span><span class="params">(<span class="keyword">int</span> num1, <span class="keyword">int</span> num2,<span class="keyword">int</span> oper)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">switch</span> (oper) &#123;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">&#x27;+&#x27;</span>:</span><br><span class="line">			res = num1+num2;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">&#x27;-&#x27;</span>:</span><br><span class="line">			res = num2-num1;<span class="comment">//注意顺序</span></span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">&#x27;*&#x27;</span>:</span><br><span class="line">			res = num1*num2;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">&#x27;/&#x27;</span>:</span><br><span class="line">			res = num2/num1;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> res;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="然后完善计算器的逻辑"><a href="#然后完善计算器的逻辑" class="headerlink" title="然后完善计算器的逻辑"></a>然后完善计算器的逻辑</h3><h4 id="定义相关变量"><a href="#定义相关变量" class="headerlink" title="定义相关变量"></a>定义相关变量</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">String expression = <span class="string">&quot;3+2*6-2&quot;</span>;</span><br><span class="line">		<span class="comment">//创建两个栈,数栈,一个符号栈</span></span><br><span class="line">		ArrayStack numStack = <span class="keyword">new</span> ArrayStack(<span class="number">10</span>) ;</span><br><span class="line">		ArrayStack operStack = <span class="keyword">new</span> ArrayStack(<span class="number">10</span>);</span><br><span class="line">		<span class="comment">//定义需要的相关变量</span></span><br><span class="line">		<span class="keyword">int</span> index = <span class="number">0</span>;<span class="comment">//用于扫描</span></span><br><span class="line">		<span class="keyword">int</span> num1 = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> num2 = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> oper = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">char</span> ch = <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">		String keepNum = <span class="string">&quot;&quot;</span>;</span><br></pre></td></tr></table></figure>
-
-<h4 id="开始循环扫描表达式"><a href="#开始循环扫描表达式" class="headerlink" title="开始循环扫描表达式"></a>开始循环扫描表达式</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</span><br><span class="line">		<span class="comment">//依次得到expression 的每一个字符</span></span><br><span class="line">		ch = expression.substring(index, index+<span class="number">1</span>).charAt(<span class="number">0</span>);</span><br><span class="line">		<span class="comment">//判断ch是什么，然后做相应的处理</span></span><br><span class="line">					</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//让index + 1, 并判断是否扫描到expression最后.</span></span><br><span class="line">		index++;</span><br><span class="line">		<span class="keyword">if</span> (index &gt;= expression.length()) &#123;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br><span class="line">				</span><br></pre></td></tr></table></figure>
-
-<h4 id="对扫描到的结果进行下一步的处理"><a href="#对扫描到的结果进行下一步的处理" class="headerlink" title="对扫描到的结果进行下一步的处理"></a>对扫描到的结果进行下一步的处理</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">if</span>(operStack.isOper(ch)) &#123;<span class="comment">//如果是运算符</span></span><br><span class="line">	<span class="comment">//判断当前的符号栈是否为空</span></span><br><span class="line">	<span class="keyword">if</span>(!operStack.isEmpty()) &#123;</span><br><span class="line">		<span class="comment">//如果符号栈有操作符，就进行比较,如果当前的操作符的优先级小于或者等于栈中的操作符,就需要从数栈中pop出两个数,</span></span><br><span class="line">		<span class="comment">//在从符号栈中pop出一个符号，进行运算，将得到结果，入数栈，然后将当前的操作符入符号栈</span></span><br><span class="line">		<span class="keyword">if</span>(operStack.priority(ch) &lt;= operStack.priority(operStack.peek())) &#123;</span><br><span class="line">			num1 = numStack.pop();</span><br><span class="line">			num2 = numStack.pop();</span><br><span class="line">			oper = operStack.pop();</span><br><span class="line">			res = numStack.cal(num1, num2, oper);</span><br><span class="line">			<span class="comment">//把运算的结果如数栈</span></span><br><span class="line">			numStack.push(res);</span><br><span class="line">			<span class="comment">//然后将当前的操作符入符号栈</span></span><br><span class="line">			operStack.push(ch);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="comment">//如果当前的操作符的优先级大于栈中的操作符， 就直接入符号栈.</span></span><br><span class="line">			operStack.push(ch);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="comment">//如果为空直接入符号栈..</span></span><br><span class="line">		operStack.push(ch); <span class="comment">// 1 + 3</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123; </span><br><span class="line">    numStack.push(ch - <span class="number">48</span>); <span class="comment">//? &quot;1+3&quot; &#x27;1&#x27; =&gt; 1</span></span><br><span class="line">&#125;</span><br><span class="line">				</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>这时候你会发现一个问题，就是当你的数字是个两位数甚至是更多位数时，运算竟然失败了。</p>
-</blockquote>
-<p><strong>解决方式如下</strong>：</p>
-<p>进行判断两个数字是否连着，如果连着就将他们合并成一个多位数进行储存。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//处理多位数</span></span><br><span class="line">keepNum += ch;</span><br><span class="line"><span class="comment">//如果ch已经是expression的最后一位，就直接入栈</span></span><br><span class="line"><span class="keyword">if</span> (index == expression.length() - <span class="number">1</span>) &#123;</span><br><span class="line">	numStack.push(Integer.parseInt(keepNum));</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">	<span class="comment">//判断下一个字符是不是数字，如果是数字，就继续扫描，如果是运算符，则入栈</span></span><br><span class="line">	<span class="comment">//注意是看后一位，不是index++</span></span><br><span class="line">	<span class="keyword">if</span> (operStack.isOper(expression.substring(index+<span class="number">1</span>,index+<span class="number">2</span>).charAt(<span class="number">0</span>))) &#123;</span><br><span class="line">		<span class="comment">//如果后一位是运算符，则入栈 keepNum = &quot;1&quot; 或者 &quot;123&quot;</span></span><br><span class="line">		numStack.push(Integer.parseInt(keepNum));</span><br><span class="line">		<span class="comment">//重要的, keepNum清空</span></span><br><span class="line">		keepNum = <span class="string">&quot;&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">笔记 - Java - 原创</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数据结构//" class="article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/10/07/%E6%A0%88%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%E8%AE%A1%E7%AE%97%E5%99%A8/">展开全文 >></a>
     </p>
     
 
